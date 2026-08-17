@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz des départements français</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f4f6f8;
+  color: #17202a;
+}
+
+header {
+  background: #173f67;
+  color: white;
+  text-align: center;
+  padding: 20px 15px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 25px;
+}
+
+main {
+  max-width: 800px;
+  margin: auto;
+  padding: 15px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.08);
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  background: #edf2f7;
+  padding: 8px 13px;
+  border-radius: 10px;
+}
+
+.progress {
+  height: 8px;
+  background: #dfe5eb;
+  border-radius: 10px;
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #1769aa;
+  transition: width .3s;
+}
+
+#question {
+  font-size: 21px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mode {
+  width: 100%;
+  background: #1769aa;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.answer {
+  background: #edf2f7;
+  color: #17202a;
+  text-align: left;
+}
+
+.answer.correct {
+  background: #d8f3dc;
+  color: #176b2c;
+}
+
+.answer.wrong {
+  background: #fde0e0;
+  color: #9b2226;
+}
+
+#feedback {
+  min-height: 30px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+#next {
+  width: 100%;
+  background: #173f67;
+  color: white;
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+#result {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+@media(max-width:600px) {
+  .answers {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🇫🇷 Quiz des départements français</h1>
+</header>
+
+<main>
+
+<div class="card">
+
+<div class="stats">
+<div class="stat">
+Question <b id="questionNumber">0</b>/20
+</div>
+
+<div class="stat">
+Score <b id="score">0</b>
+</div>
+
+<div class="stat">
+Série <b id="streak">0</b>
+</div>
+</div>
+
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
+</div>
+
+
+<div class="card" id="menu">
+
+<h2>Choisis ton mode</h2>
+
+<button class="mode" onclick="startQuiz('prefecture')">
+Quelle est la préfecture de ce département ?
+</button>
+
+<button class="mode" onclick="startQuiz('department')">
+À quel département appartient cette ville ?
+</button>
+
+<button class="mode" onclick="startQuiz('capital')">
+À quel département appartient cette préfecture ?
+</button>
+
+<button class="mode" onclick="startQuiz('mix')">
+🎯 Défi mixte
+</button>
+
+</div>
+
+
+<div class="card hidden" id="quiz">
+
+<div id="question"></div>
+
+<div class="answers" id="answers"></div>
+
+<div id="feedback"></div>
+
+<button id="next" onclick="nextQuestion()">
+Question suivante →
+</button>
+
+</div>
+
+
+<div class="card hidden" id="result">
+
+<div id="resultText"></div>
+
+<br>
+
+<button class="mode" onclick="showMenu()">
+Rejouer
+</button>
+
+</div>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   DONNÉES
+   ===================================================== */
+
+const departments = [
+
+["01","Ain","Bourg-en-Bresse","Oyonnax"],
+["02","Aisne","Laon","Saint-Quentin"],
+["03","Allier","Moulins","Vichy"],
+["04","Alpes-de-Haute-Provence","Digne-les-Bains","Manosque"],
+["05","Hautes-Alpes","Gap","Briançon"],
+["06","Alpes-Maritimes","Nice","Cannes"],
+["07","Ardèche","Privas","Annonay"],
+["08","Ardennes","Charleville-Mézières","Sedan"],
+["09","Ariège","Foix","Pamiers"],
+["10","Aube","Troyes","Romilly-sur-Seine"],
+["11","Aude","Carcassonne","Narbonne"],
+["12","Aveyron","Rodez","Millau"],
+["13","Bouches-du-Rhône","Marseille","Aix-en-Provence"],
+["14","Calvados","Caen","Lisieux"],
+["15","Cantal","Aurillac","Saint-Flour"],
+["16","Charente","Angoulême","Cognac"],
+["17","Charente-Maritime","La Rochelle","Rochefort"],
+["18","Cher","Bourges","Vierzon"],
+["19","Corrèze","Tulle","Brive-la-Gaillarde"],
+["2A","Corse-du-Sud","Ajaccio","Porto-Vecchio"],
+["2B","Haute-Corse","Bastia","Calvi"],
+["21","Côte-d'Or","Dijon","Beaune"],
+["22","Côtes-d'Armor","Saint-Brieuc","Lannion"],
+["23","Creuse","Guéret","Aubusson"],
+["24","Dordogne","Périgueux","Bergerac"],
+["25","Doubs","Besançon","Montbéliard"],
+["26","Drôme","Valence","Romans-sur-Isère"],
+["27","Eure","Évreux","Vernon"],
+["28","Eure-et-Loir","Chartres","Dreux"],
+["29","Finistère","Quimper","Brest"],
+["30","Gard","Nîmes","Alès"],
+["31","Haute-Garonne","Toulouse","Muret"],
+["32","Gers","Auch","Condom"],
+["33","Gironde","Bordeaux","Libourne"],
+["34","Hérault","Montpellier","Béziers"],
+["35","Ille-et-Vilaine","Rennes","Saint-Malo"],
+["36","Indre","Châteauroux","Issoudun"],
+["37","Indre-et-Loire","Tours","Amboise"],
+["38","Isère","Grenoble","Vienne"],
+["39","Jura","Lons-le-Saunier","Dole"],
+["40","Landes","Mont-de-Marsan","Dax"],
+["41","Loir-et-Cher","Blois","Vendôme"],
+["42","Loire","Saint-Étienne","Roanne"],
+["43","Haute-Loire","Le Puy-en-Velay","Yssingeaux"],
+["44","Loire-Atlantique","Nantes","Saint-Nazaire"],
+["45","Loiret","Orléans","Montargis"],
+["46","Lot","Cahors","Figeac"],
+["47","Lot-et-Garonne","Agen","Marmande"],
+["48","Lozère","Mende","Marvejols"],
+["49","Maine-et-Loire","Angers","Cholet"],
+["50","Manche","Saint-Lô","Cherbourg-en-Cotentin"],
+["51","Marne","Châlons-en-Champagne","Reims"],
+["52","Haute-Marne","Chaumont","Saint-Dizier"],
+["53","Mayenne","Laval","Mayenne"],
+["54","Meurthe-et-Moselle","Nancy","Longwy"],
+["55","Meuse","Bar-le-Duc","Verdun"],
+["56","Morbihan","Vannes","Lorient"],
+["57","Moselle","Metz","Thionville"],
+["58","Nièvre","Nevers","Cosne-Cours-sur-Loire"],
+["59","Nord","Lille","Roubaix"],
+["60","Oise","Beauvais","Compiègne"],
+["61","Orne","Alençon","Argentan"],
+["62","Pas-de-Calais","Arras","Calais"],
+["63","Puy-de-Dôme","Clermont-Ferrand","Riom"],
+["64","Pyrénées-Atlantiques","Pau","Bayonne"],
+["65","Hautes-Pyrénées","Tarbes","Lourdes"],
+["66","Pyrénées-Orientales","Perpignan","Prades"],
+["67","Bas-Rhin","Strasbourg","Haguenau"],
+["68","Haut-Rhin","Colmar","Mulhouse"],
+["69","Rhône","Lyon","Villefranche-sur-Saône"],
+["70","Haute-Saône","Vesoul","Luxeuil-les-Bains"],
+["71","Saône-et-Loire","Mâcon","Chalon-sur-Saône"],
+["72","Sarthe","Le Mans","La Flèche"],
+["73","Savoie","Chambéry","Albertville"],
+["74","Haute-Savoie","Annecy","Thonon-les-Bains"],
+["75","Paris","Paris","Paris"],
+["76","Seine-Maritime","Rouen","Le Havre"],
+["77","Seine-et-Marne","Melun","Meaux"],
+["78","Yvelines","Versailles","Saint-Germain-en-Laye"],
+["79","Deux-Sèvres","Niort","Bressuire"],
+["80","Somme","Amiens","Abbeville"],
+["81","Tarn","Albi","Castres"],
+["82","Tarn-et-Garonne","Montauban","Moissac"],
+["83","Var","Toulon","Fréjus"],
+["84","Vaucluse","Avignon","Carpentras"],
+["85","Vendée","La Roche-sur-Yon","Les Sables-d'Olonne"],
+["86","Vienne","Poitiers","Châtellerault"],
+["87","Haute-Vienne","Limoges","Saint-Junien"],
+["88","Vosges","Épinal","Saint-Dié-des-Vosges"],
+["89","Yonne","Auxerre","Sens"],
+["90","Territoire de Belfort","Belfort","Delle"],
+["91","Essonne","Évry-Courcouronnes","Corbeil-Essonnes"],
+["92","Hauts-de-Seine","Nanterre","Boulogne-Billancourt"],
+["93","Seine-Saint-Denis","Bobigny","Saint-Denis"],
+["94","Val-de-Marne","Créteil","Vincennes"],
+["95","Val-d'Oise","Cergy","Argenteuil"],
+["971","Guadeloupe","Basse-Terre","Les Abymes"],
+["972","Martinique","Fort-de-France","Le Lamentin"],
+["973","Guyane","Cayenne","Kourou"],
+["974","La Réunion","Saint-Denis","Saint-Paul"],
+["976","Mayotte","Mamoudzou","Dzaoudzi"]
+
+];
+
+
+/* =====================================================
+   VARIABLES
+   ===================================================== */
+
+let mode = "";
+let current = null;
+let score = 0;
+let question = 0;
+let streak = 0;
+let answered = false;
+
+const totalQuestions = 20;
+
+
+/* =====================================================
+   OUTILS
+   ===================================================== */
+
+function shuffle(array) {
+
+return [...array].sort(() => Math.random() - 0.5);
+
+}
+
+
+/* =====================================================
+   DÉMARRAGE
+   ===================================================== */
+
+function startQuiz(selectedMode) {
+
+mode = selectedMode;
+
+score = 0;
+question = 0;
+streak = 0;
+
+document.getElementById("menu").classList.add("hidden");
+document.getElementById("result").classList.add("hidden");
+document.getElementById("quiz").classList.remove("hidden");
+
+nextQuestion();
+
+}
+
+
+/* =====================================================
+   QUESTION
+   ===================================================== */
+
+function nextQuestion() {
+
+if (question >= totalQuestions) {
+
+finishQuiz();
+
+return;
+
+}
+
+answered = false;
+
+question++;
+
+document.getElementById("questionNumber").textContent = question;
+document.getElementById("score").textContent = score;
+document.getElementById("streak").textContent = streak;
+
+document.getElementById("progressBar").style.width =
+((question - 1) / totalQuestions * 100) + "%";
+
+document.getElementById("feedback").textContent = "";
+
+current =
+departments[Math.floor(Math.random() * departments.length)];
+
+
+let questionText;
+let correctAnswer;
+let possibilities;
+
+
+/* MODE 1 */
+
+if (mode === "prefecture") {
+
+questionText =
+"Quelle est la préfecture du département " +
+current[1] + " (" + current[0] + ") ?";
+
+correctAnswer = current[2];
+
+possibilities =
+departments.map(d => d[2]);
+
+}
+
+
+/* MODE 2 */
+
+else if (mode === "department") {
+
+questionText =
+"À quel département appartient " +
+current[3] + " ?";
+
+correctAnswer = current[1];
+
+possibilities =
+departments.map(d => d[1]);
+
+}
+
+
+/* MODE 3 */
+
+else if (mode === "capital") {
+
+questionText =
+"À quel département appartient la préfecture " +
+current[2] + " ?";
+
+correctAnswer = current[1];
+
+possibilities =
+departments.map(d => d[1]);
+
+}
+
+
+/* MODE MIXTE */
+
+else {
+
+const type = Math.floor(Math.random() * 3);
+
+if (type === 0) {
+
+questionText =
+"Quelle est la préfecture du département " +
+current[1] + " ?";
+
+correctAnswer = current[2];
+
+possibilities =
+departments.map(d => d[2]);
+
+}
+
+else if (type === 1) {
+
+questionText =
+"À quel département appartient " +
+current[3] + " ?";
+
+correctAnswer = current[1];
+
+possibilities =
+departments.map(d => d[1]);
+
+}
+
+else {
+
+questionText =
+"À quel département appartient la préfecture " +
+current[2] + " ?";
+
+correctAnswer = current[1];
+
+possibilities =
+departments.map(d => d[1]);
+
+}
+
+}
+
+
+document.getElementById("question").textContent =
+questionText;
+
+
+const wrongAnswers =
+shuffle(
+possibilities.filter(x => x !== correctAnswer)
+).slice(0, 3);
+
+
+const answers =
+shuffle([correctAnswer, ...wrongAnswers]);
+
+
+const container =
+document.getElementById("answers");
+
+container.innerHTML = "";
+
+
+answers.forEach(answer => {
+
+const button =
+document.createElement("button");
+
+button.textContent = answer;
+
+button.className = "answer";
+
+button.onclick = function() {
+
+checkAnswer(
+button,
+answer,
+correctAnswer
+);
+
+};
+
+container.appendChild(button);
+
+});
+
+
+}
+
+
+/* =====================================================
+   RÉPONSE
+   ===================================================== */
+
+function checkAnswer(button, answer, correctAnswer) {
+
+if (answered) return;
+
+answered = true;
+
+
+const buttons =
+document.querySelectorAll(".answer");
+
+
+buttons.forEach(b => {
+
+b.disabled = true;
+
+if (b.textContent === correctAnswer) {
+
+b.classList.add("correct");
+
+}
+
+});
+
+
+if (answer === correctAnswer) {
+
+score++;
+streak++;
+
+button.classList.add("correct");
+
+document.getElementById("feedback").textContent =
+"✅ Bonne réponse !";
+
+}
+
+else {
+
+streak = 0;
+
+button.classList.add("wrong");
+
+document.getElementById("feedback").textContent =
+"❌ Mauvaise réponse. La bonne réponse était : " +
+correctAnswer;
+
+}
+
+
+document.getElementById("score").textContent =
+score;
+
+document.getElementById("streak").textContent =
+streak;
+
+document.getElementById("progressBar").style.width =
+(question / totalQuestions * 100) + "%";
+
+}
+
+
+/* =====================================================
+   FIN
+   ===================================================== */
+
+function finishQuiz() {
+
+document.getElementById("quiz").classList.add("hidden");
+
+document.getElementById("result").classList.remove("hidden");
+
+
+let message;
+
+if (score === 20) {
+
+message = "🏆 Score parfait ! 20/20";
+
+}
+
+else if (score >= 17) {
+
+message = "🥇 Excellent ! " + score + "/20";
+
+}
+
+else if (score >= 14) {
+
+message = "🥈 Très bon niveau ! " + score + "/20";
+
+}
+
+else if (score >= 10) {
+
+message = "👍 Pas mal ! " + score + "/20";
+
+}
+
+else {
+
+message = "📚 Il faut encore réviser ! " + score + "/20";
+
+}
+
+
+document.getElementById("resultText").textContent =
+message;
+
+document.getElementById("progressBar").style.width = "100%";
+
+}
+
+
+/* =====================================================
+   RETOUR AU MENU
+   ===================================================== */
+
+function showMenu() {
+
+document.getElementById("result").classList.add("hidden");
+
+document.getElementById("menu").classList.remove("hidden");
+
+document.getElementById("progressBar").style.width = "0%";
+
+}
+
+</script>
+
+</body>
+</html>
