@@ -8,177 +8,186 @@
 
 <style>
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    background: #f1f5f9;
-    color: #17202a;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: #eef3f8;
+  color: #17202a;
 }
 
 header {
-    background: #173f67;
-    color: white;
-    padding: 20px;
-    text-align: center;
+  background: #173f67;
+  color: white;
+  padding: 22px 15px;
+  text-align: center;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 25px;
+  margin: 0;
+  font-size: 25px;
 }
 
 main {
-    max-width: 900px;
-    margin: auto;
-    padding: 15px;
+  max-width: 900px;
+  margin: auto;
+  padding: 15px;
 }
 
 .card {
-    background: white;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 3px 15px rgba(0,0,0,.08);
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 15px rgba(0,0,0,.08);
 }
 
 .stats {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .stat {
-    background: #edf2f7;
-    padding: 8px 12px;
-    border-radius: 10px;
+  background: #edf2f7;
+  padding: 8px 12px;
+  border-radius: 10px;
 }
 
 .progress {
-    height: 8px;
-    background: #dce3ea;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 15px;
+  height: 8px;
+  background: #dce3ea;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 15px;
 }
 
 .progress-bar {
-    height: 100%;
-    width: 0;
-    background: #1769aa;
-    transition: width .3s;
+  height: 100%;
+  width: 0;
+  background: #1769aa;
+  transition: width .3s;
 }
 
 button {
-    border: none;
-    border-radius: 12px;
-    padding: 13px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .mode {
-    width: 100%;
-    margin: 5px 0;
-    background: #1769aa;
-    color: white;
-}
-
-.secondary {
-    background: #e8eef5;
-    color: #173f67;
-}
-
-#question {
-    font-size: 21px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.answers {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+  width: 100%;
+  margin: 5px 0;
+  background: #1769aa;
+  color: white;
 }
 
 .answer {
-    background: #edf2f7;
-    text-align: left;
+  background: #edf2f7;
+  text-align: left;
+}
+
+.answer:hover:not(:disabled) {
+  background: #dce8f3;
 }
 
 .answer.correct {
-    background: #d8f3dc;
-    color: #176b2c;
+  background: #d8f3dc;
+  color: #176b2c;
 }
 
 .answer.wrong {
-    background: #fde0e0;
-    color: #9b2226;
+  background: #fde0e0;
+  color: #9b2226;
 }
 
 .answer:disabled {
-    opacity: 1;
+  opacity: 1;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+#question {
+  font-size: 21px;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
 #feedback {
-    min-height: 30px;
-    margin-top: 15px;
-    font-weight: 700;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .proposition {
-    background: #f1f4f7;
-    padding: 11px;
-    border-radius: 10px;
-    margin: 7px 0;
+  padding: 12px;
+  margin: 7px 0;
+  background: #f1f4f7;
+  border-radius: 10px;
 }
 
 .proposition.correct {
-    background: #d8f3dc;
+  background: #d8f3dc;
+  border-left: 5px solid #2e7d32;
+}
+
+.proposition.wrong {
+  background: #f8eeee;
 }
 
 .fiche {
-    background: #f8fafc;
-    border-left: 5px solid #1769aa;
-    padding: 17px;
-    border-radius: 10px;
-    margin-top: 20px;
+  margin-top: 20px;
+  padding: 18px;
+  background: #f7fafc;
+  border-left: 5px solid #1769aa;
+  border-radius: 10px;
 }
 
 .fiche h3 {
-    margin-top: 0;
+  margin-top: 0;
+  color: #173f67;
 }
 
 .fiche p {
-    line-height: 1.5;
+  line-height: 1.55;
 }
 
-.fiche a {
-    display: inline-block;
-    background: #173f67;
-    color: white;
-    text-decoration: none;
-    padding: 10px 13px;
-    border-radius: 10px;
-    margin-top: 5px;
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 7px;
+  background: #e2e8f0;
+  margin: 2px;
+  font-size: 14px;
+}
+
+.small {
+  color: #64748b;
+  font-size: 14px;
 }
 
 @media(max-width:650px) {
-    .answers {
-        grid-template-columns: 1fr;
-    }
+  .answers {
+    grid-template-columns: 1fr;
+  }
 
-    header h1 {
-        font-size: 21px;
-    }
+  header h1 {
+    font-size: 21px;
+  }
 }
 </style>
 </head>
@@ -186,34 +195,38 @@ button {
 <body>
 
 <header>
-    <h1>🇫🇷 Quiz des départements français</h1>
+  <h1>🇫🇷 Quiz des départements français</h1>
 </header>
 
 <main>
 
+<!-- STATISTIQUES -->
+
 <div class="card">
 
-    <div class="stats">
-        <div class="stat">
-            Question <b id="questionNumber">0</b>/<span id="totalQuestions">20</span>
-        </div>
+  <div class="stats">
 
-        <div class="stat">
-            Score <b id="score">0</b>
-        </div>
-
-        <div class="stat">
-            Série <b id="streak">0</b>
-        </div>
-
-        <div class="stat">
-            Départements vus <b id="seen">0</b>/101
-        </div>
+    <div class="stat">
+      Question <b id="questionNumber">0</b>/<span id="totalQuestions">20</span>
     </div>
 
-    <div class="progress">
-        <div id="progressBar" class="progress-bar"></div>
+    <div class="stat">
+      Score <b id="score">0</b>
     </div>
+
+    <div class="stat">
+      Série <b id="streak">0</b>
+    </div>
+
+    <div class="stat">
+      Départements vus <b id="seen">0</b>/101
+    </div>
+
+  </div>
+
+  <div class="progress">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
 
 </div>
 
@@ -222,27 +235,27 @@ button {
 
 <div id="menu" class="card">
 
-<h2>Choisis ton mode de quiz</h2>
+  <h2>Choisis ton mode de quiz</h2>
 
-<button class="mode" onclick="startQuiz('prefecture')">
-🏛️ Département → préfecture
-</button>
+  <button class="mode" onclick="startQuiz('prefecture')">
+    🏛️ Département → préfecture
+  </button>
 
-<button class="mode" onclick="startQuiz('department')">
-📍 Ville → département
-</button>
+  <button class="mode" onclick="startQuiz('department')">
+    📍 Ville → département
+  </button>
 
-<button class="mode" onclick="startQuiz('subprefecture')">
-🏢 Sous-préfecture → département
-</button>
+  <button class="mode" onclick="startQuiz('subprefecture')">
+    🏢 Sous-préfecture → département
+  </button>
 
-<button class="mode" onclick="startQuiz('status')">
-❓ Préfecture ou sous-préfecture ?
-</button>
+  <button class="mode" onclick="startQuiz('status')">
+    ❓ Préfecture ou sous-préfecture ?
+  </button>
 
-<button class="mode" onclick="startQuiz('mixed')">
-🎯 Défi mixte
-</button>
+  <button class="mode" onclick="startQuiz('mixed')">
+    🎯 Défi mixte
+  </button>
 
 </div>
 
@@ -251,30 +264,28 @@ button {
 
 <div id="quiz" class="card hidden">
 
-<div id="question"></div>
+  <div id="question"></div>
 
-<div id="answers" class="answers"></div>
+  <div id="answers" class="answers"></div>
 
-<div id="feedback"></div>
+  <div id="feedback"></div>
 
+  <div id="correction" class="hidden">
 
-<div id="correction" class="hidden">
+    <h3>📋 Les quatre propositions</h3>
 
-<h3>📋 Les quatre propositions</h3>
+    <div id="propositions"></div>
 
-<div id="propositions"></div>
+    <div id="fiche" class="fiche"></div>
 
-<div id="fiche" class="fiche"></div>
+  </div>
 
-</div>
-
-
-<button
+  <button
     id="nextButton"
     class="mode hidden"
     onclick="nextQuestion()">
     Question suivante →
-</button>
+  </button>
 
 </div>
 
@@ -283,13 +294,13 @@ button {
 
 <div id="result" class="card hidden">
 
-<h2 id="resultTitle"></h2>
+  <h2 id="resultTitle"></h2>
 
-<p id="resultText"></p>
+  <p id="resultText"></p>
 
-<button class="mode" onclick="backToMenu()">
-Rejouer
-</button>
+  <button class="mode" onclick="backToMenu()">
+    Rejouer
+  </button>
 
 </div>
 
@@ -298,9 +309,10 @@ Rejouer
 
 <script>
 
-/* =========================================================
-   LES 101 DEPARTEMENTS
-   ========================================================= */
+/* ==========================================================
+   DONNEES DES DEPARTEMENTS
+   code, nom, préfecture, région
+   ========================================================== */
 
 const departments = [
 
@@ -400,6 +412,9 @@ const departments = [
 ["93","Seine-Saint-Denis","Bobigny","Île-de-France"],
 ["94","Val-de-Marne","Créteil","Île-de-France"],
 ["95","Val-d'Oise","Cergy","Île-de-France"],
+
+/* OUTRE-MER */
+
 ["971","Guadeloupe","Basse-Terre","Guadeloupe"],
 ["972","Martinique","Fort-de-France","Martinique"],
 ["973","Guyane","Cayenne","Guyane"],
@@ -409,9 +424,9 @@ const departments = [
 ];
 
 
-/* =========================================================
+/* ==========================================================
    SOUS-PREFECTURES
-   ========================================================= */
+   ========================================================== */
 
 const subprefectures = {
 
@@ -516,973 +531,846 @@ const subprefectures = {
 };
 
 
-/* =========================================================
+/* ==========================================================
    INFORMATIONS PEDAGOGIQUES
-   ========================================================= */
+   ========================================================== */
 
 const facts = {
 
-"01":"L’Ain (01) s’étend de la vallée du Rhône aux montagnes du Jura. Bourg-en-Bresse est sa préfecture. Le département est notamment célèbre pour le poulet de Bresse.",
+"01":"L’Ain (01) est un département de la région Auvergne-Rhône-Alpes. Il s’étend de la vallée du Rhône aux montagnes du Jura. Bourg-en-Bresse est sa préfecture. Le département est notamment réputé pour le poulet de Bresse, la Dombes et le massif du Jura.",
 
-"02":"L’Aisne (02) est marqué par la Thiérache, les vallées de l’Aisne et de l’Oise et les sites de mémoire de la Première Guerre mondiale. Laon est sa préfecture.",
+"02":"L’Aisne (02) appartient aux Hauts-de-France. Laon est sa préfecture. Le département est marqué par les vallées de l’Aisne et de l’Oise ainsi que par les nombreux sites liés à la Première Guerre mondiale.",
 
-"03":"L’Allier (03) correspond à une partie historique du Bourbonnais. Moulins est sa préfecture et Vichy est célèbre pour ses sources thermales.",
+"03":"L’Allier (03) se trouve en Auvergne-Rhône-Alpes. Moulins est sa préfecture. Le département correspond en grande partie à l’ancien Bourbonnais et abrite notamment Vichy, célèbre pour ses sources thermales.",
 
-"04":"Les Alpes-de-Haute-Provence (04) offrent un paysage très contrasté entre Provence et montagnes alpines. Digne-les-Bains est la préfecture.",
+"04":"Les Alpes-de-Haute-Provence (04) appartiennent à la région Provence-Alpes-Côte d’Azur. Digne-les-Bains est la préfecture. Le département offre des paysages allant de la Provence aux hauts reliefs alpins.",
 
-"05":"Les Hautes-Alpes (05) sont dominées par les grands massifs alpins. Gap est la préfecture et le département comprend une partie du parc national des Écrins.",
+"05":"Les Hautes-Alpes (05) sont un département de montagne de Provence-Alpes-Côte d’Azur. Gap est la préfecture. Le département comprend une partie du parc national des Écrins et certains des plus hauts sommets des Alpes françaises.",
 
-"06":"Les Alpes-Maritimes (06) associent la Côte d’Azur et les hauts reliefs alpins. Nice est la préfecture.",
+"06":"Les Alpes-Maritimes (06) associent le littoral méditerranéen et les montagnes alpines. Nice est la préfecture. Le département comprend notamment la Côte d’Azur, le Mercantour et la frontière italienne.",
 
-"07":"L’Ardèche (07) est célèbre pour ses gorges, ses plateaux et ses paysages volcaniques. Privas est la préfecture.",
+"07":"L’Ardèche (07) est un département d’Auvergne-Rhône-Alpes. Privas est sa préfecture. Il est connu pour ses gorges, ses plateaux volcaniques et ses paysages de moyenne montagne.",
 
-"08":"Les Ardennes (08) sont marquées par les forêts et la vallée de la Meuse. Charleville-Mézières est la préfecture.",
+"08":"Les Ardennes (08) appartiennent au Grand Est. Charleville-Mézières est la préfecture. La vallée de la Meuse et les forêts ardennaises caractérisent une grande partie du département.",
 
-"09":"L’Ariège (09) est un département pyrénéen. Foix est la préfecture, dominée par son célèbre château.",
+"09":"L’Ariège (09) est un département pyrénéen d’Occitanie. Foix est la préfecture. Son territoire comprend de nombreux reliefs et plusieurs sites liés à l’histoire médiévale et cathare.",
 
-"10":"L’Aube (10) est au cœur de la Champagne méridionale. Troyes est la préfecture et possède un remarquable patrimoine médiéval.",
+"10":"L’Aube (10) appartient au Grand Est. Troyes est la préfecture. Le département constitue une partie importante de la Champagne méridionale et possède un patrimoine historique remarquable.",
 
-"11":"L’Aude (11) va du littoral méditerranéen aux Pyrénées. Carcassonne est sa préfecture et sa cité fortifiée est mondialement connue.",
+"11":"L’Aude (11) est en Occitanie. Carcassonne est la préfecture. Le département s’étend des Pyrénées au littoral méditerranéen et est particulièrement célèbre pour la cité médiévale de Carcassonne.",
 
-"12":"L’Aveyron (12) possède de vastes plateaux et des vallées encaissées. Rodez est la préfecture.",
+"12":"L’Aveyron (12) est un département d’Occitanie. Rodez est la préfecture. Il est marqué par les plateaux de l’Aubrac et du Larzac, les gorges du Tarn et de nombreux villages historiques.",
 
-"13":"Les Bouches-du-Rhône (13) associent Marseille, la Camargue, les Calanques et les massifs provençaux. Marseille est la préfecture.",
+"13":"Les Bouches-du-Rhône (13) appartiennent à Provence-Alpes-Côte d’Azur. Marseille est la préfecture. Le département comprend notamment les Calanques, la Camargue et une importante partie du littoral méditerranéen.",
 
-"14":"Le Calvados (14) est notamment connu pour les plages du Débarquement et le patrimoine normand. Caen est la préfecture.",
+"14":"Le Calvados (14) est en Normandie. Caen est la préfecture. Le département est particulièrement connu pour les plages du Débarquement, les stations balnéaires et la production de cidre.",
 
-"15":"Le Cantal (15) est dominé par les reliefs d’un ancien volcan. Aurillac est la préfecture.",
+"15":"Le Cantal (15) appartient à Auvergne-Rhône-Alpes. Aurillac est la préfecture. Le département est dominé par les reliefs volcaniques du massif du Cantal.",
 
-"16":"La Charente (16) est traversée par le fleuve Charente. Angoulême est sa préfecture et la capitale française de la bande dessinée.",
+"16":"La Charente (16) est en Nouvelle-Aquitaine. Angoulême est la préfecture. La ville est notamment connue pour son festival international de la bande dessinée.",
 
-"17":"La Charente-Maritime (17) possède un long littoral et plusieurs îles, notamment Ré et Oléron. La Rochelle est la préfecture.",
+"17":"La Charente-Maritime (17) appartient à Nouvelle-Aquitaine. La Rochelle est la préfecture. Le département possède un vaste littoral et comprend notamment les îles de Ré, d’Oléron et d’Aix.",
 
-"18":"Le Cher (18) se trouve au cœur de la France. Bourges est sa préfecture et possède une célèbre cathédrale gothique.",
+"18":"Le Cher (18) se situe dans le Centre-Val de Loire. Bourges est la préfecture. Le département appartient à l’ancien Berry et sa préfecture possède une remarquable cathédrale gothique.",
 
-"19":"La Corrèze (19) est un département vallonné du Limousin historique. Tulle est sa préfecture.",
+"19":"La Corrèze (19) appartient à Nouvelle-Aquitaine. Tulle est la préfecture. Le département correspond à une partie du Limousin historique et possède de nombreux paysages vallonnés.",
 
-"2A":"La Corse-du-Sud (2A) correspond à la partie méridionale de la Corse. Ajaccio est sa préfecture et la ville natale de Napoléon.",
+"2A":"La Corse-du-Sud (2A) occupe la partie méridionale de la Corse. Ajaccio est la préfecture. La ville est notamment connue pour être le lieu de naissance de Napoléon Bonaparte.",
 
-"2B":"La Haute-Corse (2B) occupe la partie septentrionale de l’île. Bastia est sa préfecture.",
+"2B":"La Haute-Corse (2B) occupe la partie septentrionale de la Corse. Bastia est la préfecture. Le département comprend notamment le Cap Corse, la Balagne et le massif du Monte Cinto.",
 
-"21":"La Côte-d’Or (21) est au cœur de la Bourgogne viticole. Dijon est sa préfecture.",
+"21":"La Côte-d’Or (21) appartient à Bourgogne-Franche-Comté. Dijon est la préfecture. Le département est particulièrement célèbre pour les vignobles de Bourgogne et les climats du vignoble de Dijon à Beaune.",
 
-"22":"Les Côtes-d’Armor (22) possèdent un littoral très découpé. Saint-Brieuc est la préfecture.",
+"22":"Les Côtes-d’Armor (22) sont situées en Bretagne. Saint-Brieuc est la préfecture. Le département possède un littoral très découpé, notamment la Côte de Granit rose.",
 
-"23":"La Creuse (23) est un département rural du Limousin. Guéret est sa préfecture et Aubusson est célèbre pour ses tapisseries.",
+"23":"La Creuse (23) appartient à Nouvelle-Aquitaine. Guéret est la préfecture. Département rural du Limousin historique, elle est notamment connue pour Aubusson et ses tapisseries.",
 
-"24":"La Dordogne (24) est réputée pour ses châteaux, ses grottes et ses vallées. Périgueux est la préfecture.",
+"24":"La Dordogne (24) appartient à Nouvelle-Aquitaine. Périgueux est la préfecture. Le département est célèbre pour ses grottes préhistoriques, ses châteaux et la vallée de la Dordogne.",
 
-"25":"Le Doubs (25) est un département jurassien. Besançon est sa préfecture et sa citadelle est une œuvre de Vauban.",
+"25":"Le Doubs (25) est en Bourgogne-Franche-Comté. Besançon est la préfecture. La citadelle de Besançon, construite par Vauban, domine la ville.",
 
-"26":"La Drôme (26) s’étend de la vallée du Rhône aux reliefs du Vercors et des Baronnies. Valence est la préfecture.",
+"26":"La Drôme (26) appartient à Auvergne-Rhône-Alpes. Valence est la préfecture. Le département s’étend de la vallée du Rhône aux reliefs du Vercors et des Baronnies.",
 
-"27":"L’Eure (27) est un département normand. Évreux est sa préfecture et Giverny se trouve dans le département.",
+"27":"L’Eure (27) est en Normandie. Évreux est la préfecture. Le département comprend notamment Giverny et ses célèbres jardins associés à Claude Monet.",
 
-"28":"L’Eure-et-Loir (28) se situe entre Beauce et Perche. Chartres est la préfecture et sa cathédrale est mondialement connue.",
+"28":"L’Eure-et-Loir (28) appartient au Centre-Val de Loire. Chartres est la préfecture. Sa cathédrale gothique et ses vitraux constituent l’un des grands patrimoines du département.",
 
-"29":"Le Finistère (29) forme l’extrémité occidentale de la Bretagne. Quimper est sa préfecture.",
+"29":"Le Finistère (29) est l’extrémité occidentale de la Bretagne. Quimper est la préfecture. Son territoire possède une façade maritime particulièrement développée.",
 
-"30":"Le Gard (30) va des Cévennes à la Camargue. Nîmes est sa préfecture et possède un patrimoine romain exceptionnel.",
+"30":"Le Gard (30) appartient à l’Occitanie. Nîmes est la préfecture. La ville est célèbre pour ses monuments romains, notamment les Arènes et la Maison Carrée.",
 
-"31":"La Haute-Garonne (31) est organisée autour de Toulouse et de la Garonne. Toulouse est la préfecture.",
+"31":"La Haute-Garonne (31) est en Occitanie. Toulouse est la préfecture. Le département est organisé autour de la Garonne et de la métropole toulousaine.",
 
-"32":"Le Gers (32) correspond au cœur de la Gascogne. Auch est la préfecture.",
+"32":"Le Gers (32) appartient à l’Occitanie. Auch est la préfecture. Le département correspond au cœur de la Gascogne et est réputé pour sa gastronomie.",
 
-"33":"La Gironde (33) est le plus vaste département de France métropolitaine. Bordeaux est sa préfecture.",
+"33":"La Gironde (33) est en Nouvelle-Aquitaine. Bordeaux est la préfecture. Avec plus de 10 000 km², c’est le plus vaste département de France métropolitaine.",
 
-"34":"L’Hérault (34) associe littoral méditerranéen, vignobles et arrière-pays. Montpellier est la préfecture.",
+"34":"L’Hérault (34) est en Occitanie. Montpellier est la préfecture. Le département associe littoral méditerranéen, vignobles et arrière-pays montagneux.",
 
-"35":"L’Ille-et-Vilaine (35) est le département le plus oriental de Bretagne. Rennes est sa préfecture.",
+"35":"L’Ille-et-Vilaine (35) est le département le plus oriental de Bretagne. Rennes est la préfecture. Le département comprend également Saint-Malo et une partie de la côte nord bretonne.",
 
-"36":"L’Indre (36) est au cœur du Berry. Châteauroux est la préfecture et la Brenne est connue pour ses nombreux étangs.",
+"36":"L’Indre (36) appartient au Centre-Val de Loire. Châteauroux est la préfecture. Le département comprend notamment le parc naturel régional de la Brenne, célèbre pour ses nombreux étangs.",
 
-"37":"L’Indre-et-Loire (37) est au cœur du Val de Loire. Tours est la préfecture et plusieurs grands châteaux se trouvent dans le département.",
+"37":"L’Indre-et-Loire (37) est en Centre-Val de Loire. Tours est la préfecture. Le département est au cœur du Val de Loire et possède plusieurs châteaux célèbres.",
 
-"38":"L’Isère (38) va des plaines du Rhône aux massifs alpins. Grenoble est sa préfecture.",
+"38":"L’Isère (38) appartient à Auvergne-Rhône-Alpes. Grenoble est la préfecture. Le département est dominé par plusieurs massifs alpins, notamment Belledonne, la Chartreuse et le Vercors.",
 
-"39":"Le Jura (39) est connu pour ses montagnes, ses lacs, ses forêts et son vignoble. Lons-le-Saunier est la préfecture.",
+"39":"Le Jura (39) appartient à Bourgogne-Franche-Comté. Lons-le-Saunier est la préfecture. Le département est réputé pour ses montagnes, ses lacs, ses forêts et son vignoble.",
 
-"40":"Les Landes (40) possèdent l’une des plus grandes forêts de pins d’Europe occidentale. Mont-de-Marsan est la préfecture.",
+"40":"Les Landes (40) appartiennent à Nouvelle-Aquitaine. Mont-de-Marsan est la préfecture. Elles abritent l’une des plus grandes forêts cultivées d’Europe occidentale.",
 
-"41":"Le Loir-et-Cher (41) est au cœur des châteaux de la Loire. Blois est la préfecture.",
+"41":"Le Loir-et-Cher (41) appartient au Centre-Val de Loire. Blois est la préfecture. Le département est situé au cœur des châteaux de la Loire.",
 
-"42":"La Loire (42) associe Saint-Étienne, les monts du Forez et des territoires ruraux. Saint-Étienne est la préfecture.",
+"42":"La Loire (42) est en Auvergne-Rhône-Alpes. Saint-Étienne est la préfecture. Le département doit son nom au fleuve Loire qui le traverse.",
 
-"43":"La Haute-Loire (43) est un département volcanique traversé par la Loire. Le Puy-en-Velay est la préfecture.",
+"43":"La Haute-Loire (43) appartient à Auvergne-Rhône-Alpes. Le Puy-en-Velay est la préfecture. Le département est fortement marqué par les paysages volcaniques.",
 
-"44":"La Loire-Atlantique (44) s’étend autour de l’estuaire de la Loire jusqu’à l’Atlantique. Nantes est la préfecture.",
+"44":"La Loire-Atlantique (44) appartient aux Pays de la Loire. Nantes est la préfecture. Le département s’étend autour de l’estuaire de la Loire jusqu’à l’océan Atlantique.",
 
-"45":"Le Loiret (45) est traversé par la Loire. Orléans est la préfecture.",
+"45":"Le Loiret (45) appartient au Centre-Val de Loire. Orléans est la préfecture. La Loire traverse le département d’est en ouest.",
 
-"46":"Le Lot (46) est connu pour ses causses, ses vallées et ses villages. Cahors est la préfecture.",
+"46":"Le Lot (46) est en Occitanie. Cahors est la préfecture. Le département est connu pour ses causses, ses vallées et ses villages médiévaux.",
 
-"47":"Le Lot-et-Garonne (47) est un département agricole de vallées et de vergers. Agen est la préfecture.",
+"47":"Le Lot-et-Garonne (47) appartient à Nouvelle-Aquitaine. Agen est la préfecture. C’est un département agricole réputé notamment pour ses vergers.",
 
-"48":"La Lozère (48) est le département le moins peuplé de France métropolitaine. Mende est la préfecture.",
+"48":"La Lozère (48) est en Occitanie. Mende est la préfecture. C’est le département le moins peuplé de France métropolitaine.",
 
-"49":"Le Maine-et-Loire (49) est traversé par la Loire et possède de nombreux châteaux. Angers est la préfecture.",
+"49":"Le Maine-et-Loire (49) appartient aux Pays de la Loire. Angers est la préfecture. La Loire et de nombreux châteaux structurent son territoire.",
 
-"50":"La Manche (50) possède une longue façade maritime et comprend le Cotentin. Saint-Lô est la préfecture.",
+"50":"La Manche (50) appartient à la Normandie. Saint-Lô est la préfecture. Le département comprend notamment le Cotentin et une grande partie des plages du Débarquement.",
 
-"51":"La Marne (51) est au cœur de la Champagne viticole. Châlons-en-Champagne est la préfecture.",
+"51":"La Marne (51) est dans le Grand Est. Châlons-en-Champagne est la préfecture. Le département constitue l’un des grands territoires de production du champagne.",
 
-"52":"La Haute-Marne (52) est un département rural et très boisé du Grand Est. Chaumont est la préfecture.",
+"52":"La Haute-Marne (52) appartient au Grand Est. Chaumont est la préfecture. C’est un département rural, vallonné et très boisé.",
 
-"53":"La Mayenne (53) est un département rural traversé par la rivière Mayenne. Laval est la préfecture.",
+"53":"La Mayenne (53) appartient aux Pays de la Loire. Laval est la préfecture. Le département est traversé du nord au sud par la rivière Mayenne.",
 
-"54":"La Meurthe-et-Moselle (54) s’étend autour de Nancy jusqu’aux frontières belge et luxembourgeoise. Nancy est la préfecture.",
+"54":"La Meurthe-et-Moselle (54) appartient au Grand Est. Nancy est la préfecture. Le département s’étend jusqu’aux frontières belge et luxembourgeoise.",
 
-"55":"La Meuse (55) est fortement associée à l’histoire de la Première Guerre mondiale. Bar-le-Duc est la préfecture.",
+"55":"La Meuse (55) est dans le Grand Est. Bar-le-Duc est la préfecture. Le département est fortement marqué par les lieux de mémoire de la Première Guerre mondiale.",
 
-"56":"Le Morbihan (56) possède un littoral très découpé et un patrimoine mégalithique exceptionnel. Vannes est la préfecture.",
+"56":"Le Morbihan (56) est en Bretagne. Vannes est la préfecture. Le département possède un littoral très découpé et un important patrimoine mégalithique.",
 
-"57":"La Moselle (57) est frontalière de l’Allemagne et du Luxembourg. Metz est la préfecture.",
+"57":"La Moselle (57) appartient au Grand Est. Metz est la préfecture. Le département est frontalier de l’Allemagne et du Luxembourg.",
 
-"58":"La Nièvre (58) est un département rural et forestier de Bourgogne. Nevers est la préfecture.",
+"58":"La Nièvre (58) appartient à Bourgogne-Franche-Comté. Nevers est la préfecture. Le département est marqué par le Morvan et de vastes espaces ruraux.",
 
-"59":"Le Nord (59) est le département le plus peuplé de France. Lille est la préfecture.",
+"59":"Le Nord (59) appartient aux Hauts-de-France. Lille est la préfecture. C’est le département le plus peuplé de France.",
 
-"60":"L’Oise (60) se situe au nord de Paris. Beauvais est la préfecture et le département possède notamment le château de Chantilly.",
+"60":"L’Oise (60) appartient aux Hauts-de-France. Beauvais est la préfecture. Le département comprend notamment Chantilly, Compiègne et de nombreux sites historiques.",
 
-"61":"L’Orne (61) correspond à une partie rurale de la Normandie. Alençon est la préfecture.",
+"61":"L’Orne (61) est en Normandie. Alençon est la préfecture. Le département est particulièrement rural et comprend une partie du parc naturel régional du Perche.",
 
-"62":"Le Pas-de-Calais (62) possède une façade sur la Manche et un important patrimoine minier. Arras est la préfecture.",
+"62":"Le Pas-de-Calais (62) appartient aux Hauts-de-France. Arras est la préfecture. Son territoire comprend le littoral de la Manche et l’ancien bassin minier.",
 
-"63":"Le Puy-de-Dôme (63) est dominé par la chaîne des Puys. Clermont-Ferrand est la préfecture.",
+"63":"Le Puy-de-Dôme (63) appartient à Auvergne-Rhône-Alpes. Clermont-Ferrand est la préfecture. La chaîne des Puys et le puy de Dôme sont les symboles du département.",
 
-"64":"Les Pyrénées-Atlantiques (64) associent Pays basque, Béarn et Pyrénées. Pau est la préfecture.",
+"64":"Les Pyrénées-Atlantiques (64) appartiennent à Nouvelle-Aquitaine. Pau est la préfecture. Le département associe le Béarn, le Pays basque et les Pyrénées.",
 
-"65":"Les Hautes-Pyrénées (65) abritent Lourdes et de hauts sommets pyrénéens. Tarbes est la préfecture.",
+"65":"Les Hautes-Pyrénées (65) sont en Occitanie. Tarbes est la préfecture. Le département comprend notamment Lourdes et plusieurs des plus hauts sommets pyrénéens.",
 
-"66":"Les Pyrénées-Orientales (66) vont de la Méditerranée aux Pyrénées. Perpignan est la préfecture.",
+"66":"Les Pyrénées-Orientales (66) appartiennent à l’Occitanie. Perpignan est la préfecture. Le département s’étend de la Méditerranée aux Pyrénées.",
 
-"67":"Le Bas-Rhin (67) correspond à la partie nord de l’Alsace. Strasbourg est la préfecture.",
+"67":"Le Bas-Rhin (67) appartient au Grand Est. Strasbourg est la préfecture. Le département correspond à la partie nord de l’Alsace historique.",
 
-"68":"Le Haut-Rhin (68) correspond au sud de l’Alsace. Colmar est la préfecture.",
+"68":"Le Haut-Rhin (68) appartient au Grand Est. Colmar est la préfecture. Il correspond à la partie méridionale de l’Alsace historique.",
 
-"69":"Le Rhône (69) s’organise autour de Lyon et du Beaujolais. Lyon est la préfecture.",
+"69":"Le Rhône (69) appartient à Auvergne-Rhône-Alpes. Lyon est la préfecture. Le département est notamment associé à Lyon et au vignoble du Beaujolais.",
 
-"70":"La Haute-Saône (70) est un département rural et forestier. Vesoul est la préfecture.",
+"70":"La Haute-Saône (70) appartient à Bourgogne-Franche-Comté. Vesoul est la préfecture. C’est un département rural et fortement boisé.",
 
-"71":"La Saône-et-Loire (71) est un vaste département bourguignon. Mâcon est la préfecture.",
+"71":"La Saône-et-Loire (71) appartient à Bourgogne-Franche-Comté. Mâcon est la préfecture. Le département est l’un des plus vastes de la région.",
 
-"72":"La Sarthe (72) est célèbre pour Le Mans et ses 24 Heures. Le Mans est la préfecture.",
+"72":"La Sarthe (72) appartient aux Pays de la Loire. Le Mans est la préfecture. La ville accueille notamment la célèbre course des 24 Heures du Mans.",
 
-"73":"La Savoie (73) est un département alpin. Chambéry est la préfecture.",
+"73":"La Savoie (73) appartient à Auvergne-Rhône-Alpes. Chambéry est la préfecture. Le département est entièrement marqué par les reliefs alpins.",
 
-"74":"La Haute-Savoie (74) possède notamment le lac d’Annecy et le massif du Mont-Blanc. Annecy est la préfecture.",
+"74":"La Haute-Savoie (74) appartient à Auvergne-Rhône-Alpes. Annecy est la préfecture. Le département comprend notamment le lac d’Annecy et le massif du Mont-Blanc.",
 
-"75":"Paris (75) est à la fois une commune et un département. Paris est naturellement sa préfecture.",
+"75":"Paris (75) est à la fois une commune et un département. Paris est naturellement sa préfecture. Le département constitue le cœur historique et administratif de la France.",
 
-"76":"La Seine-Maritime (76) possède les célèbres falaises de la côte d’Albâtre. Rouen est la préfecture.",
+"76":"La Seine-Maritime (76) appartient à la Normandie. Rouen est la préfecture. Le département possède notamment les falaises de la côte d’Albâtre et les ports du Havre et de Dieppe.",
 
-"77":"La Seine-et-Marne (77) est le plus vaste département d’Île-de-France. Melun est la préfecture.",
+"77":"La Seine-et-Marne (77) appartient à l’Île-de-France. Melun est la préfecture. C’est le département le plus vaste de la région francilienne.",
 
-"78":"Les Yvelines (78) comprennent Versailles et de vastes espaces boisés. Versailles est la préfecture.",
+"78":"Les Yvelines (78) appartiennent à l’Île-de-France. Versailles est la préfecture. Le département comprend le château de Versailles et de vastes forêts.",
 
-"79":"Les Deux-Sèvres (79) appartiennent à l’ancienne région du Poitou. Niort est la préfecture.",
+"79":"Les Deux-Sèvres (79) appartiennent à Nouvelle-Aquitaine. Niort est la préfecture. Le département correspond à une partie de l’ancien Poitou.",
 
-"80":"La Somme (80) est traversée par le fleuve Somme et possède la baie de Somme. Amiens est la préfecture.",
+"80":"La Somme (80) appartient aux Hauts-de-France. Amiens est la préfecture. Le fleuve Somme traverse le département avant de rejoindre la baie de Somme.",
 
-"81":"Le Tarn (81) est notamment connu pour Albi et son patrimoine épiscopal. Albi est la préfecture.",
+"81":"Le Tarn (81) appartient à l’Occitanie. Albi est la préfecture. La cité épiscopale d’Albi est classée au patrimoine mondial de l’UNESCO.",
 
-"82":"Le Tarn-et-Garonne (82) est l’un des plus jeunes départements métropolitains, créé en 1808. Montauban est la préfecture.",
+"82":"Le Tarn-et-Garonne (82) appartient à l’Occitanie. Montauban est la préfecture. Créé en 1808, il fait partie des départements les plus récents de France métropolitaine.",
 
-"83":"Le Var (83) associe littoral méditerranéen, massifs et îles. Toulon est la préfecture.",
+"83":"Le Var (83) appartient à Provence-Alpes-Côte d’Azur. Toulon est la préfecture. Le département possède une importante façade méditerranéenne et comprend notamment les îles d’Hyères.",
 
-"84":"Le Vaucluse (84) est dominé notamment par le mont Ventoux. Avignon est la préfecture.",
+"84":"Le Vaucluse (84) appartient à Provence-Alpes-Côte d’Azur. Avignon est la préfecture. Le département est notamment dominé par le mont Ventoux.",
 
-"85":"La Vendée (85) associe bocage, littoral et îles. La Roche-sur-Yon est la préfecture.",
+"85":"La Vendée (85) appartient aux Pays de la Loire. La Roche-sur-Yon est la préfecture. Le département associe bocage, littoral et îles.",
 
-"86":"La Vienne (86) se situe au seuil du Poitou. Poitiers est la préfecture.",
+"86":"La Vienne (86) appartient à Nouvelle-Aquitaine. Poitiers est la préfecture. Le département correspond à une partie de l’ancien Poitou.",
 
-"87":"La Haute-Vienne (87) est au cœur du Limousin historique. Limoges est la préfecture et est célèbre pour sa porcelaine.",
+"87":"La Haute-Vienne (87) appartient à Nouvelle-Aquitaine. Limoges est la préfecture. La ville est mondialement connue pour sa porcelaine.",
 
-"88":"Les Vosges (88) sont dominées par le massif du même nom. Épinal est la préfecture.",
+"88":"Les Vosges (88) appartiennent au Grand Est. Épinal est la préfecture. Le massif des Vosges occupe une partie importante du département.",
 
-"89":"L’Yonne (89) est un département bourguignon. Auxerre est la préfecture.",
+"89":"L’Yonne (89) appartient à Bourgogne-Franche-Comté. Auxerre est la préfecture. Le département possède notamment les vignobles de Chablis.",
 
-"90":"Le Territoire de Belfort (90) est le plus petit département métropolitain par sa superficie. Belfort est la préfecture.",
+"90":"Le Territoire de Belfort (90) appartient à Bourgogne-Franche-Comté. Belfort est la préfecture. Il est issu de l’ancien arrondissement du Haut-Rhin resté français après la guerre de 1870.",
 
-"91":"L’Essonne (91) est un département francilien mêlant espaces urbains et agricoles. Évry-Courcouronnes est la préfecture.",
+"91":"L’Essonne (91) appartient à l’Île-de-France. Évry-Courcouronnes est la préfecture. Le département associe zones urbaines et grands espaces agricoles.",
 
-"92":"Les Hauts-de-Seine (92) sont au cœur de la métropole parisienne. Nanterre est la préfecture.",
+"92":"Les Hauts-de-Seine (92) appartiennent à l’Île-de-France. Nanterre est la préfecture. Le département comprend notamment La Défense.",
 
-"93":"La Seine-Saint-Denis (93) est située au nord-est de Paris. Bobigny est la préfecture.",
+"93":"La Seine-Saint-Denis (93) appartient à l’Île-de-France. Bobigny est la préfecture. Le département se situe immédiatement au nord-est de Paris.",
 
-"94":"Le Val-de-Marne (94) est structuré notamment par la Seine et la Marne. Créteil est la préfecture.",
+"94":"Le Val-de-Marne (94) appartient à l’Île-de-France. Créteil est la préfecture. Le département est traversé par la Seine et la Marne.",
 
-"95":"Le Val-d’Oise (95) s’étend au nord-ouest de Paris. Cergy est la préfecture.",
+"95":"Le Val-d’Oise (95) appartient à l’Île-de-France. Cergy est la préfecture. Le département se situe au nord-ouest de Paris.",
 
-"971":"La Guadeloupe (971) est un archipel des Antilles françaises. Basse-Terre est la préfecture.",
+"971":"La Guadeloupe (971) est un département et une région d’outre-mer des Antilles françaises. Basse-Terre est la préfecture. L’archipel comprend notamment Grande-Terre et Basse-Terre.",
 
-"972":"La Martinique (972) est une île volcanique des Antilles. Fort-de-France est la préfecture.",
+"972":"La Martinique (972) est un département et une région d’outre-mer des Antilles. Fort-de-France est la préfecture. L’île est dominée au nord par la montagne Pelée.",
 
-"973":"La Guyane (973) est le seul département français situé en Amérique du Sud. Cayenne est la préfecture.",
+"973":"La Guyane (973) est un département et une région d’outre-mer situé en Amérique du Sud. Cayenne est la préfecture. Elle est couverte en grande partie par la forêt amazonienne.",
 
-"974":"La Réunion (974) est une île volcanique de l’océan Indien. Saint-Denis est la préfecture.",
+"974":"La Réunion (974) est un département et une région d’outre-mer de l’océan Indien. Saint-Denis est la préfecture. L’île est caractérisée par ses reliefs volcaniques, notamment le piton de la Fournaise.",
 
-"976":"Mayotte (976) est un archipel français de l’océan Indien. Mamoudzou est la préfecture."
+"976":"Mayotte (976) est un département et une région d’outre-mer de l’océan Indien. Mamoudzou est la préfecture. Le territoire est constitué de plusieurs îles, dont Grande-Terre et Petite-Terre."
 
 };
 
 
-/* =========================================================
-   VARIABLES DU QUIZ
-   ========================================================= */
+/* ==========================================================
+   VARIABLES
+   ========================================================== */
 
 let mode = "";
 let questionIndex = 0;
 let totalQuestions = 20;
 let score = 0;
 let streak = 0;
-
-let questionQueue = [];
+let queue = [];
 let currentDepartment = null;
 let currentCorrectAnswer = null;
 let currentQuestionType = null;
 let answered = false;
+let currentCity = null;
 
 
-/* =========================================================
-   OUTILS
-   ========================================================= */
+/* ==========================================================
+   UTILITAIRES
+   ========================================================== */
 
 function shuffle(array) {
-    return [...array].sort(() => Math.random() - 0.5);
+  return [...array].sort(() => Math.random() - 0.5);
 }
 
 function getDepartment(code) {
-    return departments.find(d => d[0] === code);
+  return departments.find(d => d[0] === code);
+}
+
+function getDepartmentByName(name) {
+  return departments.find(d => d[1] === name);
 }
 
 
-/*
-Retourne les informations sur une ville :
-préfecture ou sous-préfecture + département.
-*/
-
-function cityInformation(city) {
-
-    for (const d of departments) {
-
-        if (d[2] === city) {
-
-            return `${d[1]} (${d[0]}) — préfecture`;
-        }
-
-        if ((subprefectures[d[0]] || []).includes(city)) {
-
-            return `${d[1]} (${d[0]}) — sous-préfecture`;
-        }
-    }
-
-    return "information non disponible";
-}
-
-
-/*
-Création de l'URL vers la fiche du département.
-
-La fiche externe est uniquement ouverte dans un nouvel onglet.
-Le quiz lui-même n'en dépend pas.
-*/
-
-function departmentURL(department) {
-
-    const code = department[0];
-
-    const slugs = {
-
-        "2A": "corse-du-sud",
-        "2B": "haute-corse",
-
-        "01":"ain",
-        "02":"aisne",
-        "03":"allier",
-        "04":"alpes-de-haute-provence",
-        "05":"hautes-alpes",
-        "06":"alpes-maritimes",
-        "07":"ardeche",
-        "08":"ardennes",
-        "09":"ariege",
-        "10":"aube",
-        "11":"aude",
-        "12":"aveyron",
-        "13":"bouches-du-rhone",
-        "14":"calvados",
-        "15":"cantal",
-        "16":"charente",
-        "17":"charente-maritime",
-        "18":"cher",
-        "19":"correze",
-        "21":"cote-d-or",
-        "22":"cotes-d-armor",
-        "23":"creuse",
-        "24":"dordogne",
-        "25":"doubs",
-        "26":"drome",
-        "27":"eure",
-        "28":"eure-et-loir",
-        "29":"finistere",
-        "30":"gard",
-        "31":"haute-garonne",
-        "32":"gers",
-        "33":"gironde",
-        "34":"herault",
-        "35":"ille-et-vilaine",
-        "36":"indre",
-        "37":"indre-et-loire",
-        "38":"isere",
-        "39":"jura",
-        "40":"landes",
-        "41":"loir-et-cher",
-        "42":"loire",
-        "43":"haute-loire",
-        "44":"loire-atlantique",
-        "45":"loiret",
-        "46":"lot",
-        "47":"lot-et-garonne",
-        "48":"lozere",
-        "49":"maine-et-loire",
-        "50":"manche",
-        "51":"marne",
-        "52":"haute-marne",
-        "53":"mayenne",
-        "54":"meurthe-et-moselle",
-        "55":"meuse",
-        "56":"morbihan",
-        "57":"moselle",
-        "58":"nievre",
-        "59":"nord",
-        "60":"oise",
-        "61":"orne",
-        "62":"pas-de-calais",
-        "63":"puy-de-dome",
-        "64":"pyrenees-atlantiques",
-        "65":"hautes-pyrenees",
-        "66":"pyrenees-orientales",
-        "67":"bas-rhin",
-        "68":"haut-rhin",
-        "69":"rhone",
-        "70":"haute-saone",
-        "71":"saone-et-loire",
-        "72":"sarthe",
-        "73":"savoie",
-        "74":"haute-savoie",
-        "75":"paris",
-        "76":"seine-maritime",
-        "77":"seine-et-marne",
-        "78":"yvelines",
-        "79":"deux-sevres",
-        "80":"somme",
-        "81":"tarn",
-        "82":"tarn-et-garonne",
-        "83":"var",
-        "84":"vaucluse",
-        "85":"vendee",
-        "86":"vienne",
-        "87":"haute-vienne",
-        "88":"vosges",
-        "89":"yonne",
-        "90":"territoire-de-belfort",
-        "91":"essonne",
-        "92":"hauts-de-seine",
-        "93":"seine-saint-denis",
-        "94":"val-de-marne",
-        "95":"val-d-oise",
-        "971":"guadeloupe",
-        "972":"martinique",
-        "973":"guyane",
-        "974":"la-reunion",
-        "976":"mayotte"
-    };
-
-    return `https://www.carte-des-departements.fr/departement/${code}-${slugs[code]}/`;
-}
-
-
-/* =========================================================
-   DEMARRAGE
-   ========================================================= */
+/* ==========================================================
+   DEMARRER
+   ========================================================== */
 
 function startQuiz(selectedMode) {
 
-    mode = selectedMode;
+  mode = selectedMode;
 
-    questionIndex = 0;
-    score = 0;
-    streak = 0;
+  questionIndex = 0;
+  score = 0;
+  streak = 0;
 
-    /*
-    Une seule occurrence de chaque département dans la
-    série initiale : cela évite les répétitions.
-    */
+  /*
+  On mélange les 101 départements.
+  Chaque département ne peut donc apparaître qu'une
+  fois avant que la liste soit épuisée.
+  */
 
-    questionQueue = shuffle(departments.map(d => d[0]));
+  queue = shuffle(departments.map(d => d[0]));
 
-    document.getElementById("menu").classList.add("hidden");
-    document.getElementById("result").classList.add("hidden");
-    document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
 
-    nextQuestion();
+  nextQuestion();
 }
 
 
-/* =========================================================
+/* ==========================================================
    QUESTION SUIVANTE
-   ========================================================= */
+   ========================================================== */
 
 function nextQuestion() {
 
-    if (questionIndex >= totalQuestions) {
+  if (questionIndex >= totalQuestions) {
+    finishQuiz();
+    return;
+  }
 
-        finishQuiz();
+  answered = false;
 
-        return;
-    }
+  document.getElementById("correction").classList.add("hidden");
+  document.getElementById("nextButton").classList.add("hidden");
+  document.getElementById("feedback").textContent = "";
 
-    answered = false;
+  currentDepartment = getDepartment(queue.shift());
 
-    document.getElementById("nextButton").classList.add("hidden");
-    document.getElementById("correction").classList.add("hidden");
-    document.getElementById("feedback").textContent = "";
+  if (mode === "mixed") {
 
-    /*
-    On choisit un département encore non utilisé.
-    */
+    const types = [
+      "prefecture",
+      "department",
+      "subprefecture",
+      "status"
+    ];
 
-    let code = questionQueue.shift();
+    currentQuestionType =
+      types[Math.floor(Math.random() * types.length)];
 
-    currentDepartment = getDepartment(code);
+  } else {
 
-    /*
-    En mode mixte, le type de question est tiré au sort.
-    */
+    currentQuestionType = mode;
+  }
 
-    if (mode === "mixed") {
+  /*
+  Si le département n'a pas de sous-préfecture,
+  on évite le mode sous-préfecture.
+  */
 
-        const types = [
-            "prefecture",
-            "department",
-            "subprefecture",
-            "status"
-        ];
+  if (
+    currentQuestionType === "subprefecture" &&
+    (!subprefectures[currentDepartment[0]] ||
+     subprefectures[currentDepartment[0]].length === 0)
+  ) {
 
-        currentQuestionType =
-            types[Math.floor(Math.random() * types.length)];
+    currentQuestionType = "department";
+  }
 
-    } else {
+  questionIndex++;
 
-        currentQuestionType = mode;
-    }
+  generateQuestion();
 
-    questionIndex++;
-
-    generateQuestion();
-
-    updateStats();
+  updateStats();
 }
 
 
-/* =========================================================
-   GENERATION DES QUESTIONS
-   ========================================================= */
+/* ==========================================================
+   GENERER UNE QUESTION
+   ========================================================== */
 
 function generateQuestion() {
 
-    const d = currentDepartment;
+  const d = currentDepartment;
 
-    let question = "";
-    let correct = "";
-    let pool = [];
+  let question = "";
+  let correct = "";
+  let choices = [];
+
+
+  /* DEPARTEMENT → PREFECTURE */
+
+  if (currentQuestionType === "prefecture") {
+
+    question =
+      `Quelle est la préfecture du département ${d[1]} (${d[0]}) ?`;
+
+    correct = d[2];
+
+    choices = departments.map(x => x[2]);
+  }
+
+
+  /* VILLE → DEPARTEMENT */
+
+  else if (currentQuestionType === "department") {
+
+    const subs = subprefectures[d[0]] || [];
+
+    let city;
+
+    if (subs.length > 0 && Math.random() < 0.65) {
+
+      city =
+        subs[Math.floor(Math.random() * subs.length)];
+
+    } else {
+
+      city = d[2];
+    }
+
+    currentCity = city;
+
+    question =
+      `À quel département appartient ${city} ?`;
+
+    correct = d[1];
+
+    choices = departments.map(x => x[1]);
+  }
+
+
+  /* SOUS-PREFECTURE → DEPARTEMENT */
+
+  else if (currentQuestionType === "subprefecture") {
+
+    const subs = subprefectures[d[0]];
+
+    const city =
+      subs[Math.floor(Math.random() * subs.length)];
+
+    currentCity = city;
+
+    question =
+      `À quel département appartient la sous-préfecture de ${city} ?`;
+
+    correct = d[1];
+
+    choices = departments.map(x => x[1]);
+  }
+
+
+  /* PREFECTURE OU SOUS-PREFECTURE */
+
+  else {
+
+    let city;
+    let status;
+
+    /*
+    50 % préfecture, 50 % sous-préfecture.
+    */
+
+    if (
+      Math.random() < 0.5 ||
+      !subprefectures[d[0]] ||
+      subprefectures[d[0]].length === 0
+    ) {
+
+      city = d[2];
+      status = "Préfecture";
+
+    } else {
+
+      const subs = subprefectures[d[0]];
+
+      city =
+        subs[Math.floor(Math.random() * subs.length)];
+
+      status = "Sous-préfecture";
+    }
+
+    currentCity = city;
+
+    question =
+      `Quel est le statut administratif de ${city} ?`;
+
+    correct = status;
+
+    choices = [
+      "Préfecture",
+      "Sous-préfecture"
+    ];
+  }
+
+
+  currentCorrectAnswer = correct;
+
+
+  /*
+  Pour le mode statut, seulement 2 réponses.
+  Pour les autres modes, 4 réponses.
+  */
+
+  if (currentQuestionType === "status") {
+
+    choices = shuffle(choices);
+
+  } else {
+
+    const wrong =
+      shuffle(choices.filter(x => x !== correct))
+      .slice(0, 3);
+
+    choices =
+      shuffle([correct, ...wrong]);
+  }
+
+
+  document.getElementById("question").textContent =
+    question;
+
+
+  const container =
+    document.getElementById("answers");
+
+  container.innerHTML = "";
+
+
+  choices.forEach(choice => {
+
+    const button =
+      document.createElement("button");
+
+    button.className = "answer";
+
+    button.textContent = choice;
+
+    button.onclick = () =>
+      checkAnswer(button, choice, correct, choices);
+
+    container.appendChild(button);
+
+  });
+}
+
+
+/* ==========================================================
+   VERIFIER LA REPONSE
+   ========================================================== */
+
+function checkAnswer(
+  clickedButton,
+  answer,
+  correct,
+  choices
+) {
+
+  if (answered) return;
+
+  answered = true;
+
+  const buttons =
+    document.querySelectorAll(".answer");
+
+  buttons.forEach(button => {
+
+    button.disabled = true;
+
+    if (button.textContent === correct) {
+      button.classList.add("correct");
+    }
+
+  });
+
+
+  if (answer === correct) {
+
+    score++;
+    streak++;
+
+    clickedButton.classList.add("correct");
+
+    document.getElementById("feedback").textContent =
+      "✅ Bonne réponse !";
+
+  } else {
+
+    streak = 0;
+
+    clickedButton.classList.add("wrong");
+
+    document.getElementById("feedback").textContent =
+      `❌ Mauvaise réponse. La bonne réponse était : ${correct}`;
+  }
+
+
+  showPropositions(choices);
+
+  showFiche();
+
+  document.getElementById("correction")
+    .classList.remove("hidden");
+
+  document.getElementById("nextButton")
+    .classList.remove("hidden");
+
+  updateStats();
+}
+
+
+/* ==========================================================
+   AFFICHAGE DES 4 PROPOSITIONS
+   ========================================================== */
+
+function showPropositions(choices) {
+
+  const container =
+    document.getElementById("propositions");
+
+  container.innerHTML = "";
+
+
+  choices.forEach(choice => {
+
+    const div =
+      document.createElement("div");
+
+    const isCorrect =
+      choice === currentCorrectAnswer;
+
+    div.className =
+      "proposition " +
+      (isCorrect ? "correct" : "wrong");
+
+
+    let text = "";
 
 
     /*
-    DEPARTEMENT → PREFECTURE
+    QUESTION PREFECTURE
     */
 
     if (currentQuestionType === "prefecture") {
 
-        question =
-            `Quelle est la préfecture du département ${d[1]} (${d[0]}) ?`;
+      const dep =
+        departments.find(d => d[2] === choice);
 
-        correct = d[2];
+      if (dep) {
 
-        pool = departments.map(x => x[2]);
+        text =
+          `${dep[1]} (${dep[0]}) — ${dep[2]} est la préfecture`;
+      }
     }
 
 
     /*
-    VILLE → DEPARTEMENT
+    QUESTION VILLE → DEPARTEMENT
     */
 
-    else if (currentQuestionType === "department") {
+    else if (
+      currentQuestionType === "department" ||
+      currentQuestionType === "subprefecture"
+    ) {
 
-        const subs = subprefectures[d[0]] || [];
+      const dep =
+        getDepartmentByName(choice);
 
-        let city;
+      if (dep) {
 
-        if (subs.length && Math.random() < 0.6) {
-
-            city = subs[Math.floor(Math.random() * subs.length)];
-
-        } else {
-
-            city = d[2];
-        }
-
-        question =
-            `À quel département appartient ${city} ?`;
-
-        correct = d[1];
-
-        pool = departments.map(x => x[1]);
+        text =
+          `${dep[1]} (${dep[0]}) — préfecture : ${dep[2]}`;
+      }
     }
 
 
     /*
-    SOUS-PREFECTURE → DEPARTEMENT
+    QUESTION STATUT
     */
 
-    else if (currentQuestionType === "subprefecture") {
+    else {
 
-        const subs = subprefectures[d[0]] || [];
+      const city = currentCity;
 
-        /*
-        Certains départements n'ont pas de sous-préfecture
-        dans notre liste. Dans ce cas, on passe au suivant.
-        */
+      let dep = null;
+      let status = null;
 
-        if (!subs.length) {
 
-            questionIndex--;
+      departments.forEach(d => {
 
-            questionQueue.push(d[0]);
+        if (d[2] === city) {
 
-            nextQuestion();
-
-            return;
+          dep = d;
+          status = "préfecture";
         }
 
-        const city =
-            subs[Math.floor(Math.random() * subs.length)];
-
-        question =
-            `À quel département appartient la sous-préfecture de ${city} ?`;
-
-        correct = d[1];
-
-        pool = departments.map(x => x[1]);
-    }
-
-
-    /*
-    PREFECTURE OU SOUS-PREFECTURE
-    */
-
-    else if (currentQuestionType === "status") {
-
-        const options = [];
-
-        departments.forEach(dep => {
-
-            options.push({
-                city: dep[2],
-                type: "Préfecture",
-                code: dep[0]
-            });
-
-            (subprefectures[dep[0]] || []).forEach(city => {
-
-                options.push({
-                    city: city,
-                    type: "Sous-préfecture",
-                    code: dep[0]
-                });
-
-            });
-
-        });
-
-        const chosen =
-            options[Math.floor(Math.random() * options.length)];
-
-        window.statusQuestion = chosen;
-
-        question =
-            `Quel est le statut administratif de ${chosen.city} ?`;
-
-        correct = chosen.type;
-
-        pool = [
-            "Préfecture",
-            "Sous-préfecture"
-        ];
-    }
-
-
-    currentCorrectAnswer = correct;
-
-    /*
-    Création des quatre réponses.
-    */
-
-    const uniqueWrongAnswers =
-        shuffle(pool.filter(x => x !== correct));
-
-    const answers = shuffle([
-        correct,
-        ...uniqueWrongAnswers.slice(0, 3)
-    ]);
-
-    document.getElementById("question").textContent = question;
-
-    const container =
-        document.getElementById("answers");
-
-    container.innerHTML = "";
-
-    answers.forEach(answer => {
-
-        const button =
-            document.createElement("button");
-
-        button.className = "answer";
-
-        button.textContent = answer;
-
-        button.onclick = () => {
-
-            checkAnswer(
-                button,
-                answer,
-                correct,
-                answers
-            );
-
-        };
-
-        container.appendChild(button);
-
-    });
-}
-
-
-/* =========================================================
-   REPONSE
-   ========================================================= */
-
-function checkAnswer(
-    clickedButton,
-    answer,
-    correct,
-    answers
-) {
-
-    if (answered) return;
-
-    answered = true;
-
-    const buttons =
-        document.querySelectorAll(".answer");
-
-    buttons.forEach(button => {
-
-        button.disabled = true;
-
-        if (button.textContent === correct) {
-
-            button.classList.add("correct");
-        }
-
-    });
-
-
-    const isCorrect =
-        answer === correct;
-
-
-    if (isCorrect) {
-
-        score++;
-        streak++;
-
-        clickedButton.classList.add("correct");
-
-        document.getElementById("feedback").textContent =
-            "✅ Bonne réponse !";
-
-    } else {
-
-        streak = 0;
-
-        clickedButton.classList.add("wrong");
-
-        document.getElementById("feedback").textContent =
-            `❌ Mauvaise réponse. La bonne réponse était : ${correct}`;
-    }
-
-
-    showPropositions(answers);
-
-    showFiche();
-
-    document
-        .getElementById("correction")
-        .classList.remove("hidden");
-
-    document
-        .getElementById("nextButton")
-        .classList.remove("hidden");
-
-    updateStats();
-}
-
-
-/* =========================================================
-   INFORMATIONS DES QUATRE PROPOSITIONS
-   ========================================================= */
-
-function showPropositions(answers) {
-
-    const container =
-        document.getElementById("propositions");
-
-    container.innerHTML = "";
-
-
-    answers.forEach(answer => {
-
-        const div =
-            document.createElement("div");
-
-        div.className = "proposition";
-
-
-        if (answer === currentCorrectAnswer) {
-
-            div.classList.add("correct");
-        }
-
-
-        let information = "";
-
-
-        /*
-        MODE PREFECTURE
-        */
-
-        if (currentQuestionType === "prefecture") {
-
-            information =
-                cityInformation(answer);
-        }
-
-
-        /*
-        MODE DEPARTEMENT
-        */
-
-        else if (
-            currentQuestionType === "department" ||
-            currentQuestionType === "subprefecture"
+        if (
+          (subprefectures[d[0]] || [])
+          .includes(city)
         ) {
 
-            const dep =
-                departments.find(
-                    d => d[1] === answer
-                );
-
-            if (dep) {
-
-                information =
-                    `${dep[1]} (${dep[0]}) — préfecture : ${dep[2]}`;
-            }
+          dep = d;
+          status = "sous-préfecture";
         }
 
-
-        /*
-        MODE STATUT
-        */
-
-        else if (currentQuestionType === "status") {
-
-            const selected =
-                window.statusQuestion;
-
-            if (answer === currentCorrectAnswer) {
-
-                information =
-                    `${selected.city} appartient au département ${selected.code} et est une ${selected.type.toLowerCase()}.`;
-
-            } else {
-
-                information =
-                    "Cette proposition ne correspond pas à la ville demandée.";
-            }
-        }
+      });
 
 
-        div.innerHTML =
-            `${answer === currentCorrectAnswer ? "✅ " : "• "}
-             <b>${answer}</b>
-             ${information ? " — " + information : ""}`;
+      if (dep) {
 
-        container.appendChild(div);
+        text =
+          `${city} appartient au département ${dep[1]} (${dep[0]}) — ${status}`;
+      }
+    }
 
-    });
+
+    div.innerHTML =
+      `<b>${isCorrect ? "✅" : "❌"} ${choice}</b>
+       <br>
+       <span class="small">${text}</span>`;
+
+    container.appendChild(div);
+
+  });
 }
 
 
-/* =========================================================
+/* ==========================================================
    FICHE PEDAGOGIQUE
-   ========================================================= */
+   ========================================================== */
 
 function showFiche() {
 
-    const d = currentDepartment;
+  const d = currentDepartment;
 
-    const text =
-        facts[d[0]] ||
-        `${d[1]} (${d[0]}) est un département français de la région ${d[3]}. ${d[2]} est sa préfecture.`;
+  const subs =
+    subprefectures[d[0]] || [];
 
-    const container =
-        document.getElementById("fiche");
+  const pedagogicalText =
+    facts[d[0]] ||
+    `${d[1]} (${d[0]}) appartient à la région ${d[3]}. Sa préfecture est ${d[2]}.`;
 
 
-    container.innerHTML = `
+  let subprefText = "";
 
-        <h3>
-            📚 À retenir — ${d[1]} (${d[0]})
-        </h3>
+  if (subs.length > 0) {
 
-        <p>
-            <b>Région :</b>
-            ${d[3]}
-        </p>
+    subprefText =
+      subs.map(city =>
+        `<span class="badge">${city}</span>`
+      ).join("");
 
-        <p>
-            <b>Préfecture :</b>
-            ${d[2]}
-        </p>
+  } else {
 
-        <p>
-            ${text}
-        </p>
+    subprefText =
+      `<span class="small">Aucune sous-préfecture.</span>`;
+  }
 
-        <a
-            href="${departmentURL(d)}"
-            target="_blank"
-            rel="noopener"
-        >
-            🔗 Voir la fiche complète de ${d[1]} (${d[0]})
-        </a>
 
-    `;
+  document.getElementById("fiche").innerHTML = `
+
+    <h3>
+      📚 À retenir : ${d[1]} (${d[0]})
+    </h3>
+
+    <p>
+      <b>Région :</b> ${d[3]}
+    </p>
+
+    <p>
+      <b>Préfecture :</b> ${d[2]}
+    </p>
+
+    <p>
+      <b>Sous-préfectures :</b><br>
+      ${subprefText}
+    </p>
+
+    <p>
+      ${pedagogicalText}
+    </p>
+
+  `;
 }
 
 
-/* =========================================================
+/* ==========================================================
    STATISTIQUES
-   ========================================================= */
+   ========================================================== */
 
 function updateStats() {
 
-    document.getElementById("questionNumber").textContent =
-        questionIndex;
+  document.getElementById("questionNumber").textContent =
+    questionIndex;
 
-    document.getElementById("totalQuestions").textContent =
-        totalQuestions;
+  document.getElementById("totalQuestions").textContent =
+    totalQuestions;
 
-    document.getElementById("score").textContent =
-        score;
+  document.getElementById("score").textContent =
+    score;
 
-    document.getElementById("streak").textContent =
-        streak;
+  document.getElementById("streak").textContent =
+    streak;
 
-    document.getElementById("seen").textContent =
-        Math.min(questionIndex, 101);
+  document.getElementById("seen").textContent =
+    Math.min(questionIndex, 101);
 
-    document.getElementById("progressBar").style.width =
-        (questionIndex / totalQuestions * 100) + "%";
+  document.getElementById("progressBar").style.width =
+    (questionIndex / totalQuestions * 100) + "%";
 }
 
 
-/* =========================================================
-   FIN DU QUIZ
-   ========================================================= */
+/* ==========================================================
+   FIN
+   ========================================================== */
 
 function finishQuiz() {
 
-    document.getElementById("quiz")
-        .classList.add("hidden");
+  document.getElementById("quiz")
+    .classList.add("hidden");
 
-    document.getElementById("result")
-        .classList.remove("hidden");
-
-
-    document.getElementById("resultTitle").textContent =
-        `Résultat : ${score}/${totalQuestions}`;
+  document.getElementById("result")
+    .classList.remove("hidden");
 
 
-    let message;
+  document.getElementById("resultTitle").textContent =
+    `Résultat : ${score}/${totalQuestions}`;
 
 
-    if (score === totalQuestions) {
+  let message;
 
-        message =
-            "🏆 Score parfait ! Tu maîtrises les départements français.";
+  if (score === totalQuestions) {
 
-    } else if (score >= 17) {
+    message =
+      "🏆 Score parfait ! Tu maîtrises les départements français.";
 
-        message =
-            "🥇 Excellent !";
+  } else if (score >= 17) {
 
-    } else if (score >= 14) {
+    message =
+      "🥇 Excellent niveau !";
 
-        message =
-            "🥈 Très bon niveau !";
+  } else if (score >= 14) {
 
-    } else if (score >= 10) {
+    message =
+      "🥈 Très bon résultat !";
 
-        message =
-            "👍 Bonne base, continue !";
+  } else if (score >= 10) {
 
-    } else {
+    message =
+      "👍 Bonne base, continue tes révisions.";
 
-        message =
-            "📚 Il faut encore réviser un peu !";
-    }
+  } else {
+
+    message =
+      "📚 Quelques révisions supplémentaires devraient t'aider.";
+  }
 
 
-    document.getElementById("resultText").textContent =
-        message;
+  document.getElementById("resultText").textContent =
+    message;
 }
 
 
-/* =========================================================
-   RETOUR AU MENU
-   ========================================================= */
+/* ==========================================================
+   RETOUR MENU
+   ========================================================== */
 
 function backToMenu() {
 
-    document.getElementById("result")
-        .classList.add("hidden");
+  document.getElementById("result")
+    .classList.add("hidden");
 
-    document.getElementById("quiz")
-        .classList.add("hidden");
+  document.getElementById("quiz")
+    .classList.add("hidden");
 
-    document.getElementById("menu")
-        .classList.remove("hidden");
+  document.getElementById("menu")
+    .classList.remove("hidden");
 
-    questionIndex = 0;
-    score = 0;
-    streak = 0;
+  questionIndex = 0;
+  score = 0;
+  streak = 0;
 
-    updateStats();
+  updateStats();
 }
 
 </script>
 
 </body>
+</html>
