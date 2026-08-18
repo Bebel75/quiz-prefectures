@@ -1,43 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Quiz des départements français</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-    background: #f3f6f9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: #f1f5f9;
     color: #17202a;
 }
 
 header {
     background: #173f67;
     color: white;
-    text-align: center;
     padding: 20px;
+    text-align: center;
 }
 
 header h1 {
     margin: 0;
-    font-size: 24px;
+    font-size: 25px;
 }
 
 main {
@@ -51,13 +41,13 @@ main {
     border-radius: 16px;
     padding: 20px;
     margin-bottom: 15px;
-    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    box-shadow: 0 3px 15px rgba(0,0,0,.08);
 }
 
 .stats {
     display: flex;
-    gap: 8px;
     justify-content: center;
+    gap: 8px;
     flex-wrap: wrap;
 }
 
@@ -72,12 +62,12 @@ main {
     background: #dce3ea;
     border-radius: 10px;
     overflow: hidden;
-    margin-top: 14px;
+    margin-top: 15px;
 }
 
-.progressBar {
+.progress-bar {
     height: 100%;
-    width: 0%;
+    width: 0;
     background: #1769aa;
     transition: width .3s;
 }
@@ -85,7 +75,7 @@ main {
 button {
     border: none;
     border-radius: 12px;
-    padding: 14px;
+    padding: 13px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -103,6 +93,12 @@ button {
     color: #173f67;
 }
 
+#question {
+    font-size: 21px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
 .answers {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -112,11 +108,10 @@ button {
 .answer {
     background: #edf2f7;
     text-align: left;
-    color: #17202a;
 }
 
 .answer.correct {
-    background: #d9f4df;
+    background: #d8f3dc;
     color: #176b2c;
 }
 
@@ -129,389 +124,185 @@ button {
     opacity: 1;
 }
 
-#question {
-    font-size: 21px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
 #feedback {
-    min-height: 35px;
+    min-height: 30px;
     margin-top: 15px;
     font-weight: 700;
-}
-
-#next {
-    width: 100%;
-    background: #173f67;
-    color: white;
-    margin-top: 15px;
 }
 
 .hidden {
     display: none;
 }
 
-.correction {
-    margin-top: 20px;
-}
-
-.correctionTitle {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
 .proposition {
-    padding: 10px 12px;
-    margin: 6px 0;
+    background: #f1f4f7;
+    padding: 11px;
     border-radius: 10px;
-    background: #f1f4f7;
+    margin: 7px 0;
 }
 
-.proposition.correctProp {
-    background: #d9f4df;
-}
-
-.proposition.wrongProp {
-    background: #f1f4f7;
+.proposition.correct {
+    background: #d8f3dc;
 }
 
 .fiche {
-    margin-top: 20px;
-    padding: 18px;
-    border-radius: 14px;
     background: #f8fafc;
     border-left: 5px solid #1769aa;
+    padding: 17px;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
 .fiche h3 {
     margin-top: 0;
 }
 
-.fiche iframe {
-    width: 100%;
-    height: 700px;
-    border: 1px solid #d9e0e7;
-    border-radius: 10px;
-    background: white;
+.fiche p {
+    line-height: 1.5;
 }
 
-.ficheLink {
+.fiche a {
     display: inline-block;
-    margin-top: 12px;
-    padding: 11px 14px;
-    border-radius: 10px;
     background: #173f67;
     color: white;
     text-decoration: none;
-    font-weight: 600;
+    padding: 10px 13px;
+    border-radius: 10px;
+    margin-top: 5px;
 }
 
-.tag {
-    display: inline-block;
-    background: #edf2f7;
-    padding: 5px 9px;
-    border-radius: 8px;
-    margin: 3px;
-    font-size: 13px;
-}
-
-.good {
-    color: #176b2c;
-}
-
-.bad {
-    color: #9b2226;
-}
-
-.small {
-    font-size: 13px;
-    color: #65717c;
-}
-
-#result {
-    text-align: center;
-}
-
-@media(max-width: 650px) {
-
+@media(max-width:650px) {
     .answers {
         grid-template-columns: 1fr;
     }
 
-    .fiche iframe {
-        height: 600px;
+    header h1 {
+        font-size: 21px;
     }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
 <header>
-
-<h1>
-🇫🇷 Quiz des départements français
-</h1>
-
+    <h1>🇫🇷 Quiz des départements français</h1>
 </header>
-
 
 <main>
 
-
-<!-- STATISTIQUES -->
-
 <div class="card">
 
-<div class="stats">
+    <div class="stats">
+        <div class="stat">
+            Question <b id="questionNumber">0</b>/<span id="totalQuestions">20</span>
+        </div>
 
-<div class="stat">
-Question <b id="questionNumber">0</b>/<span id="totalQuestions">20</span>
-</div>
+        <div class="stat">
+            Score <b id="score">0</b>
+        </div>
 
-<div class="stat">
-Score <b id="score">0</b>
-</div>
+        <div class="stat">
+            Série <b id="streak">0</b>
+        </div>
 
-<div class="stat">
-Série <b id="streak">0</b>
-</div>
+        <div class="stat">
+            Départements vus <b id="seen">0</b>/101
+        </div>
+    </div>
 
-<div class="stat">
-Départements vus <b id="seen">0</b>/101
-</div>
-
-</div>
-
-<div class="progress">
-
-<div
-id="progressBar"
-class="progressBar">
-</div>
-
-</div>
+    <div class="progress">
+        <div id="progressBar" class="progress-bar"></div>
+    </div>
 
 </div>
 
 
 <!-- MENU -->
 
-<div
-id="menu"
-class="card">
+<div id="menu" class="card">
 
-<h2>
-Choisis ton mode
-</h2>
+<h2>Choisis ton mode de quiz</h2>
 
-
-<button
-class="mode"
-onclick="startQuiz('prefecture')">
-
+<button class="mode" onclick="startQuiz('prefecture')">
 🏛️ Département → préfecture
-
 </button>
 
-
-<button
-class="mode"
-onclick="startQuiz('city')">
-
+<button class="mode" onclick="startQuiz('department')">
 📍 Ville → département
-
 </button>
 
-
-<button
-class="mode"
-onclick="startQuiz('subprefecture')">
-
+<button class="mode" onclick="startQuiz('subprefecture')">
 🏢 Sous-préfecture → département
-
 </button>
 
-
-<button
-class="mode"
-onclick="startQuiz('status')">
-
+<button class="mode" onclick="startQuiz('status')">
 ❓ Préfecture ou sous-préfecture ?
-
 </button>
 
-
-<button
-class="mode"
-onclick="startQuiz('departmentSub')">
-
-🗺️ Département → sous-préfecture
-
-</button>
-
-
-<button
-class="mode"
-onclick="startQuiz('mix')">
-
+<button class="mode" onclick="startQuiz('mixed')">
 🎯 Défi mixte
-
 </button>
-
-
-<button
-class="mode secondary"
-onclick="startTerritories()">
-
-🌴 Outre-mer hors départements
-
-</button>
-
 
 </div>
 
 
 <!-- QUIZ -->
 
-<div
-id="quiz"
-class="card hidden">
+<div id="quiz" class="card hidden">
+
+<div id="question"></div>
+
+<div id="answers" class="answers"></div>
+
+<div id="feedback"></div>
 
 
-<div id="question">
-</div>
+<div id="correction" class="hidden">
 
+<h3>📋 Les quatre propositions</h3>
 
-<div
-id="answers"
-class="answers">
-</div>
+<div id="propositions"></div>
 
-
-<div
-id="feedback">
-</div>
-
-
-<!-- CORRECTION DETAILLEE -->
-
-<div
-id="correction"
-class="correction hidden">
-
-<div class="correctionTitle">
-📋 Les quatre propositions
-</div>
-
-<div id="propositions">
-</div>
-
-
-<!-- FICHE DU DEPARTEMENT -->
-
-<div
-id="fiche"
-class="fiche">
-
-<h3 id="ficheTitle">
-📚 À retenir
-</h3>
-
-<div id="ficheDescription">
-
-</div>
-
-</div>
+<div id="fiche" class="fiche"></div>
 
 </div>
 
 
 <button
-id="next"
-class="hidden"
-onclick="nextQuestion()">
-
-Question suivante →
-
+    id="nextButton"
+    class="mode hidden"
+    onclick="nextQuestion()">
+    Question suivante →
 </button>
-
 
 </div>
 
 
 <!-- RESULTAT -->
 
-<div
-id="result"
-class="card hidden">
+<div id="result" class="card hidden">
 
-<h2 id="resultTitle">
-</h2>
+<h2 id="resultTitle"></h2>
 
-<p id="resultText">
-</p>
+<p id="resultText"></p>
 
-<button
-class="mode"
-onclick="showMenu()">
-
+<button class="mode" onclick="backToMenu()">
 Rejouer
-
 </button>
 
 </div>
-
-
-<!-- PROGRESSION -->
-
-<div class="card">
-
-<h3>
-📈 Progression
-</h3>
-
-<div id="mastery">
-Aucune réponse enregistrée.
-</div>
-
-</div>
-
-
-<div class="card small">
-
-<b>Principe pédagogique :</b>
-
-chaque question utilise un département différent jusqu'à ce que les
-101 départements aient été parcourus.
-
-Après chaque réponse, les quatre propositions sont rappelées avec
-leur département et leur numéro.
-
-La fiche du département concerné est ensuite affichée depuis
-carte-des-departements.fr.
-
-</div>
-
 
 </main>
 
 
 <script>
 
+/* =========================================================
+   LES 101 DEPARTEMENTS
+   ========================================================= */
 
-/* ==========================================================
-   101 DEPARTEMENTS
-   ========================================================== */
-
-const DEPARTMENTS = [
+const departments = [
 
 ["01","Ain","Bourg-en-Bresse","Auvergne-Rhône-Alpes"],
 ["02","Aisne","Laon","Hauts-de-France"],
@@ -618,11 +409,11 @@ const DEPARTMENTS = [
 ];
 
 
-/* ==========================================================
+/* =========================================================
    SOUS-PREFECTURES
-   ========================================================== */
+   ========================================================= */
 
-const SUBPREFS = {
+const subprefectures = {
 
 "01":["Belley","Gex","Nantua"],
 "02":["Château-Thierry","Saint-Quentin","Soissons","Vervins"],
@@ -699,7 +490,6 @@ const SUBPREFS = {
 "72":["La Flèche","Mamers"],
 "73":["Albertville","Saint-Jean-de-Maurienne"],
 "74":["Bonneville","Saint-Julien-en-Genevois","Thonon-les-Bains"],
-"75":[],
 "76":["Dieppe","Le Havre"],
 "77":["Fontainebleau","Meaux","Provins","Torcy"],
 "78":["Mantes-la-Jolie","Rambouillet","Saint-Germain-en-Laye"],
@@ -714,7 +504,6 @@ const SUBPREFS = {
 "87":["Bellac","Rochechouart"],
 "88":["Neufchâteau","Saint-Dié-des-Vosges"],
 "89":["Avallon","Sens"],
-"90":[],
 "91":["Étampes","Palaiseau"],
 "92":["Antony","Boulogne-Billancourt"],
 "93":["Le Raincy","Saint-Denis"],
@@ -723,584 +512,669 @@ const SUBPREFS = {
 "971":["Pointe-à-Pitre"],
 "972":["La Trinité","Le Marin","Saint-Pierre"],
 "973":["Saint-Laurent-du-Maroni"],
-"974":["Saint-Benoît","Saint-Paul","Saint-Pierre"],
-"976":[]
+"974":["Saint-Benoît","Saint-Paul","Saint-Pierre"]
+};
+
+
+/* =========================================================
+   INFORMATIONS PEDAGOGIQUES
+   ========================================================= */
+
+const facts = {
+
+"01":"L’Ain (01) s’étend de la vallée du Rhône aux montagnes du Jura. Bourg-en-Bresse est sa préfecture. Le département est notamment célèbre pour le poulet de Bresse.",
+
+"02":"L’Aisne (02) est marqué par la Thiérache, les vallées de l’Aisne et de l’Oise et les sites de mémoire de la Première Guerre mondiale. Laon est sa préfecture.",
+
+"03":"L’Allier (03) correspond à une partie historique du Bourbonnais. Moulins est sa préfecture et Vichy est célèbre pour ses sources thermales.",
+
+"04":"Les Alpes-de-Haute-Provence (04) offrent un paysage très contrasté entre Provence et montagnes alpines. Digne-les-Bains est la préfecture.",
+
+"05":"Les Hautes-Alpes (05) sont dominées par les grands massifs alpins. Gap est la préfecture et le département comprend une partie du parc national des Écrins.",
+
+"06":"Les Alpes-Maritimes (06) associent la Côte d’Azur et les hauts reliefs alpins. Nice est la préfecture.",
+
+"07":"L’Ardèche (07) est célèbre pour ses gorges, ses plateaux et ses paysages volcaniques. Privas est la préfecture.",
+
+"08":"Les Ardennes (08) sont marquées par les forêts et la vallée de la Meuse. Charleville-Mézières est la préfecture.",
+
+"09":"L’Ariège (09) est un département pyrénéen. Foix est la préfecture, dominée par son célèbre château.",
+
+"10":"L’Aube (10) est au cœur de la Champagne méridionale. Troyes est la préfecture et possède un remarquable patrimoine médiéval.",
+
+"11":"L’Aude (11) va du littoral méditerranéen aux Pyrénées. Carcassonne est sa préfecture et sa cité fortifiée est mondialement connue.",
+
+"12":"L’Aveyron (12) possède de vastes plateaux et des vallées encaissées. Rodez est la préfecture.",
+
+"13":"Les Bouches-du-Rhône (13) associent Marseille, la Camargue, les Calanques et les massifs provençaux. Marseille est la préfecture.",
+
+"14":"Le Calvados (14) est notamment connu pour les plages du Débarquement et le patrimoine normand. Caen est la préfecture.",
+
+"15":"Le Cantal (15) est dominé par les reliefs d’un ancien volcan. Aurillac est la préfecture.",
+
+"16":"La Charente (16) est traversée par le fleuve Charente. Angoulême est sa préfecture et la capitale française de la bande dessinée.",
+
+"17":"La Charente-Maritime (17) possède un long littoral et plusieurs îles, notamment Ré et Oléron. La Rochelle est la préfecture.",
+
+"18":"Le Cher (18) se trouve au cœur de la France. Bourges est sa préfecture et possède une célèbre cathédrale gothique.",
+
+"19":"La Corrèze (19) est un département vallonné du Limousin historique. Tulle est sa préfecture.",
+
+"2A":"La Corse-du-Sud (2A) correspond à la partie méridionale de la Corse. Ajaccio est sa préfecture et la ville natale de Napoléon.",
+
+"2B":"La Haute-Corse (2B) occupe la partie septentrionale de l’île. Bastia est sa préfecture.",
+
+"21":"La Côte-d’Or (21) est au cœur de la Bourgogne viticole. Dijon est sa préfecture.",
+
+"22":"Les Côtes-d’Armor (22) possèdent un littoral très découpé. Saint-Brieuc est la préfecture.",
+
+"23":"La Creuse (23) est un département rural du Limousin. Guéret est sa préfecture et Aubusson est célèbre pour ses tapisseries.",
+
+"24":"La Dordogne (24) est réputée pour ses châteaux, ses grottes et ses vallées. Périgueux est la préfecture.",
+
+"25":"Le Doubs (25) est un département jurassien. Besançon est sa préfecture et sa citadelle est une œuvre de Vauban.",
+
+"26":"La Drôme (26) s’étend de la vallée du Rhône aux reliefs du Vercors et des Baronnies. Valence est la préfecture.",
+
+"27":"L’Eure (27) est un département normand. Évreux est sa préfecture et Giverny se trouve dans le département.",
+
+"28":"L’Eure-et-Loir (28) se situe entre Beauce et Perche. Chartres est la préfecture et sa cathédrale est mondialement connue.",
+
+"29":"Le Finistère (29) forme l’extrémité occidentale de la Bretagne. Quimper est sa préfecture.",
+
+"30":"Le Gard (30) va des Cévennes à la Camargue. Nîmes est sa préfecture et possède un patrimoine romain exceptionnel.",
+
+"31":"La Haute-Garonne (31) est organisée autour de Toulouse et de la Garonne. Toulouse est la préfecture.",
+
+"32":"Le Gers (32) correspond au cœur de la Gascogne. Auch est la préfecture.",
+
+"33":"La Gironde (33) est le plus vaste département de France métropolitaine. Bordeaux est sa préfecture.",
+
+"34":"L’Hérault (34) associe littoral méditerranéen, vignobles et arrière-pays. Montpellier est la préfecture.",
+
+"35":"L’Ille-et-Vilaine (35) est le département le plus oriental de Bretagne. Rennes est sa préfecture.",
+
+"36":"L’Indre (36) est au cœur du Berry. Châteauroux est la préfecture et la Brenne est connue pour ses nombreux étangs.",
+
+"37":"L’Indre-et-Loire (37) est au cœur du Val de Loire. Tours est la préfecture et plusieurs grands châteaux se trouvent dans le département.",
+
+"38":"L’Isère (38) va des plaines du Rhône aux massifs alpins. Grenoble est sa préfecture.",
+
+"39":"Le Jura (39) est connu pour ses montagnes, ses lacs, ses forêts et son vignoble. Lons-le-Saunier est la préfecture.",
+
+"40":"Les Landes (40) possèdent l’une des plus grandes forêts de pins d’Europe occidentale. Mont-de-Marsan est la préfecture.",
+
+"41":"Le Loir-et-Cher (41) est au cœur des châteaux de la Loire. Blois est la préfecture.",
+
+"42":"La Loire (42) associe Saint-Étienne, les monts du Forez et des territoires ruraux. Saint-Étienne est la préfecture.",
+
+"43":"La Haute-Loire (43) est un département volcanique traversé par la Loire. Le Puy-en-Velay est la préfecture.",
+
+"44":"La Loire-Atlantique (44) s’étend autour de l’estuaire de la Loire jusqu’à l’Atlantique. Nantes est la préfecture.",
+
+"45":"Le Loiret (45) est traversé par la Loire. Orléans est la préfecture.",
+
+"46":"Le Lot (46) est connu pour ses causses, ses vallées et ses villages. Cahors est la préfecture.",
+
+"47":"Le Lot-et-Garonne (47) est un département agricole de vallées et de vergers. Agen est la préfecture.",
+
+"48":"La Lozère (48) est le département le moins peuplé de France métropolitaine. Mende est la préfecture.",
+
+"49":"Le Maine-et-Loire (49) est traversé par la Loire et possède de nombreux châteaux. Angers est la préfecture.",
+
+"50":"La Manche (50) possède une longue façade maritime et comprend le Cotentin. Saint-Lô est la préfecture.",
+
+"51":"La Marne (51) est au cœur de la Champagne viticole. Châlons-en-Champagne est la préfecture.",
+
+"52":"La Haute-Marne (52) est un département rural et très boisé du Grand Est. Chaumont est la préfecture.",
+
+"53":"La Mayenne (53) est un département rural traversé par la rivière Mayenne. Laval est la préfecture.",
+
+"54":"La Meurthe-et-Moselle (54) s’étend autour de Nancy jusqu’aux frontières belge et luxembourgeoise. Nancy est la préfecture.",
+
+"55":"La Meuse (55) est fortement associée à l’histoire de la Première Guerre mondiale. Bar-le-Duc est la préfecture.",
+
+"56":"Le Morbihan (56) possède un littoral très découpé et un patrimoine mégalithique exceptionnel. Vannes est la préfecture.",
+
+"57":"La Moselle (57) est frontalière de l’Allemagne et du Luxembourg. Metz est la préfecture.",
+
+"58":"La Nièvre (58) est un département rural et forestier de Bourgogne. Nevers est la préfecture.",
+
+"59":"Le Nord (59) est le département le plus peuplé de France. Lille est la préfecture.",
+
+"60":"L’Oise (60) se situe au nord de Paris. Beauvais est la préfecture et le département possède notamment le château de Chantilly.",
+
+"61":"L’Orne (61) correspond à une partie rurale de la Normandie. Alençon est la préfecture.",
+
+"62":"Le Pas-de-Calais (62) possède une façade sur la Manche et un important patrimoine minier. Arras est la préfecture.",
+
+"63":"Le Puy-de-Dôme (63) est dominé par la chaîne des Puys. Clermont-Ferrand est la préfecture.",
+
+"64":"Les Pyrénées-Atlantiques (64) associent Pays basque, Béarn et Pyrénées. Pau est la préfecture.",
+
+"65":"Les Hautes-Pyrénées (65) abritent Lourdes et de hauts sommets pyrénéens. Tarbes est la préfecture.",
+
+"66":"Les Pyrénées-Orientales (66) vont de la Méditerranée aux Pyrénées. Perpignan est la préfecture.",
+
+"67":"Le Bas-Rhin (67) correspond à la partie nord de l’Alsace. Strasbourg est la préfecture.",
+
+"68":"Le Haut-Rhin (68) correspond au sud de l’Alsace. Colmar est la préfecture.",
+
+"69":"Le Rhône (69) s’organise autour de Lyon et du Beaujolais. Lyon est la préfecture.",
+
+"70":"La Haute-Saône (70) est un département rural et forestier. Vesoul est la préfecture.",
+
+"71":"La Saône-et-Loire (71) est un vaste département bourguignon. Mâcon est la préfecture.",
+
+"72":"La Sarthe (72) est célèbre pour Le Mans et ses 24 Heures. Le Mans est la préfecture.",
+
+"73":"La Savoie (73) est un département alpin. Chambéry est la préfecture.",
+
+"74":"La Haute-Savoie (74) possède notamment le lac d’Annecy et le massif du Mont-Blanc. Annecy est la préfecture.",
+
+"75":"Paris (75) est à la fois une commune et un département. Paris est naturellement sa préfecture.",
+
+"76":"La Seine-Maritime (76) possède les célèbres falaises de la côte d’Albâtre. Rouen est la préfecture.",
+
+"77":"La Seine-et-Marne (77) est le plus vaste département d’Île-de-France. Melun est la préfecture.",
+
+"78":"Les Yvelines (78) comprennent Versailles et de vastes espaces boisés. Versailles est la préfecture.",
+
+"79":"Les Deux-Sèvres (79) appartiennent à l’ancienne région du Poitou. Niort est la préfecture.",
+
+"80":"La Somme (80) est traversée par le fleuve Somme et possède la baie de Somme. Amiens est la préfecture.",
+
+"81":"Le Tarn (81) est notamment connu pour Albi et son patrimoine épiscopal. Albi est la préfecture.",
+
+"82":"Le Tarn-et-Garonne (82) est l’un des plus jeunes départements métropolitains, créé en 1808. Montauban est la préfecture.",
+
+"83":"Le Var (83) associe littoral méditerranéen, massifs et îles. Toulon est la préfecture.",
+
+"84":"Le Vaucluse (84) est dominé notamment par le mont Ventoux. Avignon est la préfecture.",
+
+"85":"La Vendée (85) associe bocage, littoral et îles. La Roche-sur-Yon est la préfecture.",
+
+"86":"La Vienne (86) se situe au seuil du Poitou. Poitiers est la préfecture.",
+
+"87":"La Haute-Vienne (87) est au cœur du Limousin historique. Limoges est la préfecture et est célèbre pour sa porcelaine.",
+
+"88":"Les Vosges (88) sont dominées par le massif du même nom. Épinal est la préfecture.",
+
+"89":"L’Yonne (89) est un département bourguignon. Auxerre est la préfecture.",
+
+"90":"Le Territoire de Belfort (90) est le plus petit département métropolitain par sa superficie. Belfort est la préfecture.",
+
+"91":"L’Essonne (91) est un département francilien mêlant espaces urbains et agricoles. Évry-Courcouronnes est la préfecture.",
+
+"92":"Les Hauts-de-Seine (92) sont au cœur de la métropole parisienne. Nanterre est la préfecture.",
+
+"93":"La Seine-Saint-Denis (93) est située au nord-est de Paris. Bobigny est la préfecture.",
+
+"94":"Le Val-de-Marne (94) est structuré notamment par la Seine et la Marne. Créteil est la préfecture.",
+
+"95":"Le Val-d’Oise (95) s’étend au nord-ouest de Paris. Cergy est la préfecture.",
+
+"971":"La Guadeloupe (971) est un archipel des Antilles françaises. Basse-Terre est la préfecture.",
+
+"972":"La Martinique (972) est une île volcanique des Antilles. Fort-de-France est la préfecture.",
+
+"973":"La Guyane (973) est le seul département français situé en Amérique du Sud. Cayenne est la préfecture.",
+
+"974":"La Réunion (974) est une île volcanique de l’océan Indien. Saint-Denis est la préfecture.",
+
+"976":"Mayotte (976) est un archipel français de l’océan Indien. Mamoudzou est la préfecture."
 
 };
 
 
-/* ==========================================================
-   OUTRE-MER HORS DEPARTEMENTS
-   ========================================================== */
-
-const TERRITORIES = [
-
-["Saint-Pierre-et-Miquelon","Saint-Pierre"],
-["Saint-Barthélemy","Gustavia"],
-["Saint-Martin","Marigot"],
-["Wallis-et-Futuna","Mata Utu"],
-["Polynésie française","Papeete"],
-["Nouvelle-Calédonie","Nouméa"],
-["Terres australes et antarctiques françaises","Saint-Pierre"],
-["Clipperton","—"]
-
-];
-
-
-/* ==========================================================
-   VARIABLES
-   ========================================================== */
+/* =========================================================
+   VARIABLES DU QUIZ
+   ========================================================= */
 
 let mode = "";
-
-let current = null;
-
-let question = 0;
-
+let questionIndex = 0;
+let totalQuestions = 20;
 let score = 0;
-
 let streak = 0;
 
-let totalQuestions = 20;
-
+let questionQueue = [];
+let currentDepartment = null;
+let currentCorrectAnswer = null;
+let currentQuestionType = null;
 let answered = false;
 
-let queue = [];
 
-let seenThisRound = new Set();
-
-let stats = {};
-
-
-DEPARTMENTS.forEach(d => {
-
-    stats[d[0]] = {
-
-        seen: 0,
-        correct: 0,
-        wrong: 0
-
-    };
-
-});
-
-
-/* ==========================================================
+/* =========================================================
    OUTILS
-   ========================================================== */
+   ========================================================= */
 
 function shuffle(array) {
-
-    return [...array].sort(
-        () => Math.random() - 0.5
-    );
-
+    return [...array].sort(() => Math.random() - 0.5);
 }
-
 
 function getDepartment(code) {
-
-    return DEPARTMENTS.find(
-        d => d[0] === code
-    );
-
+    return departments.find(d => d[0] === code);
 }
 
 
-function createQueue() {
+/*
+Retourne les informations sur une ville :
+préfecture ou sous-préfecture + département.
+*/
 
-    queue = shuffle(
-        DEPARTMENTS.map(d => d[0])
-    );
+function cityInformation(city) {
 
-    seenThisRound = new Set();
+    for (const d of departments) {
 
+        if (d[2] === city) {
+
+            return `${d[1]} (${d[0]}) — préfecture`;
+        }
+
+        if ((subprefectures[d[0]] || []).includes(city)) {
+
+            return `${d[1]} (${d[0]}) — sous-préfecture`;
+        }
+    }
+
+    return "information non disponible";
 }
 
 
-/* ==========================================================
-   URL DE LA FICHE DU SITE
-   ========================================================== */
+/*
+Création de l'URL vers la fiche du département.
+
+La fiche externe est uniquement ouverte dans un nouvel onglet.
+Le quiz lui-même n'en dépend pas.
+*/
 
 function departmentURL(department) {
 
     const code = department[0];
 
-    const name = department[1]
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g,"")
-        .replace(/œ/g,"oe")
-        .replace(/æ/g,"ae")
-        .replace(/[^a-z0-9]+/g,"-")
-        .replace(/^-|-$/g,"");
+    const slugs = {
 
-    return
+        "2A": "corse-du-sud",
+        "2B": "haute-corse",
 
-    "https://www.carte-des-departements.fr/departement/"
-    + code
-    + "-"
-    + name
-    + "/";
+        "01":"ain",
+        "02":"aisne",
+        "03":"allier",
+        "04":"alpes-de-haute-provence",
+        "05":"hautes-alpes",
+        "06":"alpes-maritimes",
+        "07":"ardeche",
+        "08":"ardennes",
+        "09":"ariege",
+        "10":"aube",
+        "11":"aude",
+        "12":"aveyron",
+        "13":"bouches-du-rhone",
+        "14":"calvados",
+        "15":"cantal",
+        "16":"charente",
+        "17":"charente-maritime",
+        "18":"cher",
+        "19":"correze",
+        "21":"cote-d-or",
+        "22":"cotes-d-armor",
+        "23":"creuse",
+        "24":"dordogne",
+        "25":"doubs",
+        "26":"drome",
+        "27":"eure",
+        "28":"eure-et-loir",
+        "29":"finistere",
+        "30":"gard",
+        "31":"haute-garonne",
+        "32":"gers",
+        "33":"gironde",
+        "34":"herault",
+        "35":"ille-et-vilaine",
+        "36":"indre",
+        "37":"indre-et-loire",
+        "38":"isere",
+        "39":"jura",
+        "40":"landes",
+        "41":"loir-et-cher",
+        "42":"loire",
+        "43":"haute-loire",
+        "44":"loire-atlantique",
+        "45":"loiret",
+        "46":"lot",
+        "47":"lot-et-garonne",
+        "48":"lozere",
+        "49":"maine-et-loire",
+        "50":"manche",
+        "51":"marne",
+        "52":"haute-marne",
+        "53":"mayenne",
+        "54":"meurthe-et-moselle",
+        "55":"meuse",
+        "56":"morbihan",
+        "57":"moselle",
+        "58":"nievre",
+        "59":"nord",
+        "60":"oise",
+        "61":"orne",
+        "62":"pas-de-calais",
+        "63":"puy-de-dome",
+        "64":"pyrenees-atlantiques",
+        "65":"hautes-pyrenees",
+        "66":"pyrenees-orientales",
+        "67":"bas-rhin",
+        "68":"haut-rhin",
+        "69":"rhone",
+        "70":"haute-saone",
+        "71":"saone-et-loire",
+        "72":"sarthe",
+        "73":"savoie",
+        "74":"haute-savoie",
+        "75":"paris",
+        "76":"seine-maritime",
+        "77":"seine-et-marne",
+        "78":"yvelines",
+        "79":"deux-sevres",
+        "80":"somme",
+        "81":"tarn",
+        "82":"tarn-et-garonne",
+        "83":"var",
+        "84":"vaucluse",
+        "85":"vendee",
+        "86":"vienne",
+        "87":"haute-vienne",
+        "88":"vosges",
+        "89":"yonne",
+        "90":"territoire-de-belfort",
+        "91":"essonne",
+        "92":"hauts-de-seine",
+        "93":"seine-saint-denis",
+        "94":"val-de-marne",
+        "95":"val-d-oise",
+        "971":"guadeloupe",
+        "972":"martinique",
+        "973":"guyane",
+        "974":"la-reunion",
+        "976":"mayotte"
+    };
 
+    return `https://www.carte-des-departements.fr/departement/${code}-${slugs[code]}/`;
 }
 
 
-/* ==========================================================
-   MENU
-   ========================================================== */
+/* =========================================================
+   DEMARRAGE
+   ========================================================= */
 
 function startQuiz(selectedMode) {
 
     mode = selectedMode;
 
-    question = 0;
-
+    questionIndex = 0;
     score = 0;
-
     streak = 0;
 
-    totalQuestions = 20;
+    /*
+    Une seule occurrence de chaque département dans la
+    série initiale : cela évite les répétitions.
+    */
 
-    createQueue();
+    questionQueue = shuffle(departments.map(d => d[0]));
 
-    document
-        .getElementById("menu")
-        .classList.add("hidden");
-
-    document
-        .getElementById("result")
-        .classList.add("hidden");
-
-    document
-        .getElementById("quiz")
-        .classList.remove("hidden");
-
-    document
-        .getElementById("totalQuestions")
-        .textContent = totalQuestions;
+    document.getElementById("menu").classList.add("hidden");
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
 
     nextQuestion();
-
 }
 
 
-/* ==========================================================
-   DEPARTEMENT SUIVANT
-   ========================================================== */
-
-function getNextDepartment() {
-
-    if (queue.length === 0) {
-
-        createQueue();
-
-    }
-
-    const code = queue.shift();
-
-    seenThisRound.add(code);
-
-    return getDepartment(code);
-
-}
-
-
-/* ==========================================================
-   QUESTION
-   ========================================================== */
+/* =========================================================
+   QUESTION SUIVANTE
+   ========================================================= */
 
 function nextQuestion() {
 
-    if (question >= totalQuestions) {
+    if (questionIndex >= totalQuestions) {
 
         finishQuiz();
 
         return;
-
     }
 
     answered = false;
 
-    document
-        .getElementById("next")
-        .classList.add("hidden");
+    document.getElementById("nextButton").classList.add("hidden");
+    document.getElementById("correction").classList.add("hidden");
+    document.getElementById("feedback").textContent = "";
 
-    document
-        .getElementById("correction")
-        .classList.add("hidden");
+    /*
+    On choisit un département encore non utilisé.
+    */
 
-    document
-        .getElementById("feedback")
-        .textContent = "";
+    let code = questionQueue.shift();
 
-    question++;
+    currentDepartment = getDepartment(code);
 
-    current = getNextDepartment();
+    /*
+    En mode mixte, le type de question est tiré au sort.
+    */
 
-    stats[current[0]].seen++;
+    if (mode === "mixed") {
 
-    document
-        .getElementById("questionNumber")
-        .textContent = question;
+        const types = [
+            "prefecture",
+            "department",
+            "subprefecture",
+            "status"
+        ];
 
-    document
-        .getElementById("score")
-        .textContent = score;
+        currentQuestionType =
+            types[Math.floor(Math.random() * types.length)];
 
-    document
-        .getElementById("streak")
-        .textContent = streak;
+    } else {
 
-    document
-        .getElementById("seen")
-        .textContent = seenThisRound.size;
+        currentQuestionType = mode;
+    }
 
-    document
-        .getElementById("progressBar")
-        .style.width =
-        ((question - 1) /
-        totalQuestions * 100) + "%";
+    questionIndex++;
+
+    generateQuestion();
+
+    updateStats();
+}
 
 
-    let text = "";
+/* =========================================================
+   GENERATION DES QUESTIONS
+   ========================================================= */
 
+function generateQuestion() {
+
+    const d = currentDepartment;
+
+    let question = "";
     let correct = "";
-
     let pool = [];
 
 
-    /* PREFECTURE */
+    /*
+    DEPARTEMENT → PREFECTURE
+    */
 
-    if (mode === "prefecture") {
+    if (currentQuestionType === "prefecture") {
 
-        text =
-            "Quelle est la préfecture du département "
-            + current[1]
-            + " ("
-            + current[0]
-            + ") ?";
+        question =
+            `Quelle est la préfecture du département ${d[1]} (${d[0]}) ?`;
 
-        correct = current[2];
+        correct = d[2];
 
-        pool =
-            DEPARTMENTS.map(
-                d => d[2]
-            );
-
+        pool = departments.map(x => x[2]);
     }
 
 
-    /* VILLE -> DEPARTEMENT */
+    /*
+    VILLE → DEPARTEMENT
+    */
 
-    else if (mode === "city") {
+    else if (currentQuestionType === "department") {
 
-        const sub =
-            SUBPREFS[current[0]] || [];
+        const subs = subprefectures[d[0]] || [];
 
         let city;
 
-        if (
-            sub.length > 0 &&
-            Math.random() < .6
-        ) {
+        if (subs.length && Math.random() < 0.6) {
 
-            city =
-                sub[
-                    Math.floor(
-                        Math.random() *
-                        sub.length
-                    )
-                ];
+            city = subs[Math.floor(Math.random() * subs.length)];
 
+        } else {
+
+            city = d[2];
         }
 
-        else {
+        question =
+            `À quel département appartient ${city} ?`;
 
-            city = current[2];
+        correct = d[1];
 
-        }
-
-        text =
-            "À quel département appartient "
-            + city
-            + " ?";
-
-        correct = current[1];
-
-        pool =
-            DEPARTMENTS.map(
-                d => d[1]
-            );
-
+        pool = departments.map(x => x[1]);
     }
 
 
-    /* SOUS-PREFECTURE */
+    /*
+    SOUS-PREFECTURE → DEPARTEMENT
+    */
 
-    else if (mode === "subprefecture") {
+    else if (currentQuestionType === "subprefecture") {
 
-        const list =
-            SUBPREFS[current[0]] || [];
+        const subs = subprefectures[d[0]] || [];
 
-        if (list.length === 0) {
+        /*
+        Certains départements n'ont pas de sous-préfecture
+        dans notre liste. Dans ce cas, on passe au suivant.
+        */
+
+        if (!subs.length) {
+
+            questionIndex--;
+
+            questionQueue.push(d[0]);
 
             nextQuestion();
 
             return;
-
         }
 
         const city =
-            list[
-                Math.floor(
-                    Math.random() *
-                    list.length
-                )
-            ];
+            subs[Math.floor(Math.random() * subs.length)];
 
-        text =
-            "À quel département appartient la sous-préfecture de "
-            + city
-            + " ?";
+        question =
+            `À quel département appartient la sous-préfecture de ${city} ?`;
 
-        correct = current[1];
+        correct = d[1];
 
-        pool =
-            DEPARTMENTS.map(
-                d => d[1]
-            );
-
+        pool = departments.map(x => x[1]);
     }
 
 
-    /* DEPARTEMENT -> SOUS-PREFECTURE */
+    /*
+    PREFECTURE OU SOUS-PREFECTURE
+    */
 
-    else if (mode === "departmentSub") {
+    else if (currentQuestionType === "status") {
 
-        const list =
-            SUBPREFS[current[0]] || [];
+        const options = [];
 
-        if (list.length === 0) {
+        departments.forEach(dep => {
 
-            nextQuestion();
-
-            return;
-
-        }
-
-        const city =
-            list[
-                Math.floor(
-                    Math.random() *
-                    list.length
-                )
-            ];
-
-        text =
-            "Laquelle de ces villes est une sous-préfecture du "
-            + current[1]
-            + " ("
-            + current[0]
-            + ") ?";
-
-        correct = city;
-
-        pool =
-            Object.values(
-                SUBPREFS
-            ).flat();
-
-    }
-
-
-    /* STATUT */
-
-    else if (mode === "status") {
-
-        const choices = [];
-
-        DEPARTMENTS.forEach(d => {
-
-            choices.push({
-
-                city: d[2],
-                code: d[0],
-                status: "Préfecture"
-
+            options.push({
+                city: dep[2],
+                type: "Préfecture",
+                code: dep[0]
             });
 
-            const sub =
-                SUBPREFS[d[0]] || [];
+            (subprefectures[dep[0]] || []).forEach(city => {
 
-            sub.forEach(city => {
-
-                choices.push({
-
+                options.push({
                     city: city,
-                    code: d[0],
-                    status: "Sous-préfecture"
-
+                    type: "Sous-préfecture",
+                    code: dep[0]
                 });
 
             });
 
         });
 
+        const chosen =
+            options[Math.floor(Math.random() * options.length)];
 
-        const selected =
-            choices[
-                Math.floor(
-                    Math.random() *
-                    choices.length
-                )
-            ];
+        window.statusQuestion = chosen;
 
-        current =
-            getDepartment(
-                selected.code
-            );
+        question =
+            `Quel est le statut administratif de ${chosen.city} ?`;
 
-        currentStatusCity =
-            selected.city;
-
-        text =
-            "Quel est le statut administratif de "
-            + selected.city
-            + " ?";
-
-        correct =
-            selected.status;
+        correct = chosen.type;
 
         pool = [
-
             "Préfecture",
-
-            "Sous-préfecture",
-
-            "Ni l'une ni l'autre"
-
+            "Sous-préfecture"
         ];
-
     }
 
 
-    /* MIX */
+    currentCorrectAnswer = correct;
 
-    else if (mode === "mix") {
+    /*
+    Création des quatre réponses.
+    */
 
-        const modes = [
+    const uniqueWrongAnswers =
+        shuffle(pool.filter(x => x !== correct));
 
-            "prefecture",
-            "city",
-            "subprefecture",
-            "departmentSub",
-            "status"
-
-        ];
-
-        const random =
-            modes[
-                Math.floor(
-                    Math.random() *
-                    modes.length
-                )
-            ];
-
-        mode = random;
-
-        question--;
-
-        nextQuestion();
-
-        return;
-
-    }
-
-
-    renderQuestion(
-        text,
+    const answers = shuffle([
         correct,
-        pool
-    );
+        ...uniqueWrongAnswers.slice(0, 3)
+    ]);
 
-}
-
-
-/* ==========================================================
-   AFFICHAGE DES REPONSES
-   ========================================================== */
-
-function renderQuestion(
-    text,
-    correct,
-    pool
-) {
-
-    document
-        .getElementById("question")
-        .textContent = text;
-
-    const wrong =
-        shuffle(
-            pool.filter(
-                x => x !== correct
-            )
-        ).slice(0,3);
-
-    const answers =
-        shuffle(
-            [correct, ...wrong]
-        );
+    document.getElementById("question").textContent = question;
 
     const container =
-        document.getElementById(
-            "answers"
-        );
+        document.getElementById("answers");
 
     container.innerHTML = "";
-
 
     answers.forEach(answer => {
 
         const button =
-            document.createElement(
-                "button"
+            document.createElement("button");
+
+        button.className = "answer";
+
+        button.textContent = answer;
+
+        button.onclick = () => {
+
+            checkAnswer(
+                button,
+                answer,
+                correct,
+                answers
             );
 
-        button.className =
-            "answer";
+        };
 
-        button.textContent =
-            answer;
-
-        button.onclick =
-            function() {
-
-                checkAnswer(
-                    button,
-                    answer,
-                    correct,
-                    answers
-                );
-
-            };
-
-        container.appendChild(
-            button
-        );
+        container.appendChild(button);
 
     });
-
 }
 
 
-/* ==========================================================
-   CORRECTION
-   ========================================================== */
+/* =========================================================
+   REPONSE
+   ========================================================= */
 
 function checkAnswer(
-    button,
+    clickedButton,
     answer,
     correct,
     answers
@@ -1310,813 +1184,304 @@ function checkAnswer(
 
     answered = true;
 
+    const buttons =
+        document.querySelectorAll(".answer");
 
-    document
-        .querySelectorAll(".answer")
-        .forEach(b => {
+    buttons.forEach(button => {
 
-            b.disabled = true;
+        button.disabled = true;
 
-            if (
-                b.textContent ===
-                correct
-            ) {
+        if (button.textContent === correct) {
 
-                b.classList.add(
-                    "correct"
-                );
-
-            }
-
-        });
-
-
-    const good =
-        answer === correct;
-
-
-    if (good) {
-
-        score++;
-
-        streak++;
-
-        button.classList.add(
-            "correct"
-        );
-
-        document
-            .getElementById(
-                "feedback"
-            )
-            .textContent =
-            "✅ Bonne réponse !";
-
-        stats[current[0]].correct++;
-
-    }
-
-    else {
-
-        streak = 0;
-
-        button.classList.add(
-            "wrong"
-        );
-
-        document
-            .getElementById(
-                "feedback"
-            )
-            .textContent =
-            "❌ Mauvaise réponse.";
-
-        stats[current[0]].wrong++;
-
-    }
-
-
-    document
-        .getElementById("score")
-        .textContent = score;
-
-    document
-        .getElementById("streak")
-        .textContent = streak;
-
-
-    showDetailedCorrection(
-        answers,
-        correct
-    );
-
-
-    document
-        .getElementById("next")
-        .classList.remove(
-            "hidden"
-        );
-
-}
-
-
-/* ==========================================================
-   CORRECTION DETAILLEE
-   ========================================================== */
-
-function showDetailedCorrection(
-    answers,
-    correct
-) {
-
-    const container =
-        document.getElementById(
-            "propositions"
-        );
-
-    container.innerHTML = "";
-
-
-    answers.forEach(city => {
-
-        const div =
-            document.createElement(
-                "div"
-            );
-
-        div.className =
-            "proposition";
-
-
-        const information =
-            findCityInformation(
-                city
-            );
-
-
-        if (city === correct) {
-
-            div.classList.add(
-                "correctProp"
-            );
-
-            div.innerHTML =
-                "✅ <b>"
-                + city
-                + "</b> — "
-                + information;
-
+            button.classList.add("correct");
         }
-
-        else {
-
-            div.innerHTML =
-                "• <b>"
-                + city
-                + "</b> — "
-                + information;
-
-        }
-
-
-        container.appendChild(
-            div
-        );
 
     });
 
 
-    document
-        .getElementById(
-            "correction"
-        )
-        .classList.remove(
-            "hidden"
-        );
+    const isCorrect =
+        answer === correct;
 
 
-    showDepartmentFiche(
-        current
-    );
+    if (isCorrect) {
 
-}
+        score++;
+        streak++;
 
+        clickedButton.classList.add("correct");
 
-/* ==========================================================
-   RETROUVER LE DEPARTEMENT D'UNE VILLE
-   ========================================================== */
+        document.getElementById("feedback").textContent =
+            "✅ Bonne réponse !";
 
-function findCityInformation(
-    city
-) {
+    } else {
 
-    for (
-        const d of DEPARTMENTS
-    ) {
+        streak = 0;
 
-        if (d[2] === city) {
+        clickedButton.classList.add("wrong");
 
-            return (
-                d[1]
-                + " ("
-                + d[0]
-                + ") — préfecture"
-            );
-
-        }
-
-        const sub =
-            SUBPREFS[d[0]] || [];
-
-        if (
-            sub.includes(city)
-        ) {
-
-            return (
-                d[1]
-                + " ("
-                + d[0]
-                + ") — sous-préfecture"
-            );
-
-        }
-
+        document.getElementById("feedback").textContent =
+            `❌ Mauvaise réponse. La bonne réponse était : ${correct}`;
     }
 
 
-    return "département non identifié";
+    showPropositions(answers);
 
-}
-
-
-/* ==========================================================
-   FICHE DU DEPARTEMENT
-   ========================================================== */
-
-function showDepartmentFiche(
-    department
-) {
-
-    const code =
-        department[0];
-
-    const name =
-        department[1];
-
-    const region =
-        department[3];
-
-    const prefecture =
-        department[2];
-
+    showFiche();
 
     document
-        .getElementById(
-            "ficheTitle"
-        )
-        .textContent =
-        "📚 À retenir — "
-        + name
-        + " ("
-        + code
-        + ")";
-
-
-    const url =
-        departmentURL(
-            department
-        );
-
-
-    document
-        .getElementById(
-            "ficheDescription"
-        )
-        .innerHTML =
-
-        "<p><b>Département :</b> "
-        + name
-        + " ("
-        + code
-        + ")</p>"
-
-        +
-
-        "<p><b>Région :</b> "
-        + region
-        + "</p>"
-
-        +
-
-        "<p><b>Préfecture :</b> "
-        + prefecture
-        + "</p>"
-
-        +
-
-        "<p>La fiche ci-dessous reprend les informations pédagogiques "
-        + "du site <i>carte-des-departements.fr</i> : présentation "
-        + "du département, présentation de la préfecture et "
-        + "« Le saviez-vous ? ».</p>"
-
-        +
-
-        "<iframe "
-        + "src='"
-        + url
-        + "' "
-        + "title='Fiche du département "
-        + name
-        + " ("
-        + code
-        + ")'>"
-        + "</iframe>"
-
-        +
-
-        "<a "
-        + "class='ficheLink' "
-        + "href='"
-        + url
-        + "' "
-        + "target='_blank' "
-        + "rel='noopener'>"
-
-        + "Ouvrir la fiche de "
-        + name
-        + " ("
-        + code
-        + ") "
-        + "dans un nouvel onglet ↗"
-
-        + "</a>";
-
-}
-
-
-/* ==========================================================
-   FIN DU QUIZ
-   ========================================================== */
-
-function finishQuiz() {
-
-    document
-        .getElementById("quiz")
-        .classList.add("hidden");
-
-    document
-        .getElementById("result")
+        .getElementById("correction")
         .classList.remove("hidden");
 
     document
-        .getElementById("progressBar")
-        .style.width = "100%";
+        .getElementById("nextButton")
+        .classList.remove("hidden");
+
+    updateStats();
+}
 
 
-    document
-        .getElementById("resultTitle")
-        .textContent =
-        "Résultat : "
-        + score
-        + "/"
-        + totalQuestions;
+/* =========================================================
+   INFORMATIONS DES QUATRE PROPOSITIONS
+   ========================================================= */
+
+function showPropositions(answers) {
+
+    const container =
+        document.getElementById("propositions");
+
+    container.innerHTML = "";
+
+
+    answers.forEach(answer => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "proposition";
+
+
+        if (answer === currentCorrectAnswer) {
+
+            div.classList.add("correct");
+        }
+
+
+        let information = "";
+
+
+        /*
+        MODE PREFECTURE
+        */
+
+        if (currentQuestionType === "prefecture") {
+
+            information =
+                cityInformation(answer);
+        }
+
+
+        /*
+        MODE DEPARTEMENT
+        */
+
+        else if (
+            currentQuestionType === "department" ||
+            currentQuestionType === "subprefecture"
+        ) {
+
+            const dep =
+                departments.find(
+                    d => d[1] === answer
+                );
+
+            if (dep) {
+
+                information =
+                    `${dep[1]} (${dep[0]}) — préfecture : ${dep[2]}`;
+            }
+        }
+
+
+        /*
+        MODE STATUT
+        */
+
+        else if (currentQuestionType === "status") {
+
+            const selected =
+                window.statusQuestion;
+
+            if (answer === currentCorrectAnswer) {
+
+                information =
+                    `${selected.city} appartient au département ${selected.code} et est une ${selected.type.toLowerCase()}.`;
+
+            } else {
+
+                information =
+                    "Cette proposition ne correspond pas à la ville demandée.";
+            }
+        }
+
+
+        div.innerHTML =
+            `${answer === currentCorrectAnswer ? "✅ " : "• "}
+             <b>${answer}</b>
+             ${information ? " — " + information : ""}`;
+
+        container.appendChild(div);
+
+    });
+}
+
+
+/* =========================================================
+   FICHE PEDAGOGIQUE
+   ========================================================= */
+
+function showFiche() {
+
+    const d = currentDepartment;
+
+    const text =
+        facts[d[0]] ||
+        `${d[1]} (${d[0]}) est un département français de la région ${d[3]}. ${d[2]} est sa préfecture.`;
+
+    const container =
+        document.getElementById("fiche");
+
+
+    container.innerHTML = `
+
+        <h3>
+            📚 À retenir — ${d[1]} (${d[0]})
+        </h3>
+
+        <p>
+            <b>Région :</b>
+            ${d[3]}
+        </p>
+
+        <p>
+            <b>Préfecture :</b>
+            ${d[2]}
+        </p>
+
+        <p>
+            ${text}
+        </p>
+
+        <a
+            href="${departmentURL(d)}"
+            target="_blank"
+            rel="noopener"
+        >
+            🔗 Voir la fiche complète de ${d[1]} (${d[0]})
+        </a>
+
+    `;
+}
+
+
+/* =========================================================
+   STATISTIQUES
+   ========================================================= */
+
+function updateStats() {
+
+    document.getElementById("questionNumber").textContent =
+        questionIndex;
+
+    document.getElementById("totalQuestions").textContent =
+        totalQuestions;
+
+    document.getElementById("score").textContent =
+        score;
+
+    document.getElementById("streak").textContent =
+        streak;
+
+    document.getElementById("seen").textContent =
+        Math.min(questionIndex, 101);
+
+    document.getElementById("progressBar").style.width =
+        (questionIndex / totalQuestions * 100) + "%";
+}
+
+
+/* =========================================================
+   FIN DU QUIZ
+   ========================================================= */
+
+function finishQuiz() {
+
+    document.getElementById("quiz")
+        .classList.add("hidden");
+
+    document.getElementById("result")
+        .classList.remove("hidden");
+
+
+    document.getElementById("resultTitle").textContent =
+        `Résultat : ${score}/${totalQuestions}`;
 
 
     let message;
 
 
-    if (
-        score ===
-        totalQuestions
-    ) {
+    if (score === totalQuestions) {
 
         message =
-            "🏆 Score parfait !";
+            "🏆 Score parfait ! Tu maîtrises les départements français.";
 
-    }
-
-    else if (
-        score >= 17
-    ) {
+    } else if (score >= 17) {
 
         message =
-            "🥇 Excellent niveau !";
+            "🥇 Excellent !";
 
-    }
-
-    else if (
-        score >= 14
-    ) {
+    } else if (score >= 14) {
 
         message =
             "🥈 Très bon niveau !";
 
-    }
-
-    else if (
-        score >= 10
-    ) {
+    } else if (score >= 10) {
 
         message =
-            "👍 Bonne base !";
+            "👍 Bonne base, continue !";
 
-    }
-
-    else {
+    } else {
 
         message =
-            "📚 Il faut encore réviser !";
-
+            "📚 Il faut encore réviser un peu !";
     }
 
 
-    document
-        .getElementById(
-            "resultText"
-        )
-        .textContent =
+    document.getElementById("resultText").textContent =
         message;
-
 }
 
 
-/* ==========================================================
-   PROGRESSION
-   ========================================================== */
+/* =========================================================
+   RETOUR AU MENU
+   ========================================================= */
 
-function updateMastery() {
+function backToMenu() {
 
-    const seen =
-        DEPARTMENTS.filter(
-            d =>
-            stats[d[0]].seen > 0
-        ).length;
-
-
-    const mastered =
-        DEPARTMENTS.filter(
-            d =>
-            stats[d[0]].correct >= 2 &&
-            stats[d[0]].wrong === 0
-        ).length;
-
-
-    const weak =
-        DEPARTMENTS
-        .filter(
-            d =>
-            stats[d[0]].wrong > 0
-        )
-        .map(
-            d =>
-            d[1]
-            + " ("
-            + d[0]
-            + ")"
-        );
-
-
-    let html =
-
-        "<span class='tag'>"
-        + "Départements rencontrés : "
-        + "<b>"
-        + seen
-        + "/101</b>"
-        + "</span>";
-
-
-    html +=
-
-        "<span class='tag'>"
-        + "Maîtrisés : "
-        + "<b>"
-        + mastered
-        + "/101</b>"
-        + "</span>";
-
-
-    html += "<br><br>";
-
-
-    if (weak.length) {
-
-        html +=
-
-            "<span class='bad'>"
-            + "À revoir : "
-            + weak
-                .slice(0,15)
-                .join(", ")
-            + (
-                weak.length > 15
-                ? "…"
-                : ""
-            )
-            + "</span>";
-
-    }
-
-    else {
-
-        html +=
-
-            "<span class='good'>"
-            + "Aucune erreur enregistrée."
-            + "</span>";
-
-    }
-
-
-    document
-        .getElementById(
-            "mastery"
-        )
-        .innerHTML =
-        html;
-
-}
-
-
-/* ==========================================================
-   OUTRE-MER HORS DEPARTEMENTS
-   ========================================================== */
-
-function startTerritories() {
-
-    document
-        .getElementById("menu")
+    document.getElementById("result")
         .classList.add("hidden");
 
-    document
-        .getElementById("result")
+    document.getElementById("quiz")
         .classList.add("hidden");
 
-    document
-        .getElementById("quiz")
+    document.getElementById("menu")
         .classList.remove("hidden");
 
-
-    const list =
-        shuffle(TERRITORIES);
-
-
-    question = 0;
-
+    questionIndex = 0;
     score = 0;
+    streak = 0;
 
-    totalQuestions =
-        list.length;
-
-
-    function territoryQuestion() {
-
-        if (
-            question >=
-            totalQuestions
-        ) {
-
-            finishQuiz();
-
-            return;
-
-        }
-
-
-        answered = false;
-
-        question++;
-
-
-        const territory =
-            list[question - 1];
-
-
-        const correct =
-            territory[1];
-
-
-        const answers =
-            shuffle([
-
-                correct,
-
-                ...shuffle(
-
-                    TERRITORIES
-                    .map(
-                        t => t[1]
-                    )
-                    .filter(
-                        x =>
-                        x !== correct
-                    )
-
-                ).slice(0,3)
-
-            ]);
-
-
-        document
-            .getElementById(
-                "questionNumber"
-            )
-            .textContent =
-            question;
-
-
-        document
-            .getElementById(
-                "totalQuestions"
-            )
-            .textContent =
-            totalQuestions;
-
-
-        document
-            .getElementById(
-                "score"
-            )
-            .textContent =
-            score;
-
-
-        document
-            .getElementById(
-                "question"
-            )
-            .textContent =
-
-            "Quel est le chef-lieu de "
-            + territory[0]
-            + " ?";
-
-
-        document
-            .getElementById(
-                "answers"
-            )
-            .innerHTML = "";
-
-
-        document
-            .getElementById(
-                "correction"
-            )
-            .classList.add(
-                "hidden"
-            );
-
-
-        answers.forEach(
-            answer => {
-
-                const button =
-                    document.createElement(
-                        "button"
-                    );
-
-                button.className =
-                    "answer";
-
-                button.textContent =
-                    answer;
-
-
-                button.onclick =
-                    function() {
-
-                        if (
-                            answered
-                        ) return;
-
-
-                        answered =
-                            true;
-
-
-                        document
-                            .querySelectorAll(
-                                ".answer"
-                            )
-                            .forEach(
-                                b => {
-
-                                    b.disabled =
-                                        true;
-
-                                    if (
-                                        b.textContent
-                                        === correct
-                                    ) {
-
-                                        b.classList.add(
-                                            "correct"
-                                        );
-
-                                    }
-
-                                }
-                            );
-
-
-                        if (
-                            answer ===
-                            correct
-                        ) {
-
-                            score++;
-
-                            button.classList.add(
-                                "correct"
-                            );
-
-                            document
-                                .getElementById(
-                                    "feedback"
-                                )
-                                .textContent =
-                                "✅ Bonne réponse !";
-
-                        }
-
-                        else {
-
-                            button.classList.add(
-                                "wrong"
-                            );
-
-                            document
-                                .getElementById(
-                                    "feedback"
-                                )
-                                .textContent =
-                                "❌ La bonne réponse était : "
-                                + correct;
-
-                        }
-
-
-                        document
-                            .getElementById(
-                                "score"
-                            )
-                            .textContent =
-                            score;
-
-
-                        document
-                            .getElementById(
-                                "next"
-                            )
-                            .classList.remove(
-                                "hidden"
-                            );
-
-                    };
-
-
-                document
-                    .getElementById(
-                        "answers"
-                    )
-                    .appendChild(
-                        button
-                    );
-
-            }
-        );
-
-    }
-
-
-    document
-        .getElementById(
-            "next"
-        )
-        .onclick =
-        territoryQuestion;
-
-
-    territoryQuestion();
-
+    updateStats();
 }
-
-
-/* ==========================================================
-   RETOUR AU MENU
-   ========================================================== */
-
-function showMenu() {
-
-    document
-        .getElementById(
-            "result"
-        )
-        .classList.add(
-            "hidden"
-        );
-
-    document
-        .getElementById(
-            "menu"
-        )
-        .classList.remove(
-            "hidden"
-        );
-
-    document
-        .getElementById(
-            "progressBar"
-        )
-        .style.width =
-        "0%";
-
-}
-
-
-updateMastery();
-
 
 </script>
 
