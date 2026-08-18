@@ -180,6 +180,11 @@ button {
   font-size: 14px;
 }
 
+.region {
+  color: #1769aa;
+  font-weight: 600;
+}
+
 @media(max-width:650px) {
   .answers {
     grid-template-columns: 1fr;
@@ -199,8 +204,6 @@ button {
 </header>
 
 <main>
-
-<!-- STATISTIQUES -->
 
 <div class="card">
 
@@ -231,8 +234,6 @@ button {
 </div>
 
 
-<!-- MENU -->
-
 <div id="menu" class="card">
 
   <h2>Choisis ton mode de quiz</h2>
@@ -259,8 +260,6 @@ button {
 
 </div>
 
-
-<!-- QUIZ -->
 
 <div id="quiz" class="card hidden">
 
@@ -289,8 +288,6 @@ button {
 
 </div>
 
-
-<!-- RESULTAT -->
 
 <div id="result" class="card hidden">
 
@@ -412,8 +409,6 @@ const departments = [
 ["93","Seine-Saint-Denis","Bobigny","Île-de-France"],
 ["94","Val-de-Marne","Créteil","Île-de-France"],
 ["95","Val-d'Oise","Cergy","Île-de-France"],
-
-/* OUTRE-MER */
 
 ["971","Guadeloupe","Basse-Terre","Guadeloupe"],
 ["972","Martinique","Fort-de-France","Martinique"],
@@ -575,11 +570,11 @@ const facts = {
 
 "19":"La Corrèze (19) appartient à Nouvelle-Aquitaine. Tulle est la préfecture. Le département correspond à une partie du Limousin historique et possède de nombreux paysages vallonnés.",
 
-"2A":"La Corse-du-Sud (2A) appartient à la collectivité de Corse, qui constitue une région. Ajaccio est la préfecture. La ville est notamment connue pour être le lieu de naissance de Napoléon Bonaparte.",
+"2A":"La Corse-du-Sud (2A) appartient à la Corse. Ajaccio est la préfecture. La ville est notamment connue pour être le lieu de naissance de Napoléon Bonaparte.",
 
-"2B":"La Haute-Corse (2B) appartient à la collectivité de Corse, qui constitue une région. Bastia est la préfecture. Le département comprend notamment le Cap Corse, la Balagne et le massif du Monte Cinto.",
+"2B":"La Haute-Corse (2B) appartient à la Corse. Bastia est la préfecture. Le département comprend notamment le Cap Corse, la Balagne et le massif du Monte Cinto.",
 
-"21":"La Côte-d’Or (21) appartient à Bourgogne-Franche-Comté. Dijon est la préfecture. Le département est particulièrement célèbre pour les vignobles de Bourgogne et les climats du vignoble de Dijon à Beaune.",
+"21":"La Côte-d’Or (21) appartient à Bourgogne-Franche-Comté. Dijon est la préfecture. Le département est particulièrement célèbre pour les vignobles de Bourgogne.",
 
 "22":"Les Côtes-d’Armor (22) sont situées en Bretagne. Saint-Brieuc est la préfecture. Le département possède un littoral très découpé, notamment la Côte de Granit rose.",
 
@@ -609,11 +604,11 @@ const facts = {
 
 "35":"L’Ille-et-Vilaine (35) est le département le plus oriental de Bretagne. Rennes est la préfecture. Le département comprend également Saint-Malo et une partie de la côte nord bretonne.",
 
-"36":"L’Indre (36) appartient au Centre-Val de Loire. Châteauroux est la préfecture. Le département comprend notamment le parc naturel régional de la Brenne, célèbre pour ses nombreux étangs.",
+"36":"L’Indre (36) appartient au Centre-Val de Loire. Châteauroux est la préfecture. Le département comprend notamment le parc naturel régional de la Brenne.",
 
 "37":"L’Indre-et-Loire (37) est en Centre-Val de Loire. Tours est la préfecture. Le département est au cœur du Val de Loire et possède plusieurs châteaux célèbres.",
 
-"38":"L’Isère (38) appartient à Auvergne-Rhône-Alpes. Grenoble est la préfecture. Le département est dominé par plusieurs massifs alpins, notamment Belledonne, la Chartreuse et le Vercors.",
+"38":"L’Isère (38) appartient à Auvergne-Rhône-Alpes. Grenoble est la préfecture. Le département est dominé par plusieurs massifs alpins.",
 
 "39":"Le Jura (39) appartient à Bourgogne-Franche-Comté. Lons-le-Saunier est la préfecture. Le département est réputé pour ses montagnes, ses lacs, ses forêts et son vignoble.",
 
@@ -775,6 +770,28 @@ function getDepartmentByName(name) {
   return departments.find(d => d[1] === name);
 }
 
+function getDepartmentByCity(city) {
+
+  for (const d of departments) {
+
+    if (d[2] === city) {
+      return {
+        department: d,
+        status: "préfecture"
+      };
+    }
+
+    if ((subprefectures[d[0]] || []).includes(city)) {
+      return {
+        department: d,
+        status: "sous-préfecture"
+      };
+    }
+  }
+
+  return null;
+}
+
 
 /* ==========================================================
    DEMARRER
@@ -788,17 +805,13 @@ function startQuiz(selectedMode) {
   score = 0;
   streak = 0;
 
-  /*
-  On mélange les 101 départements.
-  Chaque département ne peut donc apparaître qu'une
-  fois avant que la liste soit épuisée.
-  */
-
   queue = shuffle(departments.map(d => d[0]));
 
   document.getElementById("menu").classList.add("hidden");
   document.getElementById("result").classList.add("hidden");
   document.getElementById("quiz").classList.remove("hidden");
+
+  updateStats();
 
   nextQuestion();
 }
@@ -840,11 +853,6 @@ function nextQuestion() {
     currentQuestionType = mode;
   }
 
-  /*
-  Si le département n'a pas de sous-préfecture,
-  on évite le mode sous-préfecture.
-  */
-
   if (
     currentQuestionType === "subprefecture" &&
     (!subprefectures[currentDepartment[0]] ||
@@ -880,7 +888,7 @@ function generateQuestion() {
   if (currentQuestionType === "prefecture") {
 
     question =
-      `Quelle est la préfecture du département ${d[1]} (${d[0]}), situé en ${d[3]} ?`;
+      `Quelle est la préfecture du département ${d[1]} (${d[0]}), situé dans la région ${d[3]} ?`;
 
     correct = d[2];
 
@@ -944,10 +952,6 @@ function generateQuestion() {
     let city;
     let status;
 
-    /*
-    50 % préfecture, 50 % sous-préfecture.
-    */
-
     if (
       Math.random() < 0.5 ||
       !subprefectures[d[0]] ||
@@ -983,11 +987,6 @@ function generateQuestion() {
 
   currentCorrectAnswer = correct;
 
-
-  /*
-  Pour le mode statut, seulement 2 réponses.
-  Pour les autres modes, 4 réponses.
-  */
 
   if (currentQuestionType === "status") {
 
@@ -1097,7 +1096,7 @@ function checkAnswer(
 
 
 /* ==========================================================
-   AFFICHAGE DES 4 PROPOSITIONS
+   AFFICHAGE DES PROPOSITIONS
    ========================================================== */
 
 function showPropositions(choices) {
@@ -1124,9 +1123,7 @@ function showPropositions(choices) {
     let text = "";
 
 
-    /*
-    QUESTION PREFECTURE
-    */
+    /* QUESTION PREFECTURE */
 
     if (currentQuestionType === "prefecture") {
 
@@ -1141,9 +1138,7 @@ function showPropositions(choices) {
     }
 
 
-    /*
-    QUESTION VILLE → DEPARTEMENT
-    */
+    /* QUESTION VILLE → DEPARTEMENT */
 
     else if (
       currentQuestionType === "department" ||
@@ -1161,39 +1156,19 @@ function showPropositions(choices) {
     }
 
 
-    /*
-    QUESTION STATUT
-    */
+    /* QUESTION STATUT */
 
     else {
 
       const city = currentCity;
 
-      let dep = null;
-      let status = null;
+      const result =
+        getDepartmentByCity(city);
 
+      if (result) {
 
-      departments.forEach(d => {
-
-        if (d[2] === city) {
-
-          dep = d;
-          status = "préfecture";
-        }
-
-        if (
-          (subprefectures[d[0]] || [])
-          .includes(city)
-        ) {
-
-          dep = d;
-          status = "sous-préfecture";
-        }
-
-      });
-
-
-      if (dep) {
+        const dep = result.department;
+        const status = result.status;
 
         text =
           `${city} appartient au département ${dep[1]} (${dep[0]}) — région : ${dep[3]} — ${status}`;
@@ -1251,7 +1226,8 @@ function showFiche() {
     </h3>
 
     <p>
-      <b>Région :</b> ${d[3]}
+      <b>Région :</b>
+      <span class="region">${d[3]}</span>
     </p>
 
     <p>
