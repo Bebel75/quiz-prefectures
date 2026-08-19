@@ -12,21 +12,21 @@
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     background: #f3f6fa;
-    color: #1f2937;
+    color: #172033;
 }
 
 header {
-    background: linear-gradient(135deg, #17365d, #245b91);
+    background: linear-gradient(135deg, #173b73, #245aa0);
     color: white;
-    padding: 28px 20px;
+    padding: 22px 16px;
     text-align: center;
 }
 
 header h1 {
     margin: 0 0 8px;
-    font-size: 30px;
+    font-size: 28px;
 }
 
 header p {
@@ -35,238 +35,204 @@ header p {
 }
 
 .container {
-    width: min(900px, calc(100% - 24px));
-    margin: 20px auto 40px;
+    max-width: 1100px;
+    margin: auto;
+    padding: 16px;
 }
 
 .panel {
     background: white;
-    border-radius: 18px;
-    padding: 22px;
-    margin-bottom: 18px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.07);
 }
 
-.mode-grid {
+.controls {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 12px;
+    gap: 10px;
 }
 
-.mode-btn,
-.answer-btn,
-.action-btn {
+button,
+select {
     border: 0;
-    border-radius: 12px;
-    padding: 14px 16px;
-    font-size: 16px;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 15px;
     cursor: pointer;
-    transition: .2s;
 }
 
-.mode-btn {
-    background: #edf2f7;
-    color: #1f2937;
-}
-
-.mode-btn:hover,
-.mode-btn.active {
-    background: #245b91;
+button {
+    background: #245aa0;
     color: white;
 }
 
-.action-btn {
-    background: #245b91;
-    color: white;
-}
-
-.action-btn:hover {
+button:hover {
     opacity: .9;
 }
 
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
+button.secondary {
+    background: #e8edf5;
+    color: #172033;
 }
 
-.progress {
-    height: 10px;
-    background: #e5e7eb;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 12px;
+button.danger {
+    background: #b53a3a;
+}
+
+.progress-wrap {
+    margin: 15px 0;
 }
 
 .progress-bar {
+    height: 10px;
+    background: #e4e8ef;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress {
     height: 100%;
-    width: 0%;
-    background: #245b91;
+    width: 0;
+    background: #2e78c7;
     transition: width .3s;
 }
 
-.question-number {
-    font-weight: 700;
-    color: #245b91;
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.stat {
+    background: #f0f4fa;
+    padding: 10px 14px;
+    border-radius: 10px;
 }
 
 .question {
-    font-size: 23px;
-    line-height: 1.35;
+    font-size: 24px;
     font-weight: 700;
-    margin: 25px 0;
+    line-height: 1.3;
+    margin: 20px 0;
 }
 
 .answers {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 12px;
 }
 
-.answer-btn {
-    background: #f1f5f9;
+.answer {
+    background: #eef3f9;
+    color: #172033;
+    border: 2px solid transparent;
     text-align: left;
-    min-height: 58px;
 }
 
-.answer-btn:hover:not(:disabled) {
-    background: #dbeafe;
+.answer:hover {
+    border-color: #245aa0;
 }
 
-.answer-btn.correct {
-    background: #bbf7d0;
-    border: 2px solid #16a34a;
+.answer.correct {
+    background: #d9f2df;
+    border-color: #2f8f46;
 }
 
-.answer-btn.wrong {
-    background: #fecaca;
-    border: 2px solid #dc2626;
+.answer.wrong {
+    background: #f8dcdc;
+    border-color: #b53a3a;
 }
 
-.answer-btn:disabled {
-    cursor: default;
+.answer small {
+    display: block;
+    margin-top: 5px;
+    opacity: .7;
 }
 
 .feedback {
     margin-top: 18px;
-    padding: 16px;
+    padding: 15px;
     border-radius: 12px;
     display: none;
 }
 
-.feedback.show {
+.feedback.correct {
     display: block;
+    background: #e1f4e5;
 }
 
-.feedback.good {
-    background: #ecfdf5;
-    border-left: 5px solid #16a34a;
+.feedback.wrong {
+    display: block;
+    background: #f9e1e1;
 }
 
-.feedback.bad {
-    background: #fef2f2;
-    border-left: 5px solid #dc2626;
-}
-
-.info-card {
-    margin-top: 18px;
-    padding: 18px;
-    border-radius: 14px;
+.card {
+    border-left: 5px solid #245aa0;
+    padding: 16px;
     background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    display: none;
+    border-radius: 10px;
+    margin-top: 15px;
 }
 
-.info-card.show {
-    display: block;
-}
-
-.info-card h3 {
+.card h3 {
     margin-top: 0;
-    color: #17365d;
 }
 
-.info-card p {
-    line-height: 1.6;
+.region {
+    color: #245aa0;
+    font-weight: 700;
 }
 
 .source {
     margin-top: 14px;
-    font-size: 13px;
-    color: #64748b;
-    border-top: 1px solid #e2e8f0;
     padding-top: 10px;
-}
-
-.source a {
-    color: #245b91;
-}
-
-#quiz,
-#result {
-    display: none;
-}
-
-.result-score {
-    font-size: 48px;
-    font-weight: 800;
-    color: #245b91;
-    text-align: center;
-}
-
-.result-message {
-    text-align: center;
-    font-size: 20px;
-    margin: 15px 0 25px;
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-
-.stat {
-    background: #f8fafc;
-    border-radius: 12px;
-    padding: 16px;
-    text-align: center;
-}
-
-.stat strong {
-    display: block;
-    font-size: 26px;
-    color: #245b91;
+    border-top: 1px solid #dfe5ed;
+    font-size: 13px;
+    color: #667085;
 }
 
 .hidden {
     display: none !important;
 }
 
-footer {
-    text-align: center;
-    color: #64748b;
-    font-size: 13px;
-    padding: 20px;
+#departmentList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 10px;
 }
 
-@media (max-width: 650px) {
-    .answers {
-        grid-template-columns: 1fr;
+.dept-item {
+    background: #f5f7fa;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.dept-item:hover {
+    background: #e9eef5;
+}
+
+footer {
+    text-align: center;
+    color: #667085;
+    font-size: 13px;
+    padding: 25px 10px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 23px;
     }
 
     .question {
         font-size: 20px;
     }
 
-    .stats {
+    .answers {
         grid-template-columns: 1fr;
-    }
-
-    header h1 {
-        font-size: 25px;
     }
 }
 </style>
@@ -276,2238 +242,1506 @@ footer {
 
 <header>
     <h1>🇫🇷 Quiz des départements français</h1>
-    <p>Apprends les départements, leurs préfectures et leurs régions</p>
+    <p>Apprends les 101 départements, leurs régions et leurs préfectures</p>
 </header>
 
 <div class="container">
 
-    <section id="home" class="panel">
-        <h2>Choisis ton mode de quiz</h2>
+    <section class="panel">
+        <div class="controls">
+            <select id="mode">
+                <option value="prefecture">Quelle est la préfecture ?</option>
+                <option value="department">À quel département appartient cette ville ?</option>
+                <option value="region">Dans quelle région se trouve ce département ?</option>
+                <option value="departmentFromPrefecture">À quel département appartient cette préfecture ?</option>
+            </select>
 
-        <div class="mode-grid">
-            <button class="mode-btn" onclick="startQuiz('prefecture')">
-                🏛️ Quelle est la préfecture ?
-            </button>
+            <select id="difficulty">
+                <option value="all">Tous les départements</option>
+                <option value="metropole">France métropolitaine</option>
+                <option value="outremer">Outre-mer</option>
+            </select>
 
-            <button class="mode-btn" onclick="startQuiz('department')">
-                📍 À quel département appartient cette ville ?
-            </button>
-
-            <button class="mode-btn" onclick="startQuiz('region')">
-                🗺️ À quelle région appartient ce département ?
-            </button>
-
-            <button class="mode-btn" onclick="startQuiz('mixed')">
-                🎯 Quiz mixte
-            </button>
+            <button onclick="newQuiz()">Nouveau quiz</button>
+            <button class="secondary" onclick="showList()">Voir les départements</button>
         </div>
 
-        <div style="margin-top:20px">
-            <p>
-                <strong>101 départements</strong> sont disponibles,
-                métropole et outre-mer compris.
-            </p>
-            <p>
-                Chaque réponse est suivie d'une fiche pédagogique
-                lorsqu'elle est disponible.
-            </p>
+        <div class="stats">
+            <div class="stat">Question : <strong id="questionNumber">0</strong></div>
+            <div class="stat">Score : <strong id="score">0</strong></div>
+            <div class="stat">Réussite : <strong id="successRate">0%</strong></div>
+        </div>
+
+        <div class="progress-wrap">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
         </div>
     </section>
 
-    <section id="quiz" class="panel">
+    <section class="panel" id="quizPanel">
 
-        <div class="topbar">
-            <span id="questionNumber" class="question-number"></span>
-            <span id="scoreDisplay">Score : 0</span>
+        <div id="question" class="question">
+            Clique sur « Nouveau quiz » pour commencer.
         </div>
-
-        <div class="progress">
-            <div id="progressBar" class="progress-bar"></div>
-        </div>
-
-        <div id="question" class="question"></div>
 
         <div id="answers" class="answers"></div>
 
         <div id="feedback" class="feedback"></div>
 
-        <div id="infoCard" class="info-card"></div>
+        <div id="pedagogical" class="card hidden"></div>
 
-        <div style="margin-top:18px;text-align:right">
-            <button id="nextButton"
-                    class="action-btn"
-                    onclick="nextQuestion()"
-                    style="display:none">
+        <div style="margin-top:15px;">
+            <button id="nextButton" class="hidden" onclick="nextQuestion()">
                 Question suivante →
             </button>
         </div>
 
     </section>
 
-    <section id="result" class="panel">
-
-        <h2 style="text-align:center">🎉 Quiz terminé !</h2>
-
-        <div id="resultScore" class="result-score"></div>
-
-        <div id="resultMessage" class="result-message"></div>
-
-        <div class="stats">
-            <div class="stat">
-                <strong id="correctCount">0</strong>
-                bonnes réponses
-            </div>
-
-            <div class="stat">
-                <strong id="wrongCount">0</strong>
-                erreurs
-            </div>
-
-            <div class="stat">
-                <strong id="percentage">0 %</strong>
-                réussite
-            </div>
-        </div>
-
-        <div style="text-align:center;margin-top:25px">
-            <button class="action-btn" onclick="returnHome()">
-                ↩️ Recommencer
-            </button>
-        </div>
-
+    <section class="panel hidden" id="listPanel">
+        <h2>Les 101 départements</h2>
+        <div id="departmentList"></div>
     </section>
 
 </div>
 
 <footer>
-    Quiz personnel d'apprentissage des départements français.
+    Quiz pédagogique personnel — données administratives et fiches pédagogiques issues notamment de
+    <strong>carte-des-departements.fr</strong>.
 </footer>
 
 <script>
-const SOURCE_URL = "https://www.carte-des-departements.fr/";
-
-const departments = [];
-   /* =========================================================
-   DÉPARTEMENTS 01 À 25
-   ========================================================= */
-
-departments.push(
+    const departments = [
 
 {
-    numero:"01",
-    nom:"Ain",
+    code:"01",
+    name:"Ain",
     region:"Auvergne-Rhône-Alpes",
-    prefecture:"Bourg-en-Bresse"
+    prefecture:"Bourg-en-Bresse",
+    description:"L'Ain est situé entre le Jura et le Rhône. Ses paysages vont des montagnes du Bugey aux plaines de la Dombes, avec une nature préservée et une gastronomie réputée.",
+    prefectureDescription:"Bourg-en-Bresse est célèbre notamment pour le monastère royal de Brou, chef-d'œuvre de l'art gothique flamboyant.",
+    fact:"La volaille de Bresse est la seule volaille au monde à bénéficier d'une AOC depuis 1957. Ses couleurs rappellent celles du drapeau français."
 },
 
 {
-    numero:"02",
-    nom:"Aisne",
+    code:"02",
+    name:"Aisne",
     region:"Hauts-de-France",
-    prefecture:"Laon"
+    prefecture:"Laon",
+    description:"L'Aisne, en Hauts-de-France, possède un patrimoine historique important et de nombreux paysages verdoyants.",
+    prefectureDescription:"Laon est une cité médiévale perchée sur une colline et dominée par sa cathédrale gothique Notre-Dame.",
+    fact:"Laon possédait autrefois le Poma 2000, un funiculaire à crémaillère unique en France, qui reliait la ville haute à la ville basse."
 },
 
 {
-    numero:"2A",
-    nom:"Corse-du-Sud",
+    code:"2A",
+    name:"Corse-du-Sud",
     region:"Corse",
-    prefecture:"Ajaccio"
+    prefecture:"Ajaccio",
+    description:"La Corse-du-Sud offre des paysages spectaculaires entre montagnes et mer, des aiguilles de Bavella aux îles Sanguinaires.",
+    prefectureDescription:"Ajaccio est la ville natale de Napoléon Bonaparte et possède un important patrimoine lié à l'Empereur.",
+    fact:"Napoléon Bonaparte est né à Ajaccio en 1769, peu après le rattachement de la Corse à la France."
 },
 
 {
-    numero:"2B",
-    nom:"Haute-Corse",
+    code:"2B",
+    name:"Haute-Corse",
     region:"Corse",
-    prefecture:"Bastia"
+    prefecture:"Bastia",
+    description:"La Haute-Corse offre une grande diversité de paysages, du Cap Corse à la Balagne et au désert des Agriates.",
+    prefectureDescription:"Bastia est une ville méditerranéenne tournée vers la mer, connue pour son vieux port, sa citadelle et ses églises baroques.",
+    fact:"L'église Saint-Jean-Baptiste de Bastia possède deux clochers jumeaux dominant le Vieux-Port. Elle est la plus grande église de Corse."
 },
 
 {
-    numero:"03",
-    nom:"Allier",
+    code:"03",
+    name:"Allier",
     region:"Auvergne-Rhône-Alpes",
-    prefecture:"Moulins"
+    prefecture:"Moulins",
+    description:"L'Allier, au cœur de l'Auvergne, est un département rural marqué par ses bocages, ses forêts, ses volcans et son patrimoine thermal.",
+    prefectureDescription:"Moulins, ancienne capitale du duché de Bourbon, possède notamment le Centre national du costume de scène.",
+    fact:"La cathédrale de Moulins abrite un remarquable triptyque flamand du XVe siècle représentant la Vierge en gloire."
 },
 
 {
-    numero:"04",
-    nom:"Alpes-de-Haute-Provence",
+    code:"04",
+    name:"Alpes-de-Haute-Provence",
     region:"Provence-Alpes-Côte d'Azur",
-    prefecture:"Digne-les-Bains"
+    prefecture:"Digne-les-Bains",
+    description:"Les Alpes-de-Haute-Provence offrent des paysages montagneux, des champs de lavande et un environnement naturel préservé.",
+    prefectureDescription:"Digne-les-Bains est connue pour ses thermes et son environnement entre lavande et sommets alpins.",
+    fact:"Digne-les-Bains possède la plus grande réserve géologique d'Europe, où l'on trouve notamment des fossiles et des traces de dinosaures."
 },
 
 {
-    numero:"05",
-    nom:"Hautes-Alpes",
+    code:"05",
+    name:"Hautes-Alpes",
     region:"Provence-Alpes-Côte d'Azur",
-    prefecture:"Gap"
+    prefecture:"Gap",
+    description:"Les Hautes-Alpes sont un territoire de montagne et de grands espaces, avec une altitude moyenne particulièrement élevée.",
+    prefectureDescription:"Gap, située à environ 750 mètres d'altitude, est la plus haute préfecture de France.",
+    fact:"Gap bénéficie d'un ensoleillement exceptionnel, avec plus de 2 600 heures de soleil par an."
 },
 
 {
-    numero:"06",
-    nom:"Alpes-Maritimes",
+    code:"06",
+    name:"Alpes-Maritimes",
     region:"Provence-Alpes-Côte d'Azur",
-    prefecture:"Nice"
+    prefecture:"Nice",
+    description:"Les Alpes-Maritimes associent la Côte d'Azur et les sommets alpins, offrant une grande diversité de paysages et de patrimoine.",
+    prefectureDescription:"Nice est la capitale de la Côte d'Azur, célèbre notamment pour la Promenade des Anglais et le Vieux-Nice.",
+    fact:"Le carnaval de Nice est organisé depuis des siècles et figure parmi les carnavals les plus célèbres au monde."
 },
 
 {
-    numero:"07",
-    nom:"Ardèche",
+    code:"07",
+    name:"Ardèche",
     region:"Auvergne-Rhône-Alpes",
-    prefecture:"Privas"
+    prefecture:"Privas",
+    description:"L'Ardèche possède des paysages très contrastés, entre gorges spectaculaires, plateaux calcaires et nature sauvage.",
+    prefectureDescription:"Privas est surnommée la capitale du marron glacé.",
+    fact:"La tradition du marron à Privas remonte notamment à Clément Faugier, qui développa la crème de marrons à la fin du XIXe siècle."
 },
 
 {
-    numero:"08",
-    nom:"Ardennes",
+    code:"08",
+    name:"Ardennes",
     region:"Grand Est",
-    prefecture:"Charleville-Mézières"
+    prefecture:"Charleville-Mézières",
+    description:"Les Ardennes, frontalières avec la Belgique, sont caractérisées par leurs forêts, la Meuse et un patrimoine militaire important.",
+    prefectureDescription:"Charleville-Mézières est la ville natale d'Arthur Rimbaud et possède la remarquable place Ducale.",
+    fact:"La ville accueille tous les deux ans le Festival mondial des théâtres de marionnettes et abrite l'Institut international de la marionnette."
 },
 
 {
-    numero:"09",
-    nom:"Ariège",
+    code:"09",
+    name:"Ariège",
     region:"Occitanie",
-    prefecture:"Foix"
+    prefecture:"Foix",
+    description:"L'Ariège est un département pyrénéen riche en grottes préhistoriques, châteaux et paysages montagneux.",
+    prefectureDescription:"Foix est dominée par son château médiéval aux trois tours, installé au confluent de l'Ariège et de l'Arget.",
+    fact:"Le château de Foix est réputé pour n'avoir jamais été pris malgré plusieurs sièges."
 },
 
 {
-    numero:"10",
-    nom:"Aube",
+    code:"10",
+    name:"Aube",
     region:"Grand Est",
-    prefecture:"Troyes"
+    prefecture:"Troyes",
+    description:"L'Aube, au cœur de la Champagne, associe patrimoine médiéval, vignobles, forêts et lacs.",
+    prefectureDescription:"Troyes possède un centre historique remarquable, notamment connu pour ses maisons à colombages.",
+    fact:"Troyes a donné son nom au 'poids de Troyes', ancienne unité utilisée notamment pour peser les métaux précieux."
 },
 
 {
-    numero:"11",
-    nom:"Aude",
+    code:"11",
+    name:"Aude",
     region:"Occitanie",
-    prefecture:"Carcassonne"
+    prefecture:"Carcassonne",
+    description:"L'Aude s'étend de la Méditerranée aux Pyrénées et possède un patrimoine cathare et médiéval exceptionnel.",
+    prefectureDescription:"Carcassonne est célèbre pour sa cité médiévale fortifiée, ses remparts et ses nombreuses tours.",
+    fact:"La Cité de Carcassonne a failli disparaître au XIXe siècle avant d'être restaurée notamment grâce à Viollet-le-Duc."
 },
 
 {
-    numero:"12",
-    nom:"Aveyron",
+    code:"12",
+    name:"Aveyron",
     region:"Occitanie",
-    prefecture:"Rodez"
+    prefecture:"Rodez",
+    description:"L'Aveyron est un département rural aux paysages variés, des causses aux vallées verdoyantes.",
+    prefectureDescription:"Rodez est dominée par sa cathédrale Notre-Dame et possède notamment le musée Soulages.",
+    fact:"Le clocher de la cathédrale de Rodez atteint environ 87 mètres et possède un escalier de 396 marches."
 },
 
 {
-    numero:"13",
-    nom:"Bouches-du-Rhône",
+    code:"13",
+    name:"Bouches-du-Rhône",
     region:"Provence-Alpes-Côte d'Azur",
-    prefecture:"Marseille"
+    prefecture:"Marseille",
+    description:"Les Bouches-du-Rhône associent Méditerranée, vallée du Rhône, Provence et Camargue.",
+    prefectureDescription:"Marseille, fondée selon la tradition vers 600 avant J.-C., possède notamment le Vieux-Port et Notre-Dame de la Garde.",
+    fact:"La basilique Notre-Dame de la Garde possède une statue monumentale de la Vierge recouverte d'or."
 },
 
 {
-    numero:"14",
-    nom:"Calvados",
+    code:"14",
+    name:"Calvados",
     region:"Normandie",
-    prefecture:"Caen"
+    prefecture:"Caen",
+    description:"Le Calvados est marqué par le Débarquement de 1944, ses plages, son bocage et le Pays d'Auge.",
+    prefectureDescription:"Caen, ville de Guillaume le Conquérant, fut fortement touchée en 1944 puis reconstruite.",
+    fact:"Le château de Caen, construit par Guillaume le Conquérant vers 1060, constitue l'un des grands ensembles castraux médiévaux d'Europe."
 },
 
 {
-    numero:"15",
-    nom:"Cantal",
+    code:"15",
+    name:"Cantal",
     region:"Auvergne-Rhône-Alpes",
-    prefecture:"Aurillac"
+    prefecture:"Aurillac",
+    description:"Le Cantal, au cœur du Massif central, est un département montagneux marqué par les volcans d'Auvergne et l'élevage.",
+    prefectureDescription:"Aurillac est une ville montagnarde connue notamment pour son ancienne activité de fabrication de parapluies.",
+    fact:"Au début du XXe siècle, plus de 3 000 ouvriers travaillaient dans l'industrie du parapluie à Aurillac."
 },
 
 {
-    numero:"16",
-    nom:"Charente",
+    code:"16",
+    name:"Charente",
     region:"Nouvelle-Aquitaine",
-    prefecture:"Angoulême"
+    prefecture:"Angoulême",
+    description:"La Charente est célèbre pour le cognac, ses vignobles, ses vallées et son patrimoine roman.",
+    prefectureDescription:"Angoulême, installée sur un éperon dominant la Charente, est la capitale française de la bande dessinée.",
+    fact:"Angoulême accueille chaque année le Festival international de la bande dessinée et possède de nombreuses fresques murales."
 },
 
 {
-    numero:"17",
-    nom:"Charente-Maritime",
+    code:"17",
+    name:"Charente-Maritime",
     region:"Nouvelle-Aquitaine",
-    prefecture:"La Rochelle"
+    prefecture:"La Rochelle",
+    description:"La Charente-Maritime est tournée vers l'Atlantique, avec ses îles, ses marais, ses ports et ses paysages littoraux.",
+    prefectureDescription:"La Rochelle est connue pour ses tours médiévales qui gardent l'entrée du Vieux-Port.",
+    fact:"La Rochelle fut pionnière du vélo en libre-service : son système de vélos jaunes date de 1976."
 },
 
 {
-    numero:"18",
-    nom:"Cher",
+    code:"18",
+    name:"Cher",
     region:"Centre-Val de Loire",
-    prefecture:"Bourges"
+    prefecture:"Bourges",
+    description:"Le Cher est traversé par la rivière qui lui donne son nom et possède notamment les vignobles de Sancerre.",
+    prefectureDescription:"Bourges, ancienne capitale du Berry, est dominée par sa cathédrale gothique Saint-Étienne.",
+    fact:"La cathédrale de Bourges possède cinq portails et aucun transept, une configuration particulièrement remarquable."
 },
 
 {
-    numero:"19",
-    nom:"Corrèze",
+    code:"19",
+    name:"Corrèze",
     region:"Nouvelle-Aquitaine",
-    prefecture:"Tulle"
+    prefecture:"Tulle",
+    description:"La Corrèze associe plateaux granitiques, vallées verdoyantes, élevage et patrimoine bâti.",
+    prefectureDescription:"Tulle, installée dans une vallée étroite, est surnommée la ville aux sept collines.",
+    fact:"La dentelle de Tulle, développée au XVIIIe siècle, a contribué à la renommée internationale de la ville."
 },
-
-{
-    numero:"21",
-    nom:"Côte-d'Or",
+        {
+    code:"21",
+    name:"Côte-d'Or",
     region:"Bourgogne-Franche-Comté",
-    prefecture:"Dijon"
+    prefecture:"Dijon",
+    description:"La Côte-d'Or est au cœur de la Bourgogne viticole et possède un patrimoine gastronomique et architectural remarquable.",
+    prefectureDescription:"Dijon, ancienne capitale des ducs de Bourgogne, possède un centre historique exceptionnel.",
+    fact:"La moutarde de Dijon est mondialement connue, même si une grande partie des graines utilisées aujourd'hui provient de l'étranger."
 },
 
 {
-    numero:"22",
-    nom:"Côtes-d'Armor",
+    code:"22",
+    name:"Côtes-d'Armor",
     region:"Bretagne",
-    prefecture:"Saint-Brieuc"
+    prefecture:"Saint-Brieuc",
+    description:"Les Côtes-d'Armor offrent un littoral spectaculaire entre falaises, plages et ports bretons.",
+    prefectureDescription:"Saint-Brieuc est installée au fond d'une baie profonde et possède une cathédrale fortifiée.",
+    fact:"La baie de Saint-Brieuc connaît un marnage pouvant atteindre environ 13 mètres."
 },
 
 {
-    numero:"23",
-    nom:"Creuse",
+    code:"23",
+    name:"Creuse",
     region:"Nouvelle-Aquitaine",
-    prefecture:"Guéret"
+    prefecture:"Guéret",
+    description:"La Creuse est un département rural du Limousin composé de bocages, forêts et lacs.",
+    prefectureDescription:"Guéret est entourée de forêts et constitue une porte d'entrée vers le parc naturel régional de Millevaches.",
+    fact:"Guéret possède un vaste labyrinthe végétal permanent de plusieurs kilomètres d'allées."
 },
 
 {
-    numero:"24",
-    nom:"Dordogne",
+    code:"24",
+    name:"Dordogne",
     region:"Nouvelle-Aquitaine",
-    prefecture:"Périgueux"
+    prefecture:"Périgueux",
+    description:"La Dordogne, terre du Périgord, est célèbre pour ses châteaux, ses grottes préhistoriques et sa gastronomie.",
+    prefectureDescription:"Périgueux possède notamment la cathédrale Saint-Front, reconnaissable à ses cinq coupoles.",
+    fact:"La cathédrale Saint-Front de Périgueux a inspiré l'architecte Paul Abadie pour la basilique du Sacré-Cœur de Paris."
 },
 
 {
-    numero:"25",
-    nom:"Doubs",
+    code:"25",
+    name:"Doubs",
     region:"Bourgogne-Franche-Comté",
-    prefecture:"Besançon"
-}
-
-);
-   /* =========================================================
-   DÉPARTEMENTS 26 À 50
-   ========================================================= */
-
-departments.push(
-
-{
-    numero:"26",
-    nom:"Drôme",
-    region:"Auvergne-Rhône-Alpes",
-    prefecture:"Valence"
+    prefecture:"Besançon",
+    description:"Le Doubs tire son nom de la rivière qui le traverse et possède une forte tradition horlogère, fromagère et industrielle.",
+    prefectureDescription:"Besançon est entourée par un méandre du Doubs et dominée par la citadelle de Vauban.",
+    fact:"La citadelle de Besançon, construite par Vauban, est l'un des grands ouvrages fortifiés de France."
 },
 
 {
-    numero:"27",
-    nom:"Eure",
+    code:"26",
+    name:"Drôme",
+    region:"Auvergne-Rhône-Alpes",
+    prefecture:"Valence",
+    description:"La Drôme offre une grande diversité entre lavandes, Rhône, Provence et montagnes du Vercors.",
+    prefectureDescription:"Valence est surnommée la porte du Midi et possède plusieurs témoignages de son patrimoine Belle Époque.",
+    fact:"Le kiosque Peynet de Valence inspira Raymond Peynet pour ses célèbres amoureux."
+},
+
+{
+    code:"27",
+    name:"Eure",
     region:"Normandie",
-    prefecture:"Évreux"
+    prefecture:"Évreux",
+    description:"L'Eure associe paysages bocagers, vallée de la Seine, patrimoine historique et jardins remarquables.",
+    prefectureDescription:"Évreux possède notamment une cathédrale Notre-Dame aux remarquables vitraux.",
+    fact:"Certains vitraux de la cathédrale d'Évreux furent démontés et cachés pendant les guerres afin de les protéger."
 },
 
 {
-    numero:"28",
-    nom:"Eure-et-Loir",
+    code:"28",
+    name:"Eure-et-Loir",
     region:"Centre-Val de Loire",
-    prefecture:"Chartres"
+    prefecture:"Chartres",
+    description:"L'Eure-et-Loir est une grande terre céréalière du Bassin parisien dominée par la silhouette de Chartres.",
+    prefectureDescription:"Chartres est mondialement connue pour sa cathédrale gothique et ses vitraux.",
+    fact:"Le célèbre labyrinthe de la cathédrale de Chartres mesure près de 13 mètres de diamètre."
 },
 
 {
-    numero:"29",
-    nom:"Finistère",
+    code:"29",
+    name:"Finistère",
     region:"Bretagne",
-    prefecture:"Quimper"
+    prefecture:"Quimper",
+    description:"Le Finistère, à l'extrémité occidentale de la Bretagne, offre des côtes spectaculaires et de fortes traditions maritimes.",
+    prefectureDescription:"Quimper est la capitale culturelle de la Cornouaille et possède notamment la cathédrale Saint-Corentin.",
+    fact:"La faïencerie de Quimper, fondée en 1690, compte parmi les plus anciennes faïenceries artistiques françaises."
 },
 
 {
-    numero:"30",
-    nom:"Gard",
+    code:"30",
+    name:"Gard",
     region:"Occitanie",
-    prefecture:"Nîmes"
+    prefecture:"Nîmes",
+    description:"Le Gard s'étend des Cévennes à la Camargue et possède un patrimoine romain exceptionnel.",
+    prefectureDescription:"Nîmes, la Rome française, possède notamment les arènes, la Maison Carrée et la tour Magne.",
+    fact:"Les arènes de Nîmes sont encore utilisées aujourd'hui pour des spectacles et des manifestations."
 },
 
 {
-    numero:"31",
-    nom:"Haute-Garonne",
+    code:"31",
+    name:"Haute-Garonne",
     region:"Occitanie",
-    prefecture:"Toulouse"
+    prefecture:"Toulouse",
+    description:"La Haute-Garonne associe le dynamisme de Toulouse aux paysages pyrénéens.",
+    prefectureDescription:"Toulouse, ville rose, est une grande capitale française de l'aéronautique et du spatial.",
+    fact:"La Cité de l'espace présente notamment une réplique grandeur nature de la fusée Ariane 5."
 },
 
 {
-    numero:"32",
-    nom:"Gers",
+    code:"32",
+    name:"Gers",
     region:"Occitanie",
-    prefecture:"Auch"
+    prefecture:"Auch",
+    description:"Le Gers, au cœur de la Gascogne, est réputé pour sa gastronomie, son Armagnac et son patrimoine rural.",
+    prefectureDescription:"Auch possède une cathédrale gothique et un spectaculaire escalier monumental reliant ville haute et ville basse.",
+    fact:"Le véritable d'Artagnan était gascon et est né à Lupiac, dans l'actuel Gers."
 },
 
 {
-    numero:"33",
-    nom:"Gironde",
+    code:"33",
+    name:"Gironde",
     region:"Nouvelle-Aquitaine",
-    prefecture:"Bordeaux"
+    prefecture:"Bordeaux",
+    description:"La Gironde est le plus vaste département de France métropolitaine et est mondialement connue pour ses vignobles.",
+    prefectureDescription:"Bordeaux possède un patrimoine architectural exceptionnel classé à l'UNESCO.",
+    fact:"Bordeaux possède l'un des plus vastes ensembles urbains classés au patrimoine mondial, avec environ 1 810 hectares."
 },
 
 {
-    numero:"34",
-    nom:"Hérault",
+    code:"34",
+    name:"Hérault",
     region:"Occitanie",
-    prefecture:"Montpellier"
+    prefecture:"Montpellier",
+    description:"L'Hérault associe Méditerranée, vignobles, plages, villages médiévaux et patrimoine romain.",
+    prefectureDescription:"Montpellier est une ville universitaire dynamique mêlant patrimoine médiéval et architecture contemporaine.",
+    fact:"La faculté de médecine de Montpellier, fondée au XIIIe siècle, est l'une des plus anciennes écoles de médecine encore en activité."
 },
 
 {
-    numero:"35",
-    nom:"Ille-et-Vilaine",
+    code:"35",
+    name:"Ille-et-Vilaine",
     region:"Bretagne",
-    prefecture:"Rennes"
+    prefecture:"Rennes",
+    description:"L'Ille-et-Vilaine associe patrimoine historique, côte d'Émeraude et dynamisme économique.",
+    prefectureDescription:"Rennes, capitale régionale, possède un riche patrimoine de maisons à pans de bois et le Parlement de Bretagne.",
+    fact:"Le Parlement de Bretagne a survécu à plusieurs incendies et a fait l'objet d'importantes restaurations."
 },
 
 {
-    numero:"36",
-    nom:"Indre",
+    code:"36",
+    name:"Indre",
     region:"Centre-Val de Loire",
-    prefecture:"Châteauroux"
+    prefecture:"Châteauroux",
+    description:"L'Indre est un département rural et paisible marqué par les étangs, les forêts et le souvenir de George Sand.",
+    prefectureDescription:"Châteauroux possède notamment le château Raoul et le musée Bertrand.",
+    fact:"Le musée Bertrand conserve une importante collection napoléonienne liée notamment à l'histoire de la ville."
 },
 
 {
-    numero:"37",
-    nom:"Indre-et-Loire",
+    code:"37",
+    name:"Indre-et-Loire",
     region:"Centre-Val de Loire",
-    prefecture:"Tours"
+    prefecture:"Tours",
+    description:"L'Indre-et-Loire est au cœur du Val de Loire, célèbre pour ses châteaux, ses vignobles et son patrimoine.",
+    prefectureDescription:"Tours possède notamment la place Plumereau et une importante cathédrale gothique.",
+    fact:"Tours fut temporairement le siège du gouvernement français en 1870 pendant la guerre franco-prussienne."
 },
 
 {
-    numero:"38",
-    nom:"Isère",
+    code:"38",
+    name:"Isère",
     region:"Auvergne-Rhône-Alpes",
-    prefecture:"Grenoble"
+    prefecture:"Grenoble",
+    description:"L'Isère s'étend des sommets alpins aux plaines du Dauphiné et associe montagne, patrimoine et innovation.",
+    prefectureDescription:"Grenoble est entourée par les montagnes et constitue une grande capitale scientifique et universitaire des Alpes.",
+    fact:"Les 'bulles' du téléphérique de Grenoble relient le centre-ville à la Bastille depuis les années 1930."
 },
 
 {
-    numero:"39",
-    nom:"Jura",
+    code:"39",
+    name:"Jura",
     region:"Bourgogne-Franche-Comté",
-    prefecture:"Lons-le-Saunier"
+    prefecture:"Lons-le-Saunier",
+    description:"Le Jura est un département montagneux connu pour ses lacs, ses sapins, ses fromages et ses vins.",
+    prefectureDescription:"Lons-le-Saunier est une ville thermale et la ville natale de Rouget de Lisle.",
+    fact:"Rouget de Lisle, né à Lons-le-Saunier, composa La Marseillaise en 1792 à Strasbourg."
 },
-
-{
-    numero:"40",
-    nom:"Landes",
+        {
+    code:"40",
+    name:"Landes",
     region:"Nouvelle-Aquitaine",
-    prefecture:"Mont-de-Marsan"
+    prefecture:"Mont-de-Marsan",
+    description:"Les Landes offrent un immense territoire forestier entre océan Atlantique et pinèdes, marqué par le surf, les fêtes et les traditions taurines.",
+    prefectureDescription:"Mont-de-Marsan se trouve au confluent du Midou et de la Douze et est connue pour ses arènes et ses ferias.",
+    fact:"La Feria de la Madeleine fait partie des grandes fêtes du Sud-Ouest."
 },
 
 {
-    numero:"41",
-    nom:"Loir-et-Cher",
+    code:"41",
+    name:"Loir-et-Cher",
     region:"Centre-Val de Loire",
-    prefecture:"Blois"
+    prefecture:"Blois",
+    description:"Le Loir-et-Cher est au cœur du Val de Loire et possède de nombreux châteaux, forêts et vignobles.",
+    prefectureDescription:"Blois est dominée par son château royal et son célèbre escalier Renaissance.",
+    fact:"Le château de Blois fut le théâtre de l'assassinat du duc de Guise en 1588."
 },
 
 {
-    numero:"42",
-    nom:"Loire",
+    code:"42",
+    name:"Loire",
     region:"Auvergne-Rhône-Alpes",
-    prefecture:"Saint-Étienne"
+    prefecture:"Saint-Étienne",
+    description:"La Loire conjugue passé industriel, patrimoine minier et paysages de montagne.",
+    prefectureDescription:"Saint-Étienne est une ancienne capitale du cycle et de l'armurerie devenue une ville importante du design.",
+    fact:"Saint-Étienne fut reliée par chemin de fer à Andrézieux dès 1827, parmi les premières lignes ferroviaires françaises."
 },
 
 {
-    numero:"43",
-    nom:"Haute-Loire",
+    code:"43",
+    name:"Haute-Loire",
     region:"Auvergne-Rhône-Alpes",
-    prefecture:"Le Puy-en-Velay"
+    prefecture:"Le Puy-en-Velay",
+    description:"La Haute-Loire possède des paysages volcaniques spectaculaires et un patrimoine religieux remarquable.",
+    prefectureDescription:"Le Puy-en-Velay est dominé par plusieurs pitons volcaniques, dont celui de la chapelle Saint-Michel d'Aiguilhe.",
+    fact:"La chapelle Saint-Michel d'Aiguilhe est installée sur un piton volcanique d'environ 82 mètres."
 },
 
 {
-    numero:"44",
-    nom:"Loire-Atlantique",
+    code:"44",
+    name:"Loire-Atlantique",
     region:"Pays de la Loire",
-    prefecture:"Nantes"
+    prefecture:"Nantes",
+    description:"La Loire-Atlantique associe estuaire, littoral atlantique, tradition maritime et dynamisme urbain.",
+    prefectureDescription:"Nantes fut un grand port et l'ancienne capitale des ducs de Bretagne.",
+    fact:"Le Grand Éléphant des Machines de l'île mesure environ 12 mètres de haut et peut transporter des visiteurs."
 },
 
 {
-    numero:"45",
-    nom:"Loiret",
+    code:"45",
+    name:"Loiret",
     region:"Centre-Val de Loire",
-    prefecture:"Orléans"
+    prefecture:"Orléans",
+    description:"Le Loiret est traversé par la Loire et possède un important patrimoine historique et naturel.",
+    prefectureDescription:"Orléans est particulièrement associée à Jeanne d'Arc et à la libération de la ville en 1429.",
+    fact:"Les Fêtes johanniques d'Orléans perpétuent depuis des siècles le souvenir de Jeanne d'Arc."
 },
 
 {
-    numero:"46",
-    nom:"Lot",
+    code:"46",
+    name:"Lot",
     region:"Occitanie",
-    prefecture:"Cahors"
+    prefecture:"Cahors",
+    description:"Le Lot, au cœur du Quercy, offre causses, vallées, villages perchés et patrimoine médiéval.",
+    prefectureDescription:"Cahors est installée dans un méandre du Lot et dominée par le pont Valentré.",
+    fact:"La légende du pont Valentré raconte qu'un pacte avec le diable aurait laissé une pierre manquante."
 },
 
 {
-    numero:"47",
-    nom:"Lot-et-Garonne",
+    code:"47",
+    name:"Lot-et-Garonne",
     region:"Nouvelle-Aquitaine",
-    prefecture:"Agen"
+    prefecture:"Agen",
+    description:"Le Lot-et-Garonne est une terre de vergers, de bastides et de gastronomie du Sud-Ouest.",
+    prefectureDescription:"Agen est traversée par la Garonne et est célèbre pour ses pruneaux.",
+    fact:"Le pruneau d'Agen provient de prunes d'ente ; Agen fut historiquement un important centre de commerce de ces fruits séchés."
 },
 
 {
-    numero:"48",
-    nom:"Lozère",
+    code:"48",
+    name:"Lozère",
     region:"Occitanie",
-    prefecture:"Mende"
+    prefecture:"Mende",
+    description:"La Lozère est le département le moins peuplé de France métropolitaine et offre de vastes espaces naturels.",
+    prefectureDescription:"Mende est installée au pied du mont Mimat et possède une cathédrale gothique.",
+    fact:"La cathédrale de Mende abrite la 'Non Pareille', une très grande cloche fondue au XVIe siècle."
 },
 
 {
-    numero:"49",
-    nom:"Maine-et-Loire",
+    code:"49",
+    name:"Maine-et-Loire",
     region:"Pays de la Loire",
-    prefecture:"Angers"
+    prefecture:"Angers",
+    description:"Le Maine-et-Loire, au cœur de l'Anjou, associe Loire, vignobles, châteaux et habitats troglodytiques.",
+    prefectureDescription:"Angers est dominée par son imposant château et abrite la célèbre tenture de l'Apocalypse.",
+    fact:"La tapisserie de l'Apocalypse d'Angers mesure environ 100 mètres de long."
+
 },
 
 {
-    numero:"50",
-    nom:"Manche",
+    code:"50",
+    name:"Manche",
     region:"Normandie",
     prefecture:"Saint-Lô",
-
-    pedago:`
-        <p>La Manche, département normand bordé par la mer éponyme,
-        offre un littoral spectaculaire dominé par le Mont-Saint-Michel.
-        Entre bocage, plages du Débarquement et patrimoine maritime,
-        c'est un territoire chargé d'histoire.</p>
-
-        <h4>La préfecture : Saint-Lô</h4>
-
-        <p>Saint-Lô, surnommée la « Capitale des Ruines » après sa
-        destruction quasi-totale en 1944, s'est reconstruite avec courage.
-        Aujourd'hui, c'est une ville tournée vers l'avenir, capitale du
-        cheval en Normandie.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Saint-Lô a été détruite à 95% lors de la bataille de Normandie !
-        Samuel Beckett, futur prix Nobel de littérature, y travailla comme
-        interprète après la guerre et fut marqué par cette dévastation.</p>
-    `
-}
-
-);
-   /* =========================================================
-   DÉPARTEMENTS 51 À 75
-   ========================================================= */
-
-departments.push(
+    description:"La Manche, département normand bordé par la mer éponyme, offre un littoral spectaculaire dominé par le Mont-Saint-Michel. Entre bocage, plages du Débarquement et patrimoine maritime, c'est un territoire chargé d'histoire.",
+    prefectureDescription:"Saint-Lô, surnommée la 'Capitale des Ruines' après sa destruction quasi-totale en 1944, s'est reconstruite avec courage. Aujourd'hui, c'est une ville tournée vers l'avenir, capitale du cheval en Normandie.",
+    fact:"Saint-Lô a été détruite à 95% lors de la bataille de Normandie. Samuel Beckett, futur prix Nobel de littérature, y travailla comme interprète après la guerre.",
+},
 
 {
-    numero:"51",
-    nom:"Marne",
+    code:"51",
+    name:"Marne",
     region:"Grand Est",
     prefecture:"Châlons-en-Champagne",
-
-    pedago:`
-        <p>La Marne, berceau du champagne, allie vignobles prestigieux
-        et patrimoine historique exceptionnel. Terre de sacre des rois
-        de France, ce département champenois conjugue tradition et
-        excellence.</p>
-
-        <h4>La préfecture : Châlons-en-Champagne</h4>
-
-        <p>Châlons-en-Champagne, traversée par la Marne et le canal latéral,
-        est surnommée la « Venise champenoise ». Son patrimoine architectural,
-        ses jardins et ses églises en font une ville de charme.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La cathédrale Saint-Étienne de Châlons possède des vitraux
-        exceptionnels, dont certains datent du XIIIe siècle ! Le vitrail
-        de la Crucifixion est considéré comme l'un des plus beaux de l'art
-        gothique champenois.</p>
-    `
+    description:"La Marne, berceau du champagne, allie vignobles prestigieux et patrimoine historique exceptionnel. Terre de sacre des rois de France, ce département champenois conjugue tradition et excellence.",
+    prefectureDescription:"Châlons-en-Champagne, traversée par la Marne et le canal latéral, est surnommée la 'Venise champenoise'.",
+    fact:"La cathédrale Saint-Étienne possède des vitraux exceptionnels, dont certains datent du XIIIe siècle.",
 },
 
 {
-    numero:"52",
-    nom:"Haute-Marne",
+    code:"52",
+    name:"Haute-Marne",
     region:"Grand Est",
     prefecture:"Chaumont",
-
-    pedago:`
-        <p>La Haute-Marne, département vallonné entre Champagne et Bourgogne,
-        offre nature préservée et patrimoine industriel. Terre de métallurgie
-        et de coutellerie, c'est un territoire au riche passé.</p>
-
-        <h4>La préfecture : Chaumont</h4>
-
-        <p>Chaumont, perchée sur un éperon rocheux dominant la vallée de la
-        Marne, possède un riche patrimoine médiéval. Ses viaducs ferroviaires
-        spectaculaires témoignent de son passé industriel.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Chaumont accueille tous les ans le Festival international de
-        l'affiche et du graphisme ! Depuis 1990, ce festival transforme la
-        ville en musée à ciel ouvert, avec des expositions dans toute la cité.</p>
-    `
+    description:"La Haute-Marne, département vallonné entre Champagne et Bourgogne, offre nature préservée et patrimoine industriel. Terre de métallurgie et de coutellerie, c'est un territoire au riche passé.",
+    prefectureDescription:"Chaumont, perchée sur un éperon rocheux dominant la vallée de la Marne, possède un riche patrimoine médiéval.",
+    fact:"Chaumont accueille chaque année le Festival international de l'affiche et du graphisme, créé en 1990.",
 },
 
 {
-    numero:"53",
-    nom:"Mayenne",
+    code:"53",
+    name:"Mayenne",
     region:"Pays de la Loire",
     prefecture:"Laval",
-
-    pedago:`
-        <p>La Mayenne, département bocager du nord-ouest, offre calme et
-        authenticité. Entre châteaux, rivières poissonneuses et patrimoine
-        religieux, c'est un territoire préservé au charme discret.</p>
-
-        <h4>La préfecture : Laval</h4>
-
-        <p>Laval, traversée par la Mayenne, possède un remarquable patrimoine
-        médiéval avec son château des comtes et son Vieux-Laval pittoresque.
-        C'est aussi la ville natale d'Henri Rousseau, dit le Douanier Rousseau.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le château de Laval possède le plus ancien donjon roman de France
-        encore debout ! Construit vers l'an 1000, il témoigne de plus de mille
-        ans d'histoire et abrite aujourd'hui le Musée d'Art Naïf.</p>
-    `
+    description:"La Mayenne, département bocager du nord-ouest, offre calme et authenticité. Entre châteaux, rivières poissonneuses et patrimoine religieux, c'est un territoire préservé au charme discret.",
+    prefectureDescription:"Laval, traversée par la Mayenne, possède un remarquable patrimoine médiéval avec son château des comtes et son Vieux-Laval.",
+    fact:"Le château de Laval possède un ancien donjon roman et abrite aujourd'hui le Musée d'Art Naïf.",
 },
 
 {
-    numero:"54",
-    nom:"Meurthe-et-Moselle",
+    code:"54",
+    name:"Meurthe-et-Moselle",
     region:"Grand Est",
     prefecture:"Nancy",
-
-    pedago:`
-        <p>La Meurthe-et-Moselle, terre lorraine marquée par l'histoire,
-        conjugue patrimoine industriel et Art Nouveau. De Nancy à Lunéville,
-        ce département allie traditions et dynamisme.</p>
-
-        <h4>La préfecture : Nancy</h4>
-
-        <p>Nancy, ancienne capitale des ducs de Lorraine, est un joyau de
-        l'Art Nouveau. Sa place Stanislas, classée au patrimoine mondial,
-        est considérée comme l'une des plus belles places d'Europe.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La place Stanislas de Nancy a été créée au XVIIIe siècle par le
-        roi déchu de Pologne Stanislas Leszczynski ! Ses grilles dorées en
-        fer forgé de Jean Lamour sont des chefs-d'œuvre de ferronnerie.</p>
-    `
+    description:"La Meurthe-et-Moselle, terre lorraine marquée par l'histoire, conjugue patrimoine industriel et Art Nouveau.",
+    prefectureDescription:"Nancy, ancienne capitale des ducs de Lorraine, est mondialement connue pour son patrimoine Art Nouveau et sa place Stanislas.",
+    fact:"La place Stanislas fut créée au XVIIIe siècle par Stanislas Leszczynski et ses grilles dorées sont l'œuvre de Jean Lamour.",
 },
 
 {
-    numero:"55",
-    nom:"Meuse",
+    code:"55",
+    name:"Meuse",
     region:"Grand Est",
     prefecture:"Bar-le-Duc",
-
-    pedago:`
-        <p>La Meuse, département marqué par la Grande Guerre, offre des
-        paysages de côtes boisées et de vallées tranquilles. Entre mémorial
-        de Verdun et nature préservée, c'est un territoire chargé d'histoire.</p>
-
-        <h4>La préfecture : Bar-le-Duc</h4>
-
-        <p>Bar-le-Duc, ville d'art et d'histoire étagée sur deux niveaux,
-        possède un patrimoine Renaissance remarquable. Sa ville haute recèle
-        de magnifiques hôtels particuliers et une église Saint-Étienne
-        exceptionnelle.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>L'église Saint-Étienne de Bar-le-Duc abrite le « Squelette »,
-        une sculpture de Ligier Richier représentant un transi ! Cette œuvre
-        macabre du XVIe siècle est considérée comme l'un des chefs-d'œuvre
-        de la sculpture Renaissance.</p>
-    `
+    description:"La Meuse, marquée par la Grande Guerre, offre côtes boisées, vallées tranquilles et sites de mémoire.",
+    prefectureDescription:"Bar-le-Duc possède une remarquable ville haute Renaissance.",
+    fact:"L'église Saint-Étienne abrite le 'Squelette', œuvre de Ligier Richier représentant un transi du XVIe siècle.",
 },
 
 {
-    numero:"56",
-    nom:"Morbihan",
+    code:"56",
+    name:"Morbihan",
     region:"Bretagne",
     prefecture:"Vannes",
-
-    pedago:`
-        <p>Le Morbihan, au sud de la Bretagne, offre un littoral spectaculaire
-        avec ses îles et son golfe célèbre. Terre de mégalithes et de traditions,
-        c'est le département breton le plus ensoleillé.</p>
-
-        <h4>La préfecture : Vannes</h4>
-
-        <p>Vannes, ville d'art et d'histoire au fond du golfe du Morbihan,
-        a préservé ses remparts médiévaux et ses maisons à pans de bois.
-        Son port et ses jardins en font une cité attachante et dynamique.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Les alignements de Carnac, dans le Morbihan, comptent plus de
-        3000 menhirs érigés il y a 7000 ans ! C'est la plus grande concentration
-        de mégalithes au monde, et leur fonction reste encore mystérieuse.</p>
-    `
+    description:"Le Morbihan offre un littoral spectaculaire, des îles, le golfe du Morbihan et un patrimoine mégalithique exceptionnel.",
+    prefectureDescription:"Vannes possède des remparts médiévaux, des maisons à pans de bois et un port au fond du golfe du Morbihan.",
+    fact:"Les alignements de Carnac comptent plus de 3 000 menhirs et constituent l'un des ensembles mégalithiques les plus remarquables au monde.",
 },
 
 {
-    numero:"57",
-    nom:"Moselle",
+    code:"57",
+    name:"Moselle",
     region:"Grand Est",
     prefecture:"Metz",
-
-    pedago:`
-        <p>La Moselle, département frontalier au riche patrimoine, conjugue
-        traditions lorraines et influences germaniques. Entre houillères
-        désaffectées et patrimoine fortifié, c'est un territoire de mémoire.</p>
-
-        <h4>La préfecture : Metz</h4>
-
-        <p>Metz, ville millénaire au confluent de la Seille et de la Moselle,
-        possède un patrimoine architectural exceptionnel. Sa cathédrale
-        Saint-Étienne, surnommée « la Lanterne du Bon Dieu », a les plus
-        grandes verrières gothiques du monde.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La cathédrale de Metz possède 6500 m² de vitraux, la plus grande
-        surface vitrée d'une cathédrale gothique au monde ! Certains vitraux
-        ont été créés par Marc Chagall dans les années 1960.</p>
-    `
+    description:"La Moselle conjugue traditions lorraines, influences germaniques, patrimoine fortifié et mémoire industrielle.",
+    prefectureDescription:"Metz possède notamment la cathédrale Saint-Étienne, surnommée la 'Lanterne du Bon Dieu'.",
+    fact:"La cathédrale de Metz possède une surface exceptionnelle de vitraux, dont certains furent réalisés par Marc Chagall.",
 },
 
 {
-    numero:"58",
-    nom:"Nièvre",
+    code:"58",
+    name:"Nièvre",
     region:"Bourgogne-Franche-Comté",
     prefecture:"Nevers",
-
-    pedago:`
-        <p>La Nièvre, département rural du Morvan et du Nivernais, offre
-        forêts, lacs et patrimoine roman. Terre de traditions et de savoir-faire
-        artisanaux, c'est un territoire authentique préservé.</p>
-
-        <h4>La préfecture : Nevers</h4>
-
-        <p>Nevers, au confluent de la Loire et de la Nièvre, possède un riche
-        patrimoine ducal. Sa cathédrale double unique en France et sa faïencerie
-        réputée témoignent de son histoire millénaire.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La cathédrale de Nevers possède deux chœurs opposés, l'un roman et
-        l'autre gothique ! Cette configuration unique en France s'explique par
-        l'histoire complexe de sa construction entre le XIe et le XVIe siècle.</p>
-    `
+    description:"La Nièvre, département rural du Morvan et du Nivernais, offre forêts, lacs et patrimoine roman.",
+    prefectureDescription:"Nevers, au confluent de la Loire et de la Nièvre, possède un riche patrimoine ducal et une longue tradition faïencière.",
+    fact:"La cathédrale de Nevers possède deux chœurs opposés, l'un roman et l'autre gothique."
 },
 
 {
-    numero:"59",
-    nom:"Nord",
+    code:"59",
+    name:"Nord",
     region:"Hauts-de-France",
     prefecture:"Lille",
-
-    pedago:`
-        <p>Le Nord, département le plus peuplé de France, conjugue patrimoine
-        industriel et traditions flamandes. Entre beffrois, estaminets et
-        patrimoine minier, c'est un territoire au caractère affirmé.</p>
-
-        <h4>La préfecture : Lille</h4>
-
-        <p>Lille, capitale des Flandres, est une métropole dynamique au riche
-        patrimoine architectural. Son Vieux-Lille aux façades flamandes
-        colorées, sa Grand-Place et sa citadelle Vauban en font une ville
-        attractive.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La braderie de Lille, qui a lieu chaque premier week-end de septembre,
-        est la plus grande braderie d'Europe ! Plus de 2 millions de visiteurs
-        arpentent 100 km de trottoirs pour chiner pendant 48h non-stop.</p>
-    `
+    description:"Le Nord conjugue patrimoine industriel, traditions flamandes, beffrois, estaminets et patrimoine minier.",
+    prefectureDescription:"Lille, capitale des Flandres, possède un Vieux-Lille aux façades flamandes, une Grand-Place et une citadelle Vauban.",
+    fact:"La braderie de Lille, organisée traditionnellement au début du mois de septembre, est l'un des plus grands marchés aux puces d'Europe."
 },
-
-{
-    numero:"60",
-    nom:"Oise",
+        {
+    code:"60",
+    name:"Oise",
     region:"Hauts-de-France",
     prefecture:"Beauvais",
-
-    pedago:`
-        <p>L'Oise, aux portes de Paris, allie patrimoine monumental et nature
-        préservée. Entre cathédrales gothiques, châteaux et forêts, ce
-        département francilien offre un riche patrimoine historique.</p>
-
-        <h4>La préfecture : Beauvais</h4>
-
-        <p>Beauvais, dominée par sa cathédrale Saint-Pierre aux voûtes les
-        plus hautes du monde gothique, possède un patrimoine exceptionnel.
-        La Manufacture nationale de la tapisserie perpétue un savoir-faire
-        séculaire.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Les voûtes de la cathédrale de Beauvais culminent à 48 mètres,
-        le record absolu de l'architecture gothique ! Mais cette audace
-        technique causa plusieurs effondrements, et la cathédrale ne fut
-        jamais achevée.</p>
-    `
+    description:"L'Oise, aux portes de Paris, associe cathédrales gothiques, châteaux et grandes forêts.",
+    prefectureDescription:"Beauvais est dominée par sa cathédrale Saint-Pierre et possède une importante tradition de tapisserie.",
+    fact:"Les voûtes de la cathédrale de Beauvais atteignent environ 48 mètres, un record de l'architecture gothique."
 },
 
 {
-    numero:"61",
-    nom:"Orne",
+    code:"61",
+    name:"Orne",
     region:"Normandie",
     prefecture:"Alençon",
-
-    pedago:`
-        <p>L'Orne, département bocager et forestier de Normandie, offre
-        calme et authenticité. Entre haras nationaux, châteaux et patrimoine
-        religieux, c'est un territoire préservé au charme rural.</p>
-
-        <h4>La préfecture : Alençon</h4>
-
-        <p>Alençon, ville d'art et d'histoire, est mondialement connue pour
-        sa dentelle au point d'Alençon, inscrite au patrimoine culturel
-        immatériel de l'UNESCO. Son centre ancien et sa halle au blé
-        témoignent de sa prospérité passée.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le point d'Alençon, inventé au XVIIe siècle, était si précieux
-        qu'il était surnommé « la reine des dentelles » ! Il fallait jusqu'à
-        7 ans pour former une dentellière, et certaines pièces valaient plus
-        cher que l'or.</p>
-    `
+    description:"L'Orne est un département bocager et forestier connu notamment pour ses haras et son patrimoine rural.",
+    prefectureDescription:"Alençon est mondialement connue pour sa dentelle au point d'Alençon.",
+    fact:"Le point d'Alençon est surnommé la 'reine des dentelles' et nécessite un long apprentissage."
 },
 
 {
-    numero:"62",
-    nom:"Pas-de-Calais",
+    code:"62",
+    name:"Pas-de-Calais",
     region:"Hauts-de-France",
     prefecture:"Arras",
-
-    pedago:`
-        <p>Le Pas-de-Calais, département le plus au nord de la France,
-        offre un littoral spectaculaire face à l'Angleterre. Entre beffrois,
-        terrils et patrimoine minier, c'est un territoire au caractère affirmé.</p>
-
-        <h4>La préfecture : Arras</h4>
-
-        <p>Arras, ville d'art et d'histoire, possède deux magnifiques places
-        baroques flamandes bordées de maisons à arcades. Ses souterrains
-        médiévaux, les « boves », et son beffroi classé à l'UNESCO témoignent
-        de son riche passé.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Les places d'Arras ont servi de décor au film « Les Misérables » !
-        Leurs façades flamandes uniques créent une atmosphère du XIXe siècle
-        parfaite pour recréer le Paris de Victor Hugo.</p>
-    `
+    description:"Le Pas-de-Calais possède un littoral tourné vers l'Angleterre et un important patrimoine minier et flamand.",
+    prefectureDescription:"Arras est célèbre pour ses deux grandes places baroques flamandes, ses boves et son beffroi.",
+    fact:"Les places d'Arras ont notamment servi de décor à des productions cinématographiques, dont des adaptations des Misérables."
 },
 
 {
-    numero:"63",
-    nom:"Puy-de-Dôme",
+    code:"63",
+    name:"Puy-de-Dôme",
     region:"Auvergne-Rhône-Alpes",
     prefecture:"Clermont-Ferrand",
-
-    pedago:`
-        <p>Le Puy-de-Dôme, cœur de l'Auvergne, est le royaume des volcans.
-        Entre chaîne des Puys classée à l'UNESCO et patrimoine roman,
-        ce département conjugue nature spectaculaire et richesse culturelle.</p>
-
-        <h4>La préfecture : Clermont-Ferrand</h4>
-
-        <p>Clermont-Ferrand, dominée par le puy de Dôme, est une ville
-        dynamique construite en pierre de lave noire. Capitale mondiale
-        du pneumatique avec Michelin, elle possède aussi une magnifique
-        cathédrale gothique en pierre de Volvic.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Blaise Pascal est né à Clermont-Ferrand et a réalisé son expérience
-        sur la pression atmosphérique au sommet du puy de Dôme en 1648 !
-        Cette expérience révolutionnaire prouva que l'air avait un poids.</p>
-    `
+    description:"Le Puy-de-Dôme est au cœur de l'Auvergne et de la chaîne des Puys, classée au patrimoine mondial de l'UNESCO.",
+    prefectureDescription:"Clermont-Ferrand est construite en partie avec la pierre volcanique noire de Volvic et possède une cathédrale gothique remarquable.",
+    fact:"Blaise Pascal est né à Clermont-Ferrand et son expérience sur la pression atmosphérique fut menée au sommet du puy de Dôme en 1648."
 },
 
 {
-    numero:"64",
-    nom:"Pyrénées-Atlantiques",
+    code:"64",
+    name:"Pyrénées-Atlantiques",
     region:"Nouvelle-Aquitaine",
     prefecture:"Pau",
-
-    pedago:`
-        <p>Les Pyrénées-Atlantiques conjuguent océan et montagne de façon
-        unique. Entre Pays Basque, Béarn et côte basque, ce département
-        offre une diversité culturelle et paysagère exceptionnelle.</p>
-
-        <h4>La préfecture : Pau</h4>
-
-        <p>Pau, ancienne capitale du Béarn, est une ville élégante au riche
-        patrimoine royal. Son boulevard des Pyrénées offre un panorama
-        exceptionnel sur la chaîne des Pyrénées, et son château natal
-        d'Henri IV est un joyau historique.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Henri IV, roi de France et de Navarre, est né au château de Pau
-        en 1553 ! Selon la légende, ses lèvres furent frottées avec une
-        gousse d'ail et mouillées de vin de Jurançon à sa naissance,
-        tradition béarnaise.</p>
-    `
+    description:"Les Pyrénées-Atlantiques conjuguent océan, montagne, Pays Basque, Béarn et côte atlantique.",
+    prefectureDescription:"Pau, ancienne capitale du Béarn, offre notamment un panorama remarquable sur les Pyrénées depuis son boulevard éponyme.",
+    fact:"Henri IV est né au château de Pau en 1553. Une tradition raconte que ses lèvres furent frottées avec de l'ail et mouillées de Jurançon."
 },
 
 {
-    numero:"65",
-    nom:"Hautes-Pyrénées",
+    code:"65",
+    name:"Hautes-Pyrénées",
     region:"Occitanie",
     prefecture:"Tarbes",
-
-    pedago:`
-        <p>Les Hautes-Pyrénées offrent des paysages montagneux spectaculaires
-        avec le cirque de Gavarnie et le pic du Midi. Entre thermalisme et
-        grands sites naturels, c'est le paradis des amoureux de montagne.</p>
-
-        <h4>La préfecture : Tarbes</h4>
-
-        <p>Tarbes, capitale historique de la Bigorre, est réputée pour son
-        haras national et ses magnifiques jardins Massey. Cette ville
-        dynamique est la porte d'entrée des Pyrénées centrales.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le haras national de Tarbes, créé par Napoléon en 1806, est l'un
-        des plus importants de France ! Il élève notamment des chevaux
-        anglo-arabes, race créée au XIXe siècle et réputée dans le monde entier.</p>
-    `
+    description:"Les Hautes-Pyrénées offrent de grands paysages montagneux, notamment le cirque de Gavarnie et le pic du Midi.",
+    prefectureDescription:"Tarbes est la capitale historique de la Bigorre et possède notamment un célèbre haras national.",
+    fact:"Le haras national de Tarbes fut créé par Napoléon en 1806 et est particulièrement associé à l'élevage du cheval anglo-arabe."
 },
 
 {
-    numero:"66",
-    nom:"Pyrénées-Orientales",
+    code:"66",
+    name:"Pyrénées-Orientales",
     region:"Occitanie",
     prefecture:"Perpignan",
-
-    pedago:`
-        <p>Les Pyrénées-Orientales, département le plus au sud de France,
-        conjuguent Méditerranée, Pyrénées et culture catalane. Entre plages,
-        sommets et patrimoine roman, c'est un territoire solaire et contrasté.</p>
-
-        <h4>La préfecture : Perpignan</h4>
-
-        <p>Perpignan, capitale catalane française, est une ville solaire
-        au riche patrimoine médiéval. Le Castillet, symbole de la ville,
-        et le palais des Rois de Majorque témoignent de son passé prestigieux.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Salvador Dalí déclarait que la gare de Perpignan était le
-        « centre cosmique de l'univers » ! L'artiste surréaliste y aurait
-        eu des visions mystiques et lui consacra même un tableau en 1965.</p>
-    `
+    description:"Les Pyrénées-Orientales associent Méditerranée, Pyrénées et culture catalane.",
+    prefectureDescription:"Perpignan possède notamment le Castillet et le palais des Rois de Majorque.",
+    fact:"Salvador Dalí considérait la gare de Perpignan comme un lieu particulièrement important de son univers artistique."
 },
 
 {
-    numero:"67",
-    nom:"Bas-Rhin",
+    code:"67",
+    name:"Bas-Rhin",
     region:"Grand Est",
     prefecture:"Strasbourg",
-
-    pedago:`
-        <p>Le Bas-Rhin, cœur de l'Alsace, conjugue traditions alsaciennes
-        et dimension européenne. Entre Strasbourg européenne, route des vins
-        et villages pittoresques, c'est un territoire au charme unique.</p>
-
-        <h4>La préfecture : Strasbourg</h4>
-
-        <p>Strasbourg, capitale européenne, possède un patrimoine exceptionnel
-        avec sa cathédrale gothique et sa Petite France aux maisons à colombages.
-        Siège du Parlement européen, elle symbolise la réconciliation
-        franco-allemande.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La flèche de la cathédrale de Strasbourg a été pendant 227 ans
-        (de 1647 à 1874) le monument le plus haut du monde ! Avec ses
-        142 mètres, elle dominait toutes les constructions humaines.</p>
-    `
+    description:"Le Bas-Rhin est au cœur de l'Alsace et associe traditions alsaciennes, patrimoine viticole et dimension européenne.",
+    prefectureDescription:"Strasbourg possède une cathédrale gothique spectaculaire et le quartier de la Petite France.",
+    fact:"La flèche de la cathédrale de Strasbourg, haute de 142 mètres, fut pendant plus de deux siècles le plus haut édifice du monde."
 },
 
 {
-    numero:"68",
-    nom:"Haut-Rhin",
+    code:"68",
+    name:"Haut-Rhin",
     region:"Grand Est",
     prefecture:"Colmar",
-
-    pedago:`
-        <p>Le Haut-Rhin, au sud de l'Alsace, offre des paysages entre Vosges
-        et plaine rhénane. Route des vins, villages fleuris et patrimoine
-        industriel composent ce territoire au caractère affirmé.</p>
-
-        <h4>La préfecture : Colmar</h4>
-
-        <p>Colmar, capitale des vins d'Alsace, est une ville au charme
-        incomparable avec ses maisons à colombages colorées. Son quartier
-        de la Petite Venise et le musée Unterlinden abritant le retable
-        d'Issenheim en font une destination prisée.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Colmar a servi de modèle pour le village du film d'animation
-        « Le Château ambulant » de Hayao Miyazaki ! Le réalisateur japonais
-        fut tellement charmé par la ville qu'il s'en inspira pour recréer
-        l'atmosphère de son film.</p>
-    `
+    description:"Le Haut-Rhin s'étend entre Vosges et plaine rhénane et possède notamment la route des vins d'Alsace.",
+    prefectureDescription:"Colmar est célèbre pour ses maisons à colombages, sa Petite Venise et le musée Unterlinden.",
+    fact:"Colmar est souvent citée comme l'une des sources d'inspiration visuelle de Hayao Miyazaki pour certains décors du Château ambulant."
 },
 
 {
-    numero:"69",
-    nom:"Rhône",
+    code:"69",
+    name:"Rhône",
     region:"Auvergne-Rhône-Alpes",
     prefecture:"Lyon",
-
-    pedago:`
-        <p>Le Rhône, créé autour de Lyon, conjugue métropole dynamique et
-        territoire viticole prestigieux du Beaujolais. Entre patrimoine
-        UNESCO et gastronomie réputée, c'est un département attractif.</p>
-
-        <h4>La préfecture : Lyon</h4>
-
-        <p>Lyon, troisième ville de France, est une métropole au patrimoine
-        exceptionnel classé à l'UNESCO. Entre Saône et Rhône, capitale de
-        la gastronomie et de la soie, elle offre une qualité de vie remarquable.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Lyon possède plus de 400 traboules, ces passages secrets traversant
-        les immeubles ! Construites à l'origine pour que les canuts transportent
-        leurs soieries à l'abri, elles servirent aussi à la Résistance pendant
-        la guerre.</p>
-    `
+    description:"Le Rhône conjugue la métropole lyonnaise et les territoires viticoles du Beaujolais.",
+    prefectureDescription:"Lyon, entre Saône et Rhône, possède un patrimoine classé à l'UNESCO et une réputation gastronomique internationale.",
+    fact:"Lyon possède plusieurs centaines de traboules, passages traversant les immeubles et notamment associés à l'histoire des canuts et de la Résistance."
 },
 
 {
-    numero:"70",
-    nom:"Haute-Saône",
+    code:"70",
+    name:"Haute-Saône",
     region:"Bourgogne-Franche-Comté",
     prefecture:"Vesoul",
-
-    pedago:`
-        <p>La Haute-Saône, département rural de Franche-Comté, offre paysages
-        vallonnés et patrimoine industriel. Entre vosgien et comtois, c'est
-        un territoire authentique aux traditions préservées.</p>
-
-        <h4>La préfecture : Vesoul</h4>
-
-        <p>Vesoul, préfecture de la Haute-Saône, est nichée au pied de la
-        colline de la Motte. Rendue célèbre par la chanson de Jacques Brel,
-        cette ville discrète possède un charme authentique.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La chanson « Vesoul » de Jacques Brel a rendu la ville célèbre
-        dans le monde entier ! Pourtant, Brel n'y avait passé qu'une seule
-        nuit et n'en gardait qu'un souvenir de gueule de bois.</p>
-    `
+    description:"La Haute-Saône offre des paysages vallonnés et un patrimoine industriel et rural marqué par les traditions comtoises.",
+    prefectureDescription:"Vesoul est installée au pied de la colline de la Motte.",
+    fact:"La chanson 'Vesoul' de Jacques Brel a contribué à rendre le nom de la ville célèbre dans toute la francophonie."
 },
 
 {
-    numero:"71",
-    nom:"Saône-et-Loire",
+    code:"71",
+    name:"Saône-et-Loire",
     region:"Bourgogne-Franche-Comté",
     prefecture:"Mâcon",
-
-    pedago:`
-        <p>La Saône-et-Loire, plus vaste département de Bourgogne, conjugue
-        vignobles prestigieux et patrimoine roman exceptionnel. Entre Charolais,
-        Mâconnais et Bresse bourguignonne, c'est un territoire de gastronomie.</p>
-
-        <h4>La préfecture : Mâcon</h4>
-
-        <p>Mâcon, au bord de la Saône, est la porte du Midi bourguignon.
-        Cette ville dynamique, patrie de Lamartine, est au cœur du vignoble
-        du Mâconnais et possède un riche patrimoine architectural.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Alphonse de Lamartine, poète romantique et homme politique, est né
-        à Mâcon en 1790 ! Il faillit devenir président de la République en
-        1848, mais fut battu par Louis-Napoléon Bonaparte au suffrage universel.</p>
-    `
+    description:"La Saône-et-Loire est le plus vaste département de Bourgogne et associe Charolais, Mâconnais, Bresse et vignobles.",
+    prefectureDescription:"Mâcon est située sur la Saône et constitue l'une des portes du Midi bourguignon.",
+    fact:"Alphonse de Lamartine est né à Mâcon en 1790 et joua un rôle politique majeur en 1848."
 },
 
 {
-    numero:"72",
-    nom:"Sarthe",
+    code:"72",
+    name:"Sarthe",
     region:"Pays de la Loire",
     prefecture:"Le Mans",
-
-    pedago:`
-        <p>La Sarthe, entre Maine et Loire, conjugue patrimoine automobile
-        et douceur de vivre. Célèbre pour ses 24 Heures du Mans, ce département
-        offre aussi un riche patrimoine médiéval.</p>
-
-        <h4>La préfecture : Le Mans</h4>
-
-        <p>Le Mans, ville d'art et d'histoire, possède une cité médiévale
-        remarquable avec ses remparts gallo-romains les mieux conservés de
-        France. Mondialement connue pour ses 24 Heures, c'est aussi une ville
-        au riche patrimoine.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Les 24 Heures du Mans, créées en 1923, sont la plus ancienne course
-        d'endurance automobile au monde encore disputée ! Chaque année en juin,
-        plus de 250 000 spectateurs assistent à cette épreuve mythique.</p>
-    `
+    description:"La Sarthe associe patrimoine médiéval, paysages du Maine et tradition automobile.",
+    prefectureDescription:"Le Mans possède une remarquable cité médiévale entourée de remparts gallo-romains.",
+    fact:"Les 24 Heures du Mans, créées en 1923, constituent l'une des plus célèbres courses d'endurance automobile au monde."
 },
 
 {
-    numero:"73",
-    nom:"Savoie",
+    code:"73",
+    name:"Savoie",
     region:"Auvergne-Rhône-Alpes",
     prefecture:"Chambéry",
-
-    pedago:`
-        <p>La Savoie, entre lacs et sommets alpins, offre des paysages
-        spectaculaires. Des stations de ski prestigieuses au lac du Bourget,
-        ce département conjugue nature et tourisme de montagne.</p>
-
-        <h4>La préfecture : Chambéry</h4>
-
-        <p>Chambéry, ancienne capitale des ducs de Savoie, possède un riche
-        patrimoine historique avec son château et ses rues médiévales.
-        Les Charmettes, maison de Jean-Jacques Rousseau, témoignent de son
-        passé culturel.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le célèbre « Éléphant » de Chambéry, fontaine monumentale construite
-        en 1838, rend hommage au général de Boigne qui fit fortune aux Indes !
-        Cette sculpture insolite est devenue le symbole de la ville.</p>
-    `
+    description:"La Savoie offre des paysages alpins, des stations de ski prestigieuses et le lac du Bourget.",
+    prefectureDescription:"Chambéry fut la capitale des ducs de Savoie et possède un patrimoine historique important.",
+    fact:"La fontaine des Éléphants, construite en 1838, rend hommage au général de Boigne et est devenue le symbole de Chambéry."
 },
 
 {
-    numero:"74",
-    nom:"Haute-Savoie",
+    code:"74",
+    name:"Haute-Savoie",
     region:"Auvergne-Rhône-Alpes",
     prefecture:"Annecy",
-
-    pedago:`
-        <p>La Haute-Savoie, entre montagnes prestigieuses et lac Léman,
-        est le paradis des sports d'hiver. De Chamonix à Annecy, ce
-        département alpin conjugue beauté naturelle et dynamisme économique.</p>
-
-        <h4>La préfecture : Annecy</h4>
-
-        <p>Annecy, la « Venise des Alpes », est une ville au charme
-        incomparable au bord du lac le plus pur d'Europe. Son vieille ville
-        aux canaux fleuris, son château et ses montagnes environnantes en
-        font une destination prisée.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le lac d'Annecy est considéré comme le lac le plus pur d'Europe !
-        Grâce à des efforts de dépollution depuis les années 1960, ses eaux
-        cristallines atteignent une qualité exceptionnelle.</p>
-    `
+    description:"La Haute-Savoie associe montagnes alpines, lac Léman, Chamonix et Annecy.",
+    prefectureDescription:"Annecy, surnommée la Venise des Alpes, possède une vieille ville traversée par des canaux et un environnement montagneux exceptionnel.",
+    fact:"Le lac d'Annecy est réputé pour l'excellente qualité de ses eaux, résultat notamment des efforts de dépollution engagés au XXe siècle."
 },
 
 {
-    numero:"75",
-    nom:"Paris",
+    code:"75",
+    name:"Paris",
     region:"Île-de-France",
     prefecture:"Paris",
-
-    pedago:`
-        <p>Paris, capitale de la France, est une ville-département unique.
-        Ville-lumière au patrimoine mondial, elle concentre monuments historiques,
-        musées prestigieux et rayonnement culturel international.</p>
-
-        <h4>La préfecture : Paris</h4>
-
-        <p>Paris est à la fois commune et département, avec pour préfecture
-        la préfecture de police de Paris. La tour Eiffel, Notre-Dame, le Louvre
-        sont quelques-uns des monuments qui font de Paris l'une des villes
-        les plus visitées au monde.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La tour Eiffel devait être démontée après l'Exposition universelle
-        de 1889 ! C'est grâce à son antenne radio, utile pour les communications
-        militaires, qu'elle fut sauvée et devint le symbole de Paris.</p>
-    `
-}
-
-);
-   /* =========================================================
-   DÉPARTEMENTS 76 À 95 + CORSE
-   ========================================================= */
-
-departments.push(
+    description:"Paris est à la fois une commune et un département. Capitale française, elle concentre un patrimoine monumental, culturel et historique exceptionnel.",
+    prefectureDescription:"Paris possède notamment la tour Eiffel, Notre-Dame, le Louvre et de nombreux autres monuments mondialement connus.",
+    fact:"La tour Eiffel devait initialement être démontée après l'Exposition universelle de 1889. Son utilité pour les communications radio contribua à sa conservation."
+},
 
 {
-    numero:"76",
-    nom:"Seine-Maritime",
+    code:"76",
+    name:"Seine-Maritime",
     region:"Normandie",
     prefecture:"Rouen",
-
-    pedago:`
-        <p>La Seine-Maritime, entre mer et vallée de la Seine, conjugue
-        patrimoine maritime et industriel. De Rouen à Étretat, ce département
-        normand offre falaises spectaculaires et richesse historique.</p>
-
-        <h4>La préfecture : Rouen</h4>
-
-        <p>Rouen, ville d'art et d'histoire, fut la capitale du duché de
-        Normandie. Sa cathédrale immortalisée par Monet, son Gros-Horloge
-        et ses maisons à colombages en font l'une des plus belles villes
-        de Normandie.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Jeanne d'Arc fut brûlée vive sur la place du Vieux-Marché à Rouen
-        le 30 mai 1431 ! Aujourd'hui, une église moderne au toit en forme
-        de flammes renversées marque l'emplacement de son supplice.</p>
-    `
+    description:"La Seine-Maritime associe littoral, vallée de la Seine, patrimoine maritime et falaises spectaculaires.",
+    prefectureDescription:"Rouen fut la capitale du duché de Normandie et possède notamment sa cathédrale, le Gros-Horloge et ses maisons à colombages.",
+    fact:"Jeanne d'Arc fut exécutée sur la place du Vieux-Marché à Rouen le 30 mai 1431."
 },
 
 {
-    numero:"77",
-    nom:"Seine-et-Marne",
+    code:"77",
+    name:"Seine-et-Marne",
     region:"Île-de-France",
     prefecture:"Melun",
-
-    pedago:`
-        <p>La Seine-et-Marne, plus vaste département d'Île-de-France, conjugue
-        patrimoine monumental et espaces naturels. De Fontainebleau à
-        Disneyland Paris, c'est un territoire contrasté aux portes de Paris.</p>
-
-        <h4>La préfecture : Melun</h4>
-
-        <p>Melun, préfecture historique au bord de la Seine, possède un riche
-        patrimoine médiéval. Sa collégiale Notre-Dame et ses quais pittoresques
-        témoignent de son importance passée.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le château de Fontainebleau, en Seine-et-Marne, est le seul château
-        royal habité continûment pendant 8 siècles ! De François Ier à
-        Napoléon III, tous les souverains français y ont laissé leur empreinte.</p>
-    `
+    description:"La Seine-et-Marne est le plus vaste département d'Île-de-France et associe patrimoine, forêts et espaces naturels.",
+    prefectureDescription:"Melun, située sur la Seine, possède notamment la collégiale Notre-Dame.",
+    fact:"Le château de Fontainebleau, situé en Seine-et-Marne, a été habité pendant plusieurs siècles par les souverains français."
 },
 
 {
-    numero:"78",
-    nom:"Yvelines",
+    code:"78",
+    name:"Yvelines",
     region:"Île-de-France",
     prefecture:"Versailles",
-
-    pedago:`
-        <p>Les Yvelines, département d'Île-de-France, conjuguent patrimoine
-        royal et espaces naturels préservés. Du château de Versailles aux
-        forêts, c'est un territoire prestigieux aux portes de Paris.</p>
-
-        <h4>La préfecture : Versailles</h4>
-
-        <p>Versailles, ville royale mondialement connue, est dominée par son
-        château fastueux, symbole de la monarchie absolue. Le château,
-        ses jardins de Le Nôtre et le Trianon constituent un ensemble unique
-        classé à l'UNESCO.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le château de Versailles compte 2300 pièces, 352 cheminées et
-        67 escaliers ! Louis XIV y installa la cour et le gouvernement en
-        1682, faisant de Versailles la capitale politique de la France
-        jusqu'à la Révolution.</p>
-    `
+    description:"Les Yvelines associent patrimoine royal, forêts et espaces naturels aux portes de Paris.",
+    prefectureDescription:"Versailles est mondialement connue pour son château, ses jardins et le domaine du Trianon.",
+    fact:"Le château de Versailles compte plusieurs milliers de pièces et fut le centre politique de la monarchie française sous Louis XIV."
 },
 
 {
-    numero:"79",
-    nom:"Deux-Sèvres",
+    code:"79",
+    name:"Deux-Sèvres",
     region:"Nouvelle-Aquitaine",
     prefecture:"Niort",
-
-    pedago:`
-        <p>Les Deux-Sèvres, département du Poitou, allient bocage, marais
-        poitevin et patrimoine roman. Entre Niort et le marais, c'est un
-        territoire au charme discret et à la nature préservée.</p>
-
-        <h4>La préfecture : Niort</h4>
-
-        <p>Niort, au bord de la Sèvre Niortaise, est dominée par son donjon
-        médiéval. Ancienne place forte protestante, la ville est aujourd'hui
-        la capitale française de la mutualité.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Niort est la capitale française de la mutualité ! Près de 10 000
-        personnes travaillent dans le secteur des assurances mutuelles,
-        faisant de cette ville moyenne un géant de l'économie sociale.</p>
-    `
+    description:"Les Deux-Sèvres associent bocage, marais poitevin et patrimoine roman.",
+    prefectureDescription:"Niort, située sur la Sèvre Niortaise, est dominée par son donjon médiéval.",
+    fact:"Niort est devenue un important centre français du secteur des assurances et de la mutualité."
 },
-
-{
-    numero:"80",
-    nom:"Somme",
+        {
+    code:"80",
+    name:"Somme",
     region:"Hauts-de-France",
     prefecture:"Amiens",
-
-    pedago:`
-        <p>La Somme, département picard au riche patrimoine, est marquée par
-        la Grande Guerre. Entre baie de Somme préservée et cathédrale d'Amiens,
-        c'est un territoire de mémoire et de nature.</p>
-
-        <h4>La préfecture : Amiens</h4>
-
-        <p>Amiens, dominée par sa cathédrale gothique classée à l'UNESCO,
-        possède le plus vaste édifice médiéval de France. Les hortillonnages,
-        jardins flottants sur l'eau, ajoutent au charme de la ville.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La cathédrale d'Amiens pourrait contenir deux fois Notre-Dame de
-        Paris ! Avec 200 000 m³, c'est le plus vaste édifice gothique jamais
-        construit. Son labyrinthe au sol témoigne du chemin spirituel des
-        pèlerins.</p>
-    `
+    description:"La Somme est marquée par la Première Guerre mondiale, mais aussi par la baie de Somme et son patrimoine naturel.",
+    prefectureDescription:"Amiens possède une immense cathédrale gothique et les célèbres hortillonnages.",
+    fact:"La cathédrale d'Amiens est l'un des plus grands édifices gothiques jamais construits."
 },
 
 {
-    numero:"81",
-    nom:"Tarn",
+    code:"81",
+    name:"Tarn",
     region:"Occitanie",
     prefecture:"Albi",
-
-    pedago:`
-        <p>Le Tarn, entre Albigeois et montagne Noire, conjugue patrimoine
-        cathare et nature préservée. D'Albi la rouge aux bastides médiévales,
-        c'est un département au riche patrimoine occitan.</p>
-
-        <h4>La préfecture : Albi</h4>
-
-        <p>Albi, la ville rouge construite en briques, est dominée par sa
-        cathédrale-forteresse Sainte-Cécile, la plus grande cathédrale de
-        briques au monde. Le musée Toulouse-Lautrec honore son enfant du pays.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La cathédrale Sainte-Cécile d'Albi contient le plus grand ensemble
-        de peintures italiennes de la Renaissance en France ! Sa voûte peinte
-        couvre 18 500 m², soit près de deux terrains de football.</p>
-    `
+    description:"Le Tarn associe patrimoine occitan, bastides, paysages de l'Albigeois et montagne Noire.",
+    prefectureDescription:"Albi, la ville rouge, possède la spectaculaire cathédrale Sainte-Cécile et le musée Toulouse-Lautrec.",
+    fact:"La cathédrale Sainte-Cécile d'Albi possède un immense ensemble de peintures et de décors intérieurs."
 },
 
 {
-    numero:"82",
-    nom:"Tarn-et-Garonne",
+    code:"82",
+    name:"Tarn-et-Garonne",
     region:"Occitanie",
     prefecture:"Montauban",
-
-    pedago:`
-        <p>Le Tarn-et-Garonne, au confluent des deux rivières, conjugue
-        bastides médiévales et vergers. Entre Montauban et Moissac, c'est
-        un département occitan au riche patrimoine.</p>
-
-        <h4>La préfecture : Montauban</h4>
-
-        <p>Montauban, ville rose en briques foraines, possède un riche
-        patrimoine architectural. La place Nationale aux arcades et le
-        musée Ingres témoignent de son histoire et de sa richesse culturelle.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Montauban est la ville natale du peintre Ingres et du sculpteur
-        Bourdelle ! Le musée Ingres, installé dans l'ancien palais épiscopal,
-        possède la plus grande collection d'œuvres du maître néoclassique.</p>
-    `
+    description:"Le Tarn-et-Garonne associe bastides, vergers et patrimoine occitan.",
+    prefectureDescription:"Montauban est célèbre pour sa brique rose, sa place Nationale et ses musées.",
+    fact:"Montauban est la ville natale du peintre Jean-Auguste-Dominique Ingres et du sculpteur Émile-Antoine Bourdelle."
 },
 
 {
-    numero:"83",
-    nom:"Var",
+    code:"83",
+    name:"Var",
     region:"Provence-Alpes-Côte d'Azur",
     prefecture:"Toulon",
-
-    pedago:`
-        <p>Le Var, entre mer et massifs forestiers, offre la Provence
-        méditerranéenne par excellence. Des îles d'Hyères à Saint-Tropez,
-        c'est un département ensoleillé au charme provençal.</p>
-
-        <h4>La préfecture : Toulon</h4>
-
-        <p>Toulon, grand port militaire méditerranéen, est dominée par
-        le mont Faron. Sa rade magnifique, ses marchés colorés et son
-        téléphérique en font une ville méditerranéenne authentique.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le port militaire de Toulon est le plus important de France !
-        Base de la Marine nationale, il abrite le porte-avions Charles de
-        Gaulle et une grande partie de la flotte française.</p>
-    `
+    description:"Le Var offre la Provence méditerranéenne entre littoral, massifs forestiers et îles d'Hyères.",
+    prefectureDescription:"Toulon est un grand port militaire méditerranéen dominé par le mont Faron.",
+    fact:"Le port militaire de Toulon est la principale base de la Marine nationale française et accueille notamment le porte-avions Charles de Gaulle."
 },
 
 {
-    numero:"84",
-    nom:"Vaucluse",
+    code:"84",
+    name:"Vaucluse",
     region:"Provence-Alpes-Côte d'Azur",
     prefecture:"Avignon",
-
-    pedago:`
-        <p>Le Vaucluse, terre des papes et des vignobles, conjugue patrimoine
-        monumental et nature provençale. D'Avignon au mont Ventoux, c'est un
-        département au charme méditerranéen.</p>
-
-        <h4>La préfecture : Avignon</h4>
-
-        <p>Avignon, cité des papes, possède un patrimoine exceptionnel avec
-        son palais des Papes, le plus grand palais gothique d'Europe. Son
-        pont Saint-Bénézet et ses remparts médiévaux sont classés à l'UNESCO.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le Palais des Papes d'Avignon est le plus grand palais gothique
-        du monde ! Construit au XIVe siècle, il s'étend sur 15 000 m² et
-        symbolise la puissance de la papauté qui s'installa ici de 1309 à 1403.</p>
-    `
+    description:"Le Vaucluse associe patrimoine des papes, vignobles et paysages provençaux du mont Ventoux.",
+    prefectureDescription:"Avignon est célèbre pour le Palais des Papes, ses remparts et le pont Saint-Bénézet.",
+    fact:"Le Palais des Papes d'Avignon est l'un des plus grands ensembles gothiques médiévaux d'Europe."
 },
 
 {
-    numero:"85",
-    nom:"Vendée",
+    code:"85",
+    name:"Vendée",
     region:"Pays de la Loire",
     prefecture:"La Roche-sur-Yon",
-
-    pedago:`
-        <p>La Vendée, entre bocage et littoral atlantique, conjugue patrimoine
-        historique et stations balnéaires. Du Puy du Fou aux plages, c'est
-        un département dynamique et touristique.</p>
-
-        <h4>La préfecture : La Roche-sur-Yon</h4>
-
-        <p>La Roche-sur-Yon, créée par Napoléon en 1804 comme préfecture,
-        possède un plan en damier unique. Son église néoclassique et sa place
-        Napoléon témoignent de ses origines impériales.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La Roche-sur-Yon a été créée de toutes pièces par Napoléon !
-        En 1804, il décida d'en faire la préfecture de la Vendée pour
-        pacifier la région après les guerres de Vendée. La ville s'appela
-        même « Napoléon-Vendée » de 1804 à 1814.</p>
-    `
+    description:"La Vendée associe bocage, littoral atlantique, stations balnéaires et patrimoine historique.",
+    prefectureDescription:"La Roche-sur-Yon fut créée par Napoléon en 1804 selon un plan urbain régulier.",
+    fact:"La ville porta notamment le nom de Napoléon-Vendée pendant une partie du XIXe siècle."
 },
 
 {
-    numero:"86",
-    nom:"Vienne",
+    code:"86",
+    name:"Vienne",
     region:"Nouvelle-Aquitaine",
     prefecture:"Poitiers",
-
-    pedago:`
-        <p>La Vienne, au cœur du Poitou, conjugue patrimoine roman exceptionnel
-        et parcs d'attractions. De Poitiers au Futuroscope, c'est un département
-        alliant histoire et innovation.</p>
-
-        <h4>La préfecture : Poitiers</h4>
-
-        <p>Poitiers, ville d'art et d'histoire, possède un patrimoine roman
-        exceptionnel avec Notre-Dame-la-Grande et son baptistère du IVe siècle.
-        Ville universitaire dynamique, elle a vu Charles Martel arrêter les
-        Arabes en 732.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La bataille de Poitiers en 732, où Charles Martel défit les Arabes,
-        est l'un des événements majeurs de l'histoire de France ! Cette
-        victoire stoppa l'expansion musulmane en Europe occidentale.</p>
-    `
+    description:"La Vienne associe patrimoine roman, histoire médiévale et innovation autour du Futuroscope.",
+    prefectureDescription:"Poitiers possède notamment Notre-Dame-la-Grande et un important patrimoine religieux ancien.",
+    fact:"La bataille de Poitiers de 732 est traditionnellement associée à la victoire de Charles Martel sur une armée musulmane."
 },
 
 {
-    numero:"87",
-    nom:"Haute-Vienne",
+    code:"87",
+    name:"Haute-Vienne",
     region:"Nouvelle-Aquitaine",
     prefecture:"Limoges",
-
-    pedago:`
-        <p>La Haute-Vienne, cœur du Limousin, est célèbre pour sa porcelaine
-        et ses savoir-faire traditionnels. Entre Limoges et campagne limousine,
-        c'est un département au riche patrimoine artisanal.</p>
-
-        <h4>La préfecture : Limoges</h4>
-
-        <p>Limoges, capitale mondiale de la porcelaine, possède un savoir-faire
-        reconnu dans le monde entier. Son musée de la porcelaine et ses
-        manufactures témoignent de cette excellence artisanale.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La porcelaine de Limoges doit sa renommée à la découverte de kaolin
-        près de Saint-Yrieix en 1768 ! Cette argile blanche, indispensable à
-        la porcelaine, fit de Limoges une capitale internationale de la
-        céramique de luxe.</p>
-    `
+    description:"La Haute-Vienne est célèbre pour la porcelaine de Limoges et ses savoir-faire artisanaux.",
+    prefectureDescription:"Limoges est mondialement connue pour sa porcelaine et ses manufactures.",
+    fact:"La découverte de kaolin près de Saint-Yrieix au XVIIIe siècle permit le développement de la porcelaine à Limoges."
 },
 
 {
-    numero:"88",
-    nom:"Vosges",
+    code:"88",
+    name:"Vosges",
     region:"Grand Est",
     prefecture:"Épinal",
-
-    pedago:`
-        <p>Les Vosges, département montagneux entre Lorraine et Alsace,
-        offrent forêts de sapins et lacs paisibles. Entre stations thermales
-        et patrimoine textile, c'est un territoire de nature et de traditions.</p>
-
-        <h4>La préfecture : Épinal</h4>
-
-        <p>Épinal, préfecture des Vosges au bord de la Moselle, est mondialement
-        connue pour ses images d'Épinal. Ces gravures populaires colorées ont
-        fait la renommée de la ville depuis le XVIIIe siècle.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Les images d'Épinal, créées en 1796 par Jean-Charles Pellerin,
-        étaient vendues par des colporteurs dans toute la France ! Ces gravures
-        populaires décoraient les maisons modestes et éduquaient le peuple.</p>
-    `
+    description:"Les Vosges offrent forêts, lacs, montagnes et traditions textiles et thermales.",
+    prefectureDescription:"Épinal est mondialement connue pour ses images populaires colorées.",
+    fact:"Les images d'Épinal furent notamment développées par Jean-Charles Pellerin à partir de la fin du XVIIIe siècle."
 },
 
 {
-    numero:"89",
-    nom:"Yonne",
+    code:"89",
+    name:"Yonne",
     region:"Bourgogne-Franche-Comté",
     prefecture:"Auxerre",
-
-    pedago:`
-        <p>L'Yonne, porte de la Bourgogne, conjugue vignobles prestigieux
-        et patrimoine religieux exceptionnel. De Chablis à Auxerre, c'est
-        un département au riche patrimoine architectural.</p>
-
-        <h4>La préfecture : Auxerre</h4>
-
-        <p>Auxerre, ville d'art et d'histoire au bord de l'Yonne, possède
-        un centre historique remarquable. Son abbaye Saint-Germain et sa
-        cathédrale Saint-Étienne témoignent de son importance religieuse passée.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Les cryptes de l'abbaye Saint-Germain d'Auxerre, datant du IXe siècle,
-        abritent les plus anciennes fresques carolingiennes de France ! Ces
-        peintures murales d'une fraîcheur étonnante sont un trésor de l'art médiéval.</p>
-    `
+    description:"L'Yonne est une porte de la Bourgogne, célèbre pour Chablis et son patrimoine religieux.",
+    prefectureDescription:"Auxerre possède un centre historique remarquable avec l'abbaye Saint-Germain et la cathédrale Saint-Étienne.",
+    fact:"Les cryptes de Saint-Germain d'Auxerre abritent d'importantes fresques carolingiennes."
 },
 
 {
-    numero:"90",
-    nom:"Territoire de Belfort",
+    code:"90",
+    name:"Territoire de Belfort",
     region:"Bourgogne-Franche-Comté",
     prefecture:"Belfort",
-
-    pedago:`
-        <p>Le Territoire de Belfort, plus petit département de France
-        métropolitaine, possède un caractère affirmé. Entre Lion de Belfort
-        et patrimoine industriel, c'est un territoire de résistance et
-        de traditions.</p>
-
-        <h4>La préfecture : Belfort</h4>
-
-        <p>Belfort, ville héroïque qui résista au siège prussien en 1870-1871,
-        est dominée par sa citadelle et le célèbre Lion de Bartholdi. Son
-        patrimoine fortifié témoigne de son importance stratégique.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le Lion de Belfort, sculpté par Bartholdi (créateur de la Statue
-        de la Liberté), mesure 22 mètres de long et 11 mètres de haut !
-        Cette sculpture monumentale symbolise la résistance héroïque de la
-        ville lors du siège de 1870-1871.</p>
-    `
+    description:"Le Territoire de Belfort est un petit département marqué par son patrimoine militaire et industriel.",
+    prefectureDescription:"Belfort est dominée par sa citadelle et le célèbre Lion sculpté par Bartholdi.",
+    fact:"Le Lion de Belfort mesure environ 22 mètres de long et symbolise la résistance de la ville lors du siège de 1870-1871."
 },
 
 {
-    numero:"91",
-    nom:"Essonne",
+    code:"91",
+    name:"Essonne",
     region:"Île-de-France",
     prefecture:"Évry-Courcouronnes",
-
-    pedago:`
-        <p>L'Essonne, département du sud de l'Île-de-France, conjugue patrimoine
-        historique et pôles scientifiques. Entre châteaux et technopoles,
-        c'est un territoire contrasté aux portes de Paris.</p>
-
-        <h4>La préfecture : Évry-Courcouronnes</h4>
-
-        <p>Évry-Courcouronnes, ville nouvelle créée dans les années 1960,
-        est une préfecture moderne. Sa cathédrale de la Résurrection, avec
-        son architecture audacieuse, symbolise le renouveau urbain.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La cathédrale d'Évry, inaugurée en 1995, est la seule cathédrale
-        construite en France au XXe siècle ! Son architecture cylindrique
-        audacieuse et son toit planté d'arbres en font un édifice unique.</p>
-    `
+    description:"L'Essonne associe patrimoine historique, espaces naturels et grands pôles scientifiques.",
+    prefectureDescription:"Évry-Courcouronnes est une ville nouvelle développée à partir des années 1960.",
+    fact:"La cathédrale de la Résurrection d'Évry, inaugurée en 1995, possède une architecture cylindrique très originale."
 },
 
 {
-    numero:"92",
-    nom:"Hauts-de-Seine",
+    code:"92",
+    name:"Hauts-de-Seine",
     region:"Île-de-France",
     prefecture:"Nanterre",
-
-    pedago:`
-        <p>Les Hauts-de-Seine, département dense de la petite couronne
-        parisienne, conjuguent quartiers d'affaires et patrimoine royal.
-        De la Défense à Versailles, c'est un territoire urbain et dynamique.</p>
-
-        <h4>La préfecture : Nanterre</h4>
-
-        <p>Nanterre, préfecture des Hauts-de-Seine, allie patrimoine ancien
-        et modernité urbaine. Siège du conseil départemental et ville
-        universitaire, elle possède aussi les vestiges d'un passé gallo-romain.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Sainte Geneviève, patronne de Paris, est née à Nanterre vers 422 !
-        La ville lui rend hommage avec une église qui abrite des reliques,
-        faisant de Nanterre un lieu de pèlerinage depuis le Moyen Âge.</p>
-    `
+    description:"Les Hauts-de-Seine associent quartiers d'affaires, espaces urbains et patrimoine historique.",
+    prefectureDescription:"Nanterre est une importante ville universitaire et administrative de l'ouest parisien.",
+    fact:"Selon la tradition, Sainte Geneviève, patronne de Paris, serait née à Nanterre vers 422."
 },
 
 {
-    numero:"93",
-    nom:"Seine-Saint-Denis",
+    code:"93",
+    name:"Seine-Saint-Denis",
     region:"Île-de-France",
     prefecture:"Bobigny",
-
-    pedago:`
-        <p>La Seine-Saint-Denis, département de la petite couronne parisienne,
-        est un territoire dynamique et multiculturel. Entre patrimoine
-        industriel et projets urbains innovants, c'est un département en
-        pleine transformation.</p>
-
-        <h4>La préfecture : Bobigny</h4>
-
-        <p>Bobigny, préfecture de Seine-Saint-Denis, est une ville en pleine
-        mutation. Son tribunal de grande instance et sa préfecture moderne
-        symbolisent le renouveau urbain du département.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>La basilique cathédrale de Saint-Denis, en Seine-Saint-Denis,
-        abrite les tombeaux des rois de France ! De Dagobert à Louis XVIII,
-        42 rois, 32 reines et 63 princes y sont enterrés, faisant de
-        Saint-Denis la nécropole royale.</p>
-    `
+    description:"La Seine-Saint-Denis est un département urbain et multiculturel en pleine transformation.",
+    prefectureDescription:"Bobigny est la préfecture du département et possède notamment un important patrimoine administratif contemporain.",
+    fact:"La basilique-cathédrale de Saint-Denis abrite la nécropole royale française."
 },
 
 {
-    numero:"94",
-    nom:"Val-de-Marne",
+    code:"94",
+    name:"Val-de-Marne",
     region:"Île-de-France",
     prefecture:"Créteil",
-
-    pedago:`
-        <p>Le Val-de-Marne, département de la petite couronne, conjugue
-        patrimoine naturel avec la Marne et dynamisme urbain. Entre espaces
-        verts et quartiers résidentiels, c'est un territoire équilibré.</p>
-
-        <h4>La préfecture : Créteil</h4>
-
-        <p>Créteil, préfecture moderne du Val-de-Marne, est organisée autour
-        de son lac artificiel. Ville nouvelle des années 1960, elle possède
-        une architecture contemporaine marquante avec sa cathédrale et sa
-        préfecture.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le lac de Créteil, créé en 1974, est le plus grand lac artificiel
-        d'Île-de-France accessible au public ! Cette base de loisirs de
-        42 hectares offre un espace de verdure et de détente au cœur de
-        l'urbanisation.</p>
-    `
+    description:"Le Val-de-Marne associe la vallée de la Marne, espaces verts et quartiers urbains.",
+    prefectureDescription:"Créteil est une ville nouvelle développée autour notamment de son lac artificiel.",
+    fact:"Le lac de Créteil, aménagé dans les années 1970, constitue un important espace de loisirs au cœur de l'agglomération."
 },
 
 {
-    numero:"95",
-    nom:"Val-d'Oise",
+    code:"95",
+    name:"Val-d'Oise",
     region:"Île-de-France",
     prefecture:"Cergy",
-
-    pedago:`
-        <p>Le Val-d'Oise, entre plaines agricoles et vallées boisées,
-        conjugue patrimoine historique et zones urbaines. De Pontoise à
-        Auvers-sur-Oise, c'est un territoire aux multiples facettes.</p>
-
-        <h4>La préfecture : Cergy</h4>
-
-        <p>Cergy, préfecture du Val-d'Oise, est une ville nouvelle créée
-        dans les années 1970. Son urbanisme innovant et ses équipements
-        modernes en font une ville jeune et dynamique.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Auvers-sur-Oise, dans le Val-d'Oise, fut le lieu des derniers
-        jours de Van Gogh qui y mourut en 1890 ! L'église du village
-        immortalisée dans un de ses tableaux les plus célèbres attire des
-        visiteurs du monde entier.</p>
-    `
+    description:"Le Val-d'Oise associe plaines agricoles, vallées boisées et espaces urbains.",
+    prefectureDescription:"Cergy est une ville nouvelle créée à partir des années 1960-1970 et constitue la préfecture du département.",
+    fact:"Auvers-sur-Oise, dans le Val-d'Oise, fut le lieu des derniers mois de la vie de Vincent van Gogh."
 },
-
-{
-    numero:"2A",
-    nom:"Corse-du-Sud",
-    region:"Corse",
-    prefecture:"Ajaccio"
-},
-
-{
-    numero:"2B",
-    nom:"Haute-Corse",
-    region:"Corse",
-    prefecture:"Bastia"
-}
-
-);
-   /* =========================================================
-   DÉPARTEMENTS D'OUTRE-MER
-   ========================================================= */
-
-departments.push(
-
-{
-    numero:"971",
-    nom:"Guadeloupe",
+        {
+    code:"971",
+    name:"Guadeloupe",
     region:"Guadeloupe",
     prefecture:"Basse-Terre",
-
-    pedago:`
-        <p>La Guadeloupe, archipel des Antilles françaises, offre des plages
-        de rêve et une nature luxuriante. Entre volcan de la Soufrière et
-        eaux turquoise, c'est un département tropical paradisiaque.</p>
-
-        <h4>La préfecture : Basse-Terre</h4>
-
-        <p>Basse-Terre, capitale administrative de la Guadeloupe, est nichée
-        au pied du volcan de la Soufrière. Cette ville historique possède
-        un riche patrimoine colonial avec son fort Louis Delgrès.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le volcan de la Soufrière culmine à 1467 mètres, c'est le point
-        culminant des Petites Antilles ! Toujours actif, ce volcan fait
-        l'objet d'une surveillance constante et offre des randonnées
-        spectaculaires.</p>
-    `
+    description:"La Guadeloupe est un archipel des Antilles françaises marqué par ses plages, sa forêt tropicale et le volcan de la Soufrière.",
+    prefectureDescription:"Basse-Terre est la capitale administrative de la Guadeloupe et se situe au pied de la Soufrière.",
+    fact:"La Soufrière culmine à 1 467 mètres et constitue le point culminant des Petites Antilles."
 },
 
 {
-    numero:"972",
-    nom:"Martinique",
+    code:"972",
+    name:"Martinique",
     region:"Martinique",
     prefecture:"Fort-de-France",
-
-    pedago:`
-        <p>La Martinique, île aux fleurs des Antilles, conjugue plages
-        paradisiaques, forêt tropicale et patrimoine créole. Entre montagne
-        Pelée et baies somptueuses, c'est un département tropical enchanteur.</p>
-
-        <h4>La préfecture : Fort-de-France</h4>
-
-        <p>Fort-de-France, capitale de la Martinique, est une ville dynamique
-        au patrimoine riche. Sa bibliothèque Schoelcher, son fort Saint-Louis
-        et ses marchés colorés témoignent de son histoire et de sa culture créole.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>L'éruption de la montagne Pelée en 1902 détruisit totalement
-        Saint-Pierre, alors capitale économique de la Martinique ! En quelques
-        minutes, 30 000 personnes périrent, faisant de cette catastrophe
-        l'une des plus meurtrières de l'histoire.</p>
-    `
+    description:"La Martinique associe plages, forêt tropicale, culture créole et relief volcanique.",
+    prefectureDescription:"Fort-de-France est la principale ville de l'île et possède notamment la bibliothèque Schoelcher et le fort Saint-Louis.",
+    fact:"L'éruption de la montagne Pelée en 1902 détruisit Saint-Pierre et causa la mort de dizaines de milliers de personnes."
 },
 
 {
-    numero:"973",
-    nom:"Guyane",
+    code:"973",
+    name:"Guyane",
     region:"Guyane",
     prefecture:"Cayenne",
-
-    pedago:`
-        <p>La Guyane, plus vaste département français, est couverte à 95%
-        par la forêt amazonienne. Entre biodiversité exceptionnelle et base
-        spatiale de Kourou, c'est un territoire unique entre nature et technologie.</p>
-
-        <h4>La préfecture : Cayenne</h4>
-
-        <p>Cayenne, préfecture de la Guyane, est une ville colorée au
-        patrimoine créole marqué. Son marché aux épices, ses maisons
-        coloniales et sa place des Palmistes témoignent de son histoire tropicale.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le Centre Spatial Guyanais à Kourou est le port spatial de l'Europe !
-        Grâce à sa position proche de l'équateur qui donne un avantage pour
-        les lancements, la Guyane est devenue essentielle pour l'industrie
-        spatiale européenne.</p>
-    `
+    description:"La Guyane est le plus vaste département français et est largement couverte par la forêt amazonienne.",
+    prefectureDescription:"Cayenne est la préfecture et possède notamment un patrimoine créole et le célèbre marché aux épices.",
+    fact:"Le Centre spatial guyanais de Kourou bénéficie de la proximité de l'équateur, avantageuse pour les lancements spatiaux."
 },
 
 {
-    numero:"974",
-    nom:"La Réunion",
+    code:"974",
+    name:"La Réunion",
     region:"La Réunion",
     prefecture:"Saint-Denis",
-
-    pedago:`
-        <p>La Réunion, île intense de l'océan Indien, offre des paysages
-        spectaculaires entre volcans et cirques. Du Piton de la Fournaise
-        aux lagons, c'est un département tropical au relief exceptionnel.</p>
-
-        <h4>La préfecture : Saint-Denis</h4>
-
-        <p>Saint-Denis, préfecture de La Réunion, est une ville métissée
-        au patrimoine créole remarquable. Ses cases créoles, sa rue de Paris
-        et ses monuments témoignent de l'histoire de l'île.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le Piton de la Fournaise est l'un des volcans les plus actifs
-        au monde ! Il entre en éruption en moyenne tous les neuf mois,
-        offrant un spectacle naturel grandiose et attirant des volcanologues
-        du monde entier.</p>
-    `
+    description:"La Réunion offre des paysages spectaculaires entre volcans, cirques et lagons.",
+    prefectureDescription:"Saint-Denis est la préfecture et possède un important patrimoine créole.",
+    fact:"Le Piton de la Fournaise est l'un des volcans les plus actifs au monde et connaît régulièrement des éruptions."
 },
 
 {
-    numero:"976",
-    nom:"Mayotte",
+    code:"976",
+    name:"Mayotte",
     region:"Mayotte",
     prefecture:"Mamoudzou",
-
-    pedago:`
-        <p>Mayotte, le 101e département français depuis 2011, est un archipel
-        de l'océan Indien au lagon exceptionnel. Entre traditions mahoraises
-        et développement, c'est le plus jeune département français.</p>
-
-        <h4>La préfecture : Mamoudzou</h4>
-
-        <p>Mamoudzou, préfecture de Mayotte, est une ville en plein
-        développement face au lagon. Son marché couvert et ses quartiers
-        témoignent du métissage culturel entre traditions africaines et
-        influence française.</p>
-
-        <h4>💡 Le saviez-vous ?</h4>
-
-        <p>Le lagon de Mayotte, l'un des plus beaux et des plus grands au
-        monde, s'étend sur 1500 km² ! Il abrite une biodiversité marine
-        exceptionnelle avec des tortues, des dauphins et même des baleines
-        à bosse en saison.</p>
-    `
+    description:"Mayotte est un archipel de l'océan Indien célèbre pour son lagon et sa biodiversité marine.",
+    prefectureDescription:"Mamoudzou est la préfecture de Mayotte et se développe autour d'un environnement lagunaire exceptionnel.",
+    fact:"Mayotte possède un vaste lagon abritant notamment tortues, dauphins et baleines à bosse en saison."
 }
 
-);
-
-/*
- * Ajout automatique de la source aux fiches pédagogiques.
- * La source demandée est bien carte-des-departements.fr.
- */
-departments.forEach(d => {
-    if (d.pedago) {
-        d.source = SOURCE_URL;
-    }
-});
-
-console.log("Départements chargés :", departments.length);
-   /* =========================================================
-   MOTEUR DU QUIZ
-   ========================================================= */
-
-const TOTAL_QUESTIONS = 20;
-
-let currentMode = "mixed";
-let currentQuestion = 0;
+];
+    let quizPool = [];
+let currentQuestion = null;
+let questionIndex = 0;
 let score = 0;
-let correctAnswers = 0;
-let wrongAnswers = 0;
-let currentDepartment = null;
 let answered = false;
 
+const totalQuestions = 20;
 
-/* ---------- OUTILS ---------- */
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const feedbackEl = document.getElementById("feedback");
+const pedagogicalEl = document.getElementById("pedagogical");
+const nextButton = document.getElementById("nextButton");
 
 function shuffle(array) {
     return [...array].sort(() => Math.random() - 0.5);
 }
 
-function getRandomDepartment() {
-    return departments[Math.floor(Math.random() * departments.length)];
+function getPool() {
+
+    const difficulty = document.getElementById("difficulty").value;
+
+    if (difficulty === "metropole") {
+        return departments.filter(d =>
+            !["971","972","973","974","976"].includes(d.code)
+        );
+    }
+
+    if (difficulty === "outremer") {
+        return departments.filter(d =>
+            ["971","972","973","974","976"].includes(d.code)
+        );
+    }
+
+    return [...departments];
 }
 
-function getWrongOptions(correct, property, count = 3) {
-    const values = [...new Set(
-        departments
-            .map(d => d[property])
-            .filter(v => v && v !== correct)
-    )];
+function newQuiz() {
 
-    return shuffle(values).slice(0, count);
-}
+    quizPool = shuffle(getPool());
 
-
-/* ---------- DÉMARRAGE ---------- */
-
-function startQuiz(mode) {
-
-    currentMode = mode;
-    currentQuestion = 0;
+    questionIndex = 0;
     score = 0;
-    correctAnswers = 0;
-    wrongAnswers = 0;
 
-    document.getElementById("home").style.display = "none";
-    document.getElementById("result").style.display = "none";
-    document.getElementById("quiz").style.display = "block";
+    updateStats();
 
-    document.getElementById("scoreDisplay").textContent = "Score : 0";
+    document.getElementById("listPanel").classList.add("hidden");
+    document.getElementById("quizPanel").classList.remove("hidden");
 
     nextQuestion();
 }
 
+function getWrongAnswers(correct, mode) {
 
-/* ---------- GÉNÉRATION QUESTION ---------- */
+    let candidates = [];
 
-function createQuestion() {
-
-    currentDepartment = getRandomDepartment();
-
-    let type = currentMode;
-
-    if (type === "mixed") {
-
-        const types = [
-            "prefecture",
-            "department",
-            "region"
-        ];
-
-        type = types[Math.floor(Math.random() * types.length)];
+    if (mode === "prefecture" || mode === "departmentFromPrefecture") {
+        candidates = departments.map(d => d.prefecture);
     }
 
-    let questionText;
-    let correct;
-    let wrong;
-    let options;
-
-    if (type === "prefecture") {
-
-        questionText =
-            `Quelle est la préfecture du département ${currentDepartment.nom} ?`;
-
-        correct = currentDepartment.prefecture;
-
-        wrong = getWrongOptions(
-            correct,
-            "prefecture"
-        );
-
+    if (mode === "department") {
+        candidates = departments.map(d => d.name);
     }
 
-    else if (type === "department") {
-
-        questionText =
-            `À quel département appartient la préfecture ${currentDepartment.prefecture} ?`;
-
-        correct = currentDepartment.nom;
-
-        wrong = getWrongOptions(
-            correct,
-            "nom"
-        );
-
+    if (mode === "region") {
+        candidates = [...new Set(departments.map(d => d.region))];
     }
 
-    else {
+    return shuffle(
+        candidates.filter(x => x !== correct)
+    ).slice(0, 3);
+}
 
-        questionText =
-            `À quelle région appartient le département ${currentDepartment.nom} ?`;
+function buildQuestion() {
 
-        correct = currentDepartment.region;
+    const mode = document.getElementById("mode").value;
 
-        wrong = getWrongOptions(
-            correct,
-            "region"
-        );
+    const d = quizPool[questionIndex % quizPool.length];
+
+    let question = "";
+    let correct = "";
+
+    if (mode === "prefecture") {
+
+        question = `Quelle est la préfecture du département ${d.name} (${d.code}) ?`;
+        correct = d.prefecture;
+
+    } else if (mode === "department") {
+
+        question = `À quel département appartient la ville de ${d.prefecture} ?`;
+        correct = d.name;
+
+    } else if (mode === "region") {
+
+        question = `Dans quelle région se trouve le département ${d.name} (${d.code}) ?`;
+        correct = d.region;
+
+    } else if (mode === "departmentFromPrefecture") {
+
+        question = `À quel département appartient la préfecture ${d.prefecture} ?`;
+        correct = d.name;
     }
-
-    options = shuffle([
-        correct,
-        ...wrong
-    ]);
 
     return {
-        text: questionText,
-        correct: correct,
-        options: options
+        department: d,
+        mode,
+        question,
+        correct
     };
 }
 
-
-/* ---------- AFFICHAGE ---------- */
-
 function nextQuestion() {
 
-    if (currentQuestion >= TOTAL_QUESTIONS) {
+    if (questionIndex >= totalQuestions) {
         finishQuiz();
         return;
     }
 
     answered = false;
 
-    document.getElementById("feedback").className = "feedback";
-    document.getElementById("feedback").innerHTML = "";
+    feedbackEl.className = "feedback";
+    feedbackEl.innerHTML = "";
 
-    document.getElementById("infoCard").className = "info-card";
-    document.getElementById("infoCard").innerHTML = "";
+    pedagogicalEl.classList.add("hidden");
+    pedagogicalEl.innerHTML = "";
 
-    document.getElementById("nextButton").style.display = "none";
+    nextButton.classList.add("hidden");
 
-    currentQuestion++;
+    currentQuestion = buildQuestion();
 
-    const q = createQuestion();
+    questionEl.textContent = currentQuestion.question;
 
-    document.getElementById("questionNumber").textContent =
-        `Question ${currentQuestion} / ${TOTAL_QUESTIONS}`;
+    let choices = [
+        currentQuestion.correct,
+        ...getWrongAnswers(
+            currentQuestion.correct,
+            currentQuestion.mode
+        )
+    ];
 
-    document.getElementById("progressBar").style.width =
-        `${((currentQuestion - 1) / TOTAL_QUESTIONS) * 100}%`;
+    choices = shuffle(choices);
 
-    document.getElementById("question").textContent = q.text;
+    answersEl.innerHTML = "";
 
-    const answersContainer = document.getElementById("answers");
-    answersContainer.innerHTML = "";
-
-    q.options.forEach(option => {
+    choices.forEach(choice => {
 
         const button = document.createElement("button");
 
-        button.className = "answer-btn";
-        button.textContent = option;
+        button.className = "answer";
 
-        button.onclick = () => checkAnswer(
-            option,
-            q.correct,
-            button
-        );
+        let associated = departments.find(d => {
 
-        answersContainer.appendChild(button);
+            if (
+                currentQuestion.mode === "prefecture" ||
+                currentQuestion.mode === "departmentFromPrefecture"
+            ) {
+                return d.prefecture === choice || d.name === choice;
+            }
+
+            if (currentQuestion.mode === "department") {
+                return d.name === choice;
+            }
+
+            return d.region === choice;
+        });
+
+        button.innerHTML = `
+            <strong>${choice}</strong>
+            ${
+                associated
+                ? `<small>${associated.code} · ${associated.region}</small>`
+                : ""
+            }
+        `;
+
+        button.onclick = () => checkAnswer(button, choice);
+
+        answersEl.appendChild(button);
     });
+
+    questionIndex++;
+
+    updateStats();
 }
 
-
-/* ---------- RÉPONSE ---------- */
-
-function checkAnswer(selected, correct, clickedButton) {
+function checkAnswer(button, answer) {
 
     if (answered) return;
 
     answered = true;
 
-    const buttons =
-        document.querySelectorAll(".answer-btn");
+    const correct = currentQuestion.correct;
+    const d = currentQuestion.department;
 
-    buttons.forEach(button => {
-        button.disabled = true;
+    const buttons = document.querySelectorAll(".answer");
 
-        if (button.textContent === correct) {
-            button.classList.add("correct");
+    buttons.forEach(btn => {
+
+        const text = btn.querySelector("strong").textContent;
+
+        if (text === correct) {
+            btn.classList.add("correct");
         }
+
+        btn.disabled = true;
     });
 
-    const feedback =
-        document.getElementById("feedback");
-
-    if (selected === correct) {
+    if (answer === correct) {
 
         score++;
-        correctAnswers++;
 
-        clickedButton.classList.add("correct");
+        feedbackEl.className = "feedback correct";
 
-        feedback.className = "feedback show good";
-
-        feedback.innerHTML =
-            `<strong>✅ Bonne réponse !</strong><br>
-             ${correct} est bien la bonne réponse.`;
+        feedbackEl.innerHTML = `
+            <strong>✅ Bonne réponse !</strong><br>
+            ${d.name} (${d.code}) appartient à la région
+            <strong>${d.region}</strong>.
+            Sa préfecture est
+            <strong>${d.prefecture}</strong>.
+        `;
 
     } else {
 
-        wrongAnswers++;
+        button.classList.add("wrong");
 
-        clickedButton.classList.add("wrong");
+        feedbackEl.className = "feedback wrong";
 
-        feedback.className = "feedback show bad";
-
-        feedback.innerHTML =
-            `<strong>❌ Mauvaise réponse.</strong><br>
-             La bonne réponse était <strong>${correct}</strong>.`;
+        feedbackEl.innerHTML = `
+            <strong>❌ Mauvaise réponse.</strong><br>
+            La bonne réponse était :
+            <strong>${correct}</strong>.<br>
+            Département : <strong>${d.name} (${d.code})</strong><br>
+            Région : <strong>${d.region}</strong><br>
+            Préfecture : <strong>${d.prefecture}</strong>
+        `;
     }
 
-    document.getElementById("scoreDisplay").textContent =
-        `Score : ${score}`;
+    showPedagogical(d);
 
-    showPedagogy();
+    nextButton.classList.remove("hidden");
 
-    document.getElementById("nextButton").style.display =
-        "inline-block";
-
-    document.getElementById("progressBar").style.width =
-        `${(currentQuestion / TOTAL_QUESTIONS) * 100}%`;
+    updateStats();
 }
 
+function showPedagogical(d) {
 
-/* ---------- FICHE PÉDAGOGIQUE ---------- */
+    pedagogicalEl.classList.remove("hidden");
 
-function showPedagogy() {
+    pedagogicalEl.innerHTML = `
+        <h3>📚 Fiche pédagogique — ${d.name}</h3>
 
-    const card = document.getElementById("infoCard");
+        <p>
+            <strong>${d.name} (${d.code})</strong>
+            appartient à la région
+            <span class="region">${d.region}</span>.
+        </p>
 
-    if (!currentDepartment.pedago) {
+        <p>
+            ${d.description}
+        </p>
 
-        card.className = "info-card show";
+        <p>
+            <strong>La préfecture : ${d.prefecture}</strong>
+        </p>
 
-        card.innerHTML = `
-            <h3>📚 À retenir</h3>
+        <p>
+            ${d.prefectureDescription}
+        </p>
 
-            <p>
-                <strong>${currentDepartment.nom}</strong>
-                (${currentDepartment.numero}) appartient à la région
-                <strong>${currentDepartment.region}</strong>.
-            </p>
-
-            <p>
-                Sa préfecture est
-                <strong>${currentDepartment.prefecture}</strong>.
-            </p>
-        `;
-
-        return;
-    }
-
-    card.className = "info-card show";
-
-    card.innerHTML = `
-        <h3>📚 Fiche pédagogique</h3>
-
-        ${currentDepartment.pedago}
+        <p>
+            💡 <strong>Le saviez-vous ?</strong><br>
+            ${d.fact}
+        </p>
 
         <div class="source">
-            <strong>Source :</strong>
-            <a href="${SOURCE_URL}"
-               target="_blank"
-               rel="noopener noreferrer">
-                carte-des-departements.fr
-            </a>
+            Source des données pédagogiques :
+            <strong>carte-des-departements.fr</strong>
         </div>
     `;
 }
-   /* =========================================================
-   SCORE ET FIN DE PARTIE
-   ========================================================= */
+
+function updateStats() {
+
+    document.getElementById("questionNumber").textContent =
+        Math.min(questionIndex, totalQuestions);
+
+    document.getElementById("score").textContent = score;
+
+    const answeredCount = Math.max(0, questionIndex - 1);
+
+    const rate =
+        answeredCount > 0
+        ? Math.round((score / answeredCount) * 100)
+        : 0;
+
+    document.getElementById("successRate").textContent =
+        `${rate}%`;
+
+    const progress =
+        Math.min(
+            100,
+            (questionIndex / totalQuestions) * 100
+        );
+
+    document.getElementById("progress").style.width =
+        `${progress}%`;
+}
 
 function finishQuiz() {
 
-    document.getElementById("quiz").style.display = "none";
-    document.getElementById("result").style.display = "block";
+    const rate =
+        Math.round((score / totalQuestions) * 100);
 
-    const percentage =
-        Math.round((correctAnswers / TOTAL_QUESTIONS) * 100);
+    questionEl.innerHTML = `
+        🎉 Quiz terminé !
+    `;
 
-    document.getElementById("resultScore").textContent =
-        `${score} / ${TOTAL_QUESTIONS}`;
+    answersEl.innerHTML = `
+        <div class="card">
+            <h3>Résultat</h3>
+            <p>
+                Tu as obtenu
+                <strong>${score}/${totalQuestions}</strong>.
+            </p>
+            <p>
+                Taux de réussite :
+                <strong>${rate}%</strong>
+            </p>
 
-    document.getElementById("correctCount").textContent =
-        correctAnswers;
+            ${
+                rate >= 90
+                ? "<p>🏆 Excellent ! Tu maîtrises très bien les départements.</p>"
+                : rate >= 70
+                ? "<p>👏 Très bon résultat ! Encore quelques révisions et ce sera parfait.</p>"
+                : rate >= 50
+                ? "<p>👍 Bon début. Les fiches pédagogiques vont t'aider à consolider tes connaissances.</p>"
+                : "<p>📚 Il reste quelques départements à mémoriser. Recommence un quiz !</p>"
+            }
+        </div>
+    `;
 
-    document.getElementById("wrongCount").textContent =
-        wrongAnswers;
-
-    document.getElementById("percentage").textContent =
-        `${percentage} %`;
-
-    let message;
-
-    if (percentage === 100) {
-
-        message =
-            "🏆 Parfait ! Tu maîtrises parfaitement les départements !";
-
-    } else if (percentage >= 90) {
-
-        message =
-            "🥇 Excellent ! Tu connais remarquablement bien la géographie française.";
-
-    } else if (percentage >= 75) {
-
-        message =
-            "🥈 Très bon résultat ! Encore quelques départements à consolider.";
-
-    } else if (percentage >= 60) {
-
-        message =
-            "👍 Bon travail ! La progression est déjà solide.";
-
-    } else if (percentage >= 40) {
-
-        message =
-            "📚 Pas mal ! Quelques révisions et tu vas rapidement progresser.";
-
-    } else {
-
-        message =
-            "💪 Continue ! Le quiz est justement là pour apprendre progressivement.";
-    }
-
-    document.getElementById("resultMessage").textContent =
-        message;
+    feedbackEl.className = "feedback";
+    pedagogicalEl.classList.add("hidden");
+    nextButton.classList.add("hidden");
 }
 
+function showList() {
 
-function returnHome() {
+    const listPanel = document.getElementById("listPanel");
 
-    document.getElementById("result").style.display = "none";
-    document.getElementById("quiz").style.display = "none";
-    document.getElementById("home").style.display = "block";
+    listPanel.classList.remove("hidden");
 
-    document.getElementById("progressBar").style.width = "0%";
+    const list = document.getElementById("departmentList");
 
-    score = 0;
-    correctAnswers = 0;
-    wrongAnswers = 0;
-    currentQuestion = 0;
+    list.innerHTML = "";
+
+    departments
+        .slice()
+        .sort((a,b) => a.code.localeCompare(b.code))
+        .forEach(d => {
+
+            const item = document.createElement("div");
+
+            item.className = "dept-item";
+
+            item.innerHTML = `
+                <strong>${d.code} — ${d.name}</strong><br>
+                <span class="region">${d.region}</span><br>
+                Préfecture : ${d.prefecture}
+            `;
+
+            item.onclick = () => {
+
+                document.getElementById("quizPanel")
+                    .scrollIntoView({
+                        behavior:"smooth"
+                    });
+
+                showPedagogical(d);
+                questionEl.textContent =
+                    `${d.name} (${d.code})`;
+
+                answersEl.innerHTML = "";
+
+                feedbackEl.className = "feedback";
+
+                pedagogicalEl.classList.remove("hidden");
+            };
+
+            list.appendChild(item);
+        });
 }
 
+document.getElementById("mode")
+    .addEventListener("change", () => {
 
-/* =========================================================
-   RACCOURCIS CLAVIER
-   ========================================================= */
-
-document.addEventListener("keydown", function(event) {
-
-    if (!answered) return;
-
-    if (
-        event.key === "Enter" ||
-        event.key === " "
-    ) {
-
-        const next =
-            document.getElementById("nextButton");
-
-        if (next.style.display !== "none") {
-            nextQuestion();
+        if (quizPool.length > 0) {
+            newQuiz();
         }
-    }
+    });
+
+document.getElementById("difficulty")
+    .addEventListener("change", () => {
+
+        if (quizPool.length > 0) {
+            newQuiz();
+        }
+    });
+    /*
+    Initialisation de la liste des départements.
+*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.getElementById("questionNumber").textContent = "0";
+    document.getElementById("score").textContent = "0";
+    document.getElementById("successRate").textContent = "0%";
+    document.getElementById("progress").style.width = "0%";
+
 });
-   </script>
+</script>
 
 </body>
 </html>
