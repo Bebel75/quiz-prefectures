@@ -131,14 +131,6 @@ button {
     font-size: 16px;
 }
 
-.answer-region {
-    display: block;
-    margin-top: 4px;
-    font-size: 13px;
-    color: #5c6878;
-    font-weight: 400;
-}
-
 #question {
     font-size: 21px;
     font-weight: 700;
@@ -157,10 +149,11 @@ button {
 }
 
 .proposition {
-    padding: 12px;
-    margin: 7px 0;
+    padding: 14px;
+    margin: 8px 0;
     background: #f1f4f7;
     border-radius: 10px;
+    line-height: 1.5;
 }
 
 .proposition.correct {
@@ -170,10 +163,17 @@ button {
 
 .proposition.wrong {
     background: #f8eeee;
+    border-left: 5px solid #b3261e;
 }
 
-.small {
-    color: #64748b;
+.proposition-title {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.proposition-details {
+    margin-top: 5px;
+    color: #526273;
     font-size: 14px;
 }
 
@@ -330,7 +330,7 @@ button {
 
     <div id="correction" class="hidden">
 
-        <h3>📋 Les propositions</h3>
+        <h3>📋 Correction des propositions</h3>
 
         <div id="propositions"></div>
 
@@ -374,6 +374,7 @@ button {
 
 </div>
 
+</main>
 
 <script>
 
@@ -389,7 +390,7 @@ const SOURCE_HTML = `
 `;
 
 const departments = [];
-departments.push(
+    departments.push(
 
 {
 code:"01",
@@ -600,8 +601,16 @@ intro:"La Haute-Corse dévoile la Corse authentique et sauvage. Du Cap Corse aux
 prefectureText:"Bastia, porte d'entrée de la Corse, est une ville méditerranéenne dynamique tournée vers la mer. Son vieux port, sa citadelle génoise et ses églises baroques témoignent de son riche passé.",
 fact:"L'église Saint-Jean-Baptiste de Bastia possède deux clochers jumeaux qui dominent le Vieux-Port. C'est la plus grande église de Corse, et son intérieur baroque doré est absolument somptueux !"
 },
+
+{
+code:"20",
+name:"",
+region:"",
+prefecture:""
+}
+
 );
-departments.push(
+    departments.push(
 
 {
 code:"21",
@@ -1534,28 +1543,59 @@ function shuffle(array) {
     return [...array].sort(() => Math.random() - 0.5);
 }
 
+
 function getDepartment(code) {
     return departments.find(d => d.code === code);
 }
+
 
 function getDepartmentByName(name) {
     return departments.find(d => d.name === name);
 }
 
+
 function getDepartmentByPrefecture(city) {
     return departments.find(d => d.prefecture === city);
 }
 
-function departmentLabel(d) {
-    return `${d.name} (${d.code}) — ${d.region}`;
+
+/*
+ * Informations administratives affichées APRES la réponse.
+ */
+function getSubprefectureList(department) {
+
+    const subs =
+        subprefectures[department.code] || [];
+
+    if (subs.length === 0) {
+        return "Aucune sous-préfecture renseignée.";
+    }
+
+    return subs.join(", ");
 }
 
-function optionLabelForDepartment(d) {
+
+function getAdministrativeDetails(department) {
+
     return `
-        <span class="answer-main">${d.name} (${d.code})</span>
-        <span class="answer-region">${d.region}</span>
+        <div class="proposition-details">
+
+            <strong>Département :</strong>
+            ${department.name} (${department.code})<br>
+
+            <strong>Région :</strong>
+            ${department.region}<br>
+
+            <strong>Préfecture :</strong>
+            ${department.prefecture}<br>
+
+            <strong>Sous-préfectures :</strong>
+            ${getSubprefectureList(department)}
+
+        </div>
     `;
 }
+
 
 function startQuiz(selectedMode) {
 
@@ -1566,12 +1606,21 @@ function startQuiz(selectedMode) {
     streak = 0;
     answered = false;
 
-    queue = shuffle(departments.map(d => d.code));
+    queue = shuffle(
+        departments.map(d => d.code)
+    );
 
-    document.getElementById("menu").classList.add("hidden");
-    document.getElementById("result").classList.add("hidden");
-    document.getElementById("explorer").classList.add("hidden");
-    document.getElementById("quiz").classList.remove("hidden");
+    document.getElementById("menu")
+        .classList.add("hidden");
+
+    document.getElementById("result")
+        .classList.add("hidden");
+
+    document.getElementById("explorer")
+        .classList.add("hidden");
+
+    document.getElementById("quiz")
+        .classList.remove("hidden");
 
     nextQuestion();
 }
@@ -1580,17 +1629,25 @@ function startQuiz(selectedMode) {
 function nextQuestion() {
 
     if (questionIndex >= totalQuestions) {
+
         finishQuiz();
+
         return;
     }
 
     answered = false;
 
-    document.getElementById("correction").classList.add("hidden");
-    document.getElementById("nextButton").classList.add("hidden");
-    document.getElementById("feedback").textContent = "";
+    document.getElementById("correction")
+        .classList.add("hidden");
 
-    currentDepartment = getDepartment(queue.shift());
+    document.getElementById("nextButton")
+        .classList.add("hidden");
+
+    document.getElementById("feedback")
+        .textContent = "";
+
+    currentDepartment =
+        getDepartment(queue.shift());
 
     if (mode === "mixed") {
 
@@ -1605,16 +1662,20 @@ function nextQuestion() {
             types[Math.floor(Math.random() * types.length)];
 
     } else {
+
         currentQuestionType = mode;
     }
+
 
     if (
         currentQuestionType === "subprefecture" &&
         (!subprefectures[currentDepartment.code] ||
          subprefectures[currentDepartment.code].length === 0)
     ) {
+
         currentQuestionType = "department";
     }
+
 
     questionIndex++;
 
@@ -1632,6 +1693,7 @@ function generateQuestion() {
     let correct = "";
     let choices = [];
 
+
     if (currentQuestionType === "prefecture") {
 
         question =
@@ -1639,18 +1701,30 @@ function generateQuestion() {
 
         correct = d.prefecture;
 
-        choices = departments.map(x => x.prefecture);
+        choices = departments.map(
+            x => x.prefecture
+        );
+
     }
+
 
     else if (currentQuestionType === "department") {
 
-        const subs = subprefectures[d.code] || [];
+        const subs =
+            subprefectures[d.code] || [];
 
         let city;
 
-        if (subs.length > 0 && Math.random() < 0.65) {
-            city = subs[Math.floor(Math.random() * subs.length)];
+        if (
+            subs.length > 0 &&
+            Math.random() < 0.65
+        ) {
+
+            city =
+                subs[Math.floor(Math.random() * subs.length)];
+
         } else {
+
             city = d.prefecture;
         }
 
@@ -1661,12 +1735,17 @@ function generateQuestion() {
 
         correct = d.name;
 
-        choices = departments.map(x => x.name);
+        choices = departments.map(
+            x => x.name
+        );
+
     }
+
 
     else if (currentQuestionType === "subprefecture") {
 
-        const subs = subprefectures[d.code];
+        const subs =
+            subprefectures[d.code];
 
         const city =
             subs[Math.floor(Math.random() * subs.length)];
@@ -1678,8 +1757,12 @@ function generateQuestion() {
 
         correct = d.name;
 
-        choices = departments.map(x => x.name);
+        choices = departments.map(
+            x => x.name
+        );
+
     }
+
 
     else {
 
@@ -1697,7 +1780,8 @@ function generateQuestion() {
 
         } else {
 
-            const subs = subprefectures[d.code];
+            const subs =
+                subprefectures[d.code];
 
             city =
                 subs[Math.floor(Math.random() * subs.length)];
@@ -1718,7 +1802,9 @@ function generateQuestion() {
         ];
     }
 
+
     currentCorrectAnswer = correct;
+
 
     if (currentQuestionType === "status") {
 
@@ -1727,22 +1813,31 @@ function generateQuestion() {
     } else {
 
         const wrong =
-            shuffle(choices.filter(x => x !== correct))
-            .slice(0, 3);
+            shuffle(
+                choices.filter(
+                    x => x !== correct
+                )
+            ).slice(0, 3);
 
         choices =
-            shuffle([correct, ...wrong]);
+            shuffle([
+                correct,
+                ...wrong
+            ]);
     }
+
 
     lastChoices = choices;
 
-    document.getElementById("question").textContent =
-        question;
+    document.getElementById("question")
+        .textContent = question;
+
 
     const container =
         document.getElementById("answers");
 
     container.innerHTML = "";
+
 
     choices.forEach(choice => {
 
@@ -1751,53 +1846,34 @@ function generateQuestion() {
 
         button.className = "answer";
 
+
         /*
-         * Dans TOUS les modes où une proposition est un département,
-         * on affiche immédiatement :
-         * nom + numéro + région.
+         * IMPORTANT :
+         * aucune information permettant d'identifier
+         * le département n'apparaît ici.
+         *
+         * Une proposition est simplement :
+         * "Lyon", "Besançon", "Ain", etc.
          */
 
-        if (
-            currentQuestionType === "department" ||
-            currentQuestionType === "subprefecture"
-        ) {
+        button.innerHTML = `
+            <span class="answer-main">
+                ${choice}
+            </span>
+        `;
 
-            const dep =
-                getDepartmentByName(choice);
-
-            button.innerHTML =
-                dep
-                ? optionLabelForDepartment(dep)
-                : `<span class="answer-main">${choice}</span>`;
-
-        } else if (
-            currentQuestionType === "prefecture"
-        ) {
-
-            const dep =
-                getDepartmentByPrefecture(choice);
-
-            button.innerHTML = `
-                <span class="answer-main">${choice}</span>
-                ${
-                    dep
-                    ? `<span class="answer-region">
-                        ${dep.name} (${dep.code}) — ${dep.region}
-                       </span>`
-                    : ""
-                }
-            `;
-
-        } else {
-
-            button.innerHTML =
-                `<span class="answer-main">${choice}</span>`;
-        }
 
         button.onclick = () =>
-            checkAnswer(button, choice, correct, choices);
+            checkAnswer(
+                button,
+                choice,
+                correct,
+                choices
+            );
+
 
         container.appendChild(button);
+
     });
 }
 
@@ -1816,79 +1892,103 @@ function checkAnswer(
     const buttons =
         document.querySelectorAll(".answer");
 
+
     buttons.forEach(button => {
 
         button.disabled = true;
 
     });
 
+
     if (answer === correct) {
 
         score++;
         streak++;
 
-        clickedButton.classList.add("correct");
+        clickedButton
+            .classList
+            .add("correct");
 
-        document.getElementById("feedback").textContent =
+        document.getElementById("feedback")
+            .textContent =
             "✅ Bonne réponse !";
 
     } else {
 
         streak = 0;
 
-        clickedButton.classList.add("wrong");
+        clickedButton
+            .classList
+            .add("wrong");
 
-        const goodText =
-            currentQuestionType === "status"
-            ? correct
-            : getCorrectAnswerWithContext(correct);
 
-        document.getElementById("feedback").innerHTML =
-            `❌ Mauvaise réponse. La bonne réponse était : ${goodText}`;
+        /*
+         * La bonne réponse n'est expliquée
+         * qu'après le choix.
+         */
+
+        if (
+            currentQuestionType === "prefecture"
+        ) {
+
+            document.getElementById("feedback")
+                .textContent =
+                `❌ Mauvaise réponse. La bonne réponse était ${currentCorrectAnswer}.`;
+
+        }
+
+        else if (
+            currentQuestionType === "department" ||
+            currentQuestionType === "subprefecture"
+        ) {
+
+            document.getElementById("feedback")
+                .textContent =
+                `❌ Mauvaise réponse. Le bon département était ${currentDepartment.name} (${currentDepartment.code}).`;
+
+        }
+
+        else {
+
+            document.getElementById("feedback")
+                .textContent =
+                `❌ Mauvaise réponse. La bonne réponse était ${correct}.`;
+        }
     }
+
 
     showPropositions(choices);
 
     showFiche();
 
+
     document.getElementById("correction")
-        .classList.remove("hidden");
+        .classList
+        .remove("hidden");
+
 
     document.getElementById("nextButton")
-        .classList.remove("hidden");
+        .classList
+        .remove("hidden");
+
 
     updateStats();
 }
 
 
-function getCorrectAnswerWithContext(correct) {
-
-    if (currentQuestionType === "prefecture") {
-
-        return correct +
-            " — " +
-            departmentLabel(currentDepartment);
-
-    }
-
-    if (
-        currentQuestionType === "department" ||
-        currentQuestionType === "subprefecture"
-    ) {
-
-        return departmentLabel(currentDepartment);
-    }
-
-    return correct;
-}
-
-
+/*
+ * CORRECTION DES QUATRE PROPOSITIONS
+ *
+ * C'est ici que les informations détaillées
+ * apparaissent seulement après la réponse.
+ */
 function showPropositions(choices) {
 
     const container =
         document.getElementById("propositions");
 
     container.innerHTML = "";
+
 
     choices.forEach(choice => {
 
@@ -1900,27 +2000,45 @@ function showPropositions(choices) {
 
         div.className =
             "proposition " +
-            (isCorrect ? "correct" : "wrong");
+            (isCorrect
+                ? "correct"
+                : "wrong");
 
-        let text = "";
 
-        if (currentQuestionType === "prefecture") {
+        let title = "";
+        let details = "";
+
+
+        /*
+         * QUESTION : département → préfecture
+         */
+        if (
+            currentQuestionType === "prefecture"
+        ) {
 
             const dep =
                 getDepartmentByPrefecture(choice);
 
             if (dep) {
 
-                text =
-                    `<b>${choice}</b><br>
-                     <span class="small">
-                     Département : ${dep.name} (${dep.code}) —
-                     région : ${dep.region}
-                     </span>`;
-            }
+                title =
+                    `${isCorrect ? "✅" : "❌"} ${dep.prefecture}`;
 
+                details = getAdministrativeDetails(dep);
+
+            } else {
+
+                title =
+                    `${isCorrect ? "✅" : "❌"} ${choice}`;
+            }
         }
 
+
+        /*
+         * QUESTION : ville → département
+         *
+         * Ici chaque proposition est un département.
+         */
         else if (
             currentQuestionType === "department" ||
             currentQuestionType === "subprefecture"
@@ -1931,63 +2049,93 @@ function showPropositions(choices) {
 
             if (dep) {
 
-                text =
-                    `<b>${dep.name} (${dep.code})</b><br>
-                     <span class="small">
-                     région : ${dep.region} —
-                     préfecture : ${dep.prefecture}
-                     </span>`;
-            }
+                title =
+                    `${isCorrect ? "✅" : "❌"} ${dep.name} (${dep.code})`;
 
+                details =
+                    getAdministrativeDetails(dep);
+
+            } else {
+
+                title =
+                    `${isCorrect ? "✅" : "❌"} ${choice}`;
+            }
         }
 
+
+        /*
+         * QUESTION : préfecture ou sous-préfecture
+         */
         else {
 
-            const dep = currentDepartment;
+            const city = currentCity;
 
-            text =
-                `<b>${choice}</b><br>
-                 <span class="small">
-                 ${currentCity} appartient au département
-                 ${dep.name} (${dep.code}) —
-                 région : ${dep.region}
-                 </span>`;
+            let dep = null;
+            let status = null;
+
+
+            departments.forEach(d => {
+
+                if (d.prefecture === city) {
+
+                    dep = d;
+                    status = "Préfecture";
+                }
+
+                if (
+                    (subprefectures[d.code] || [])
+                        .includes(city)
+                ) {
+
+                    dep = d;
+                    status = "Sous-préfecture";
+                }
+
+            });
+
+
+            title =
+                `${isCorrect ? "✅" : "❌"} ${city}`;
+
+            if (dep) {
+
+                details = `
+                    <div class="proposition-details">
+
+                        <strong>Statut :</strong>
+                        ${status}<br>
+
+                        ${getAdministrativeDetails(dep)}
+
+                    </div>
+                `;
+            }
         }
 
-        div.innerHTML =
-            `${isCorrect ? "✅" : "❌"} ${text}`;
+
+        div.innerHTML = `
+            <div class="proposition-title">
+                ${title}
+            </div>
+            ${details}
+        `;
+
 
         container.appendChild(div);
+
     });
 }
 
 
+/*
+ * FICHE PÉDAGOGIQUE
+ */
 function showFiche() {
 
     const d = currentDepartment;
 
-    const subs =
-        subprefectures[d.code] || [];
-
-    let subprefText = "";
-
-    if (subs.length > 0) {
-
-        subprefText =
-            subs.map(city =>
-                `<span class="dept-item"
-                        style="display:inline-block;margin:3px;">
-                    ${city}
-                 </span>`
-            ).join("");
-
-    } else {
-
-        subprefText =
-            `<span class="small">Aucune sous-préfecture renseignée.</span>`;
-    }
-
-    document.getElementById("fiche").innerHTML = `
+    document.getElementById("fiche")
+        .innerHTML = `
 
         <h3>
             📚 ${d.name} (${d.code})
@@ -2005,20 +2153,35 @@ function showFiche() {
 
         <p>
             <strong>Sous-préfectures :</strong><br>
-            ${subprefText}
+            ${getSubprefectureList(d)}
         </p>
 
-        <h4>Le département ${d.name}</h4>
+        <h4>
+            Le département ${d.name} (${d.code})
+        </h4>
 
-        <p>${d.intro}</p>
+        <p>
+            ${d.intro}
+        </p>
 
-        <h4>La préfecture : ${d.prefecture}</h4>
+        <h4>
+            La préfecture : ${d.prefecture}
+        </h4>
 
-        <p>${d.prefectureText}</p>
+        <p>
+            ${d.prefectureText}
+        </p>
 
         <div class="savoir">
-            <h4>💡 Le saviez-vous ?</h4>
-            <p>${d.fact}</p>
+
+            <h4>
+                💡 Le saviez-vous ?
+            </h4>
+
+            <p>
+                ${d.fact}
+            </p>
+
         </div>
 
         ${SOURCE_HTML}
@@ -2027,41 +2190,71 @@ function showFiche() {
 }
 
 
+function getSubprefectureList(department) {
+
+    const subs =
+        subprefectures[department.code] || [];
+
+    if (subs.length === 0) {
+
+        return `
+            <span class="small">
+                Aucune sous-préfecture renseignée.
+            </span>
+        `;
+    }
+
+    return subs.join(", ");
+}
+
+
 function updateStats() {
 
-    document.getElementById("questionNumber").textContent =
-        questionIndex;
+    document.getElementById("questionNumber")
+        .textContent = questionIndex;
 
-    document.getElementById("totalQuestions").textContent =
-        totalQuestions;
+    document.getElementById("totalQuestions")
+        .textContent = totalQuestions;
 
-    document.getElementById("score").textContent =
-        score;
+    document.getElementById("score")
+        .textContent = score;
 
-    document.getElementById("streak").textContent =
-        streak;
+    document.getElementById("streak")
+        .textContent = streak;
 
-    document.getElementById("seen").textContent =
+    document.getElementById("seen")
+        .textContent =
         Math.min(questionIndex, 101);
 
-    document.getElementById("progressBar").style.width =
-        (questionIndex / totalQuestions * 100) + "%";
+    document.getElementById("progressBar")
+        .style.width =
+        (questionIndex / totalQuestions * 100)
+        + "%";
 }
     function finishQuiz() {
 
     document.getElementById("quiz")
-        .classList.add("hidden");
+        .classList
+        .add("hidden");
 
     document.getElementById("result")
-        .classList.remove("hidden");
+        .classList
+        .remove("hidden");
 
-    document.getElementById("resultScore").textContent =
+
+    document.getElementById("resultScore")
+        .textContent =
         `${score}/${totalQuestions}`;
 
+
     const percentage =
-        Math.round(score / totalQuestions * 100);
+        Math.round(
+            score / totalQuestions * 100
+        );
+
 
     let message;
+
 
     if (percentage === 100) {
 
@@ -2089,7 +2282,9 @@ function updateStats() {
             "📚 Quelques révisions supplémentaires devraient t'aider.";
     }
 
-    document.getElementById("resultText").textContent =
+
+    document.getElementById("resultText")
+        .textContent =
         `${message} (${percentage} % de réussite)`;
 }
 
@@ -2097,16 +2292,21 @@ function updateStats() {
 function backToMenu() {
 
     document.getElementById("result")
-        .classList.add("hidden");
+        .classList
+        .add("hidden");
 
     document.getElementById("quiz")
-        .classList.add("hidden");
+        .classList
+        .add("hidden");
 
     document.getElementById("explorer")
-        .classList.add("hidden");
+        .classList
+        .add("hidden");
 
     document.getElementById("menu")
-        .classList.remove("hidden");
+        .classList
+        .remove("hidden");
+
 
     questionIndex = 0;
     score = 0;
@@ -2119,21 +2319,29 @@ function backToMenu() {
 function showExplorer() {
 
     document.getElementById("menu")
-        .classList.add("hidden");
+        .classList
+        .add("hidden");
 
     document.getElementById("quiz")
-        .classList.add("hidden");
+        .classList
+        .add("hidden");
 
     document.getElementById("result")
-        .classList.add("hidden");
+        .classList
+        .add("hidden");
 
     document.getElementById("explorer")
-        .classList.remove("hidden");
+        .classList
+        .remove("hidden");
+
 
     const list =
-        document.getElementById("departmentList");
+        document.getElementById(
+            "departmentList"
+        );
 
     list.innerHTML = "";
+
 
     departments
         .slice()
@@ -2149,7 +2357,9 @@ function showExplorer() {
             const item =
                 document.createElement("div");
 
-            item.className = "dept-item";
+            item.className =
+                "dept-item";
+
 
             item.innerHTML = `
                 <strong>
@@ -2157,7 +2367,7 @@ function showExplorer() {
                 </strong>
 
                 <div class="dept-region">
-                    ${d.region}
+                    Région : ${d.region}
                 </div>
 
                 <div>
@@ -2172,7 +2382,9 @@ function showExplorer() {
                 </button>
             `;
 
+
             list.appendChild(item);
+
         });
 }
 
@@ -2184,20 +2396,29 @@ function showStandaloneFiche(code) {
 
     if (!d) return;
 
+
     document.getElementById("menu")
-        .classList.add("hidden");
+        .classList
+        .add("hidden");
 
     document.getElementById("quiz")
-        .classList.add("hidden");
+        .classList
+        .add("hidden");
 
     document.getElementById("result")
-        .classList.add("hidden");
+        .classList
+        .add("hidden");
 
     document.getElementById("explorer")
-        .classList.remove("hidden");
+        .classList
+        .remove("hidden");
+
 
     const list =
-        document.getElementById("departmentList");
+        document.getElementById(
+            "departmentList"
+        );
+
 
     list.innerHTML = `
 
@@ -2212,15 +2433,42 @@ function showStandaloneFiche(code) {
                 ${d.region}
             </p>
 
-            <h4>Le département ${d.name}</h4>
-            <p>${d.intro}</p>
+            <p>
+                <strong>Préfecture :</strong>
+                ${d.prefecture}
+            </p>
 
-            <h4>La préfecture : ${d.prefecture}</h4>
-            <p>${d.prefectureText}</p>
+            <p>
+                <strong>Sous-préfectures :</strong><br>
+                ${getSubprefectureList(d)}
+            </p>
+
+            <h4>
+                Le département ${d.name} (${d.code})
+            </h4>
+
+            <p>
+                ${d.intro}
+            </p>
+
+            <h4>
+                La préfecture : ${d.prefecture}
+            </h4>
+
+            <p>
+                ${d.prefectureText}
+            </p>
 
             <div class="savoir">
-                <h4>💡 Le saviez-vous ?</h4>
-                <p>${d.fact}</p>
+
+                <h4>
+                    💡 Le saviez-vous ?
+                </h4>
+
+                <p>
+                    ${d.fact}
+                </p>
+
             </div>
 
             ${SOURCE_HTML}
@@ -2237,28 +2485,24 @@ function showStandaloneFiche(code) {
 
 
 /*
- * Vérification automatique :
- * le site source annonce 101 départements.
+ * Vérification de sécurité.
  */
 if (departments.length !== 101) {
 
     console.warn(
-        "Attention : le tableau contient actuellement " +
+        "Attention : " +
         departments.length +
-        " départements au lieu de 101."
+        " départements chargés au lieu de 101."
     );
 
 } else {
 
     console.log(
-        "✅ 101 départements chargés."
+        "✅ Les 101 départements sont chargés."
     );
 }
 
 
-/*
- * Initialisation
- */
 updateStats();
 
 </script>
