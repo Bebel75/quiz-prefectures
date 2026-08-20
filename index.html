@@ -252,11 +252,42 @@ button {
         font-size: 22px;
     }
 }
+
+.home-button {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 1000;
+
+    background: white;
+    color: #173f67;
+
+    border: 2px solid rgba(23,63,103,.15);
+    border-radius: 10px;
+
+    padding: 8px 12px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,.15);
+
+    cursor: pointer;
+}
+
+.home-button:hover {
+    background: #eef3f8;
+}
+    
 </style>
 </head>
 
 <body>
-
+    
+<button class="home-button" onclick="backToMenu()">
+    ⌂ Accueil
+</button>
+    
 <header>
     <h1>🇫🇷 Quiz des départements français</h1>
     <p>Départements · régions · préfectures · sous-préfectures</p>
